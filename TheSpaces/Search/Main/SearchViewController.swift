@@ -14,6 +14,12 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Поиск"
+        
+        view.backgroundColor = .red
+        
+        tabBarController?.tabBar.subviews.first?.layer.backgroundColor = UIColor.blue.cgColor
+        tabBarController?.tabBar.subviews.first?.layer.cornerRadius = 20
+        
     }
 
 }

@@ -20,6 +20,11 @@ class TabBarSource: NSObject, UITabBarControllerDelegate, UITabBarDelegate {
         
         tabBarController.delegate = TabBarSource.shared
         
+        tabBarController.tabBar.layer.cornerRadius = 40
+//        tabBarController.tabBar.isTranslucent = false
+        
+        tabBarController.tabBar.clipsToBounds = true
+        
         setupControllers()
         
     }
@@ -29,6 +34,7 @@ class TabBarSource: NSObject, UITabBarControllerDelegate, UITabBarDelegate {
         let searchNavController = UINavigationController(rootViewController: SearchCoordinator.main.viewController)
         
         tabBarController.setViewControllers([searchNavController], animated: false)
+        
     }
     
 }
