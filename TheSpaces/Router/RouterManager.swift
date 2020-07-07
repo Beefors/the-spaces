@@ -30,10 +30,6 @@ class RouterManager: NSObject {
         
         tabBarController = UITabBarController()
         
-        TabBarSource.shared.setupForTabBarController(tabBarController)
-        tabBarController.delegate = TabBarSource.shared
-        tabBarController.tabBar.delegate = TabBarSource.shared
-        
         window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .white
         window.rootViewController = tabBarController
@@ -43,10 +39,7 @@ class RouterManager: NSObject {
     
     func setup(forAppDelegate appDelegate: AppDelegate) {
         
-//        let launchViewModel = LaunchAnimationViewModel()
-//        let launchVC = LaunchAnimationViewController(viewModel: launchViewModel)
-        
-//        rootNavigationController.viewControllers = [launchVC]
+        TabBarSource.shared.setupForTabBarController(tabBarController)
         
         appDelegate.window = window
         window.makeKeyAndVisible()

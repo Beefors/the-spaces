@@ -13,12 +13,22 @@ class TabBarSource: NSObject, UITabBarControllerDelegate, UITabBarDelegate {
     
     static let shared = TabBarSource()
     
-    var tabBarController: UITabBarController?
+    var tabBarController: UITabBarController!
     
     func setupForTabBarController(_ tabBarController: UITabBarController) {
         self.tabBarController = tabBarController
         
+        tabBarController.delegate = TabBarSource.shared
         
+        setupControllers()
+        
+    }
+    
+    private func setupControllers() {
+        
+        let searchNavController = UINavigationController(rootViewController: SearchCoordinator.main.viewController)
+        
+        tabBarController.setViewControllers([searchNavController], animated: false)
     }
     
 }
