@@ -7,6 +7,32 @@ target 'TheSpaces' do
   ### Reactive Pods ###
   #####################
 
+  # Rx is a generic abstraction of computation expressed through Observable<Element> interface.
+  # https://github.com/ReactiveX/RxSwift
+  pod 'RxSwift'#, '4.5'
+  pod 'RxCocoa'#, '4.5'
+  
+  # RxSwift extensions for Swift optionals and "Occupiable" types.
+  # https://github.com/RxSwiftCommunity/RxOptional
+  pod 'RxOptional'
+  
+  # A collection of handy RxSwift Observables that let you observe all the changes in your Application's state and your UIViewController view-related notifications.
+  # https://github.com/pixeldock/RxAppState
+  pod "RxAppState"
+  
+  # RxCoreLocation is a reactive abstraction to manage Core Location.
+  # https://github.com/RxSwiftCommunity/RxCoreLocation
+  pod 'RxCoreLocation'
+  
+  # RxKeyboard provides a reactive way of observing keyboard frame changes
+  # https://github.com/RxSwiftCommunity/RxKeyboard
+  pod 'RxKeyboard'
+  
+  # Network abstraction layer written in Swift.
+  # https://github.com/Moya/Moya
+  # How use https://github.com/Moya/Moya/blob/master/docs/Examples/Basic.md
+  pod 'Moya/RxSwift'
+  
   ##################
   ### Other Pods ###
   ##################

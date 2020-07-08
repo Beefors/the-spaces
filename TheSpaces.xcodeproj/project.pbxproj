@@ -18,6 +18,22 @@
 		557B1CEB24B46D230050289D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CEA24B46D230050289D /* SearchViewController.swift */; };
 		557B1CEE24B46E4D0050289D /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CED24B46E4D0050289D /* UIViewController + Extension.swift */; };
 		557B1CF024B46EC10050289D /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CEF24B46EC10050289D /* UIColor + Extension.swift */; };
+		558575E724B5A10F00FDAEAE /* Places.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558575E624B5A10F00FDAEAE /* Places.storyboard */; };
+		558575E924B5A12800FDAEAE /* PlacesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558575E824B5A12800FDAEAE /* PlacesCoordinator.swift */; };
+		558575EC24B5A15400FDAEAE /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558575EB24B5A15400FDAEAE /* Profile.storyboard */; };
+		558575EE24B5A15E00FDAEAE /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558575ED24B5A15E00FDAEAE /* ProfileCoordinator.swift */; };
+		558575F224B5A18300FDAEAE /* Other.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558575F124B5A18300FDAEAE /* Other.storyboard */; };
+		558575F424B5A19200FDAEAE /* OtherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558575F324B5A19200FDAEAE /* OtherCoordinator.swift */; };
+		558575F624B5A21200FDAEAE /* PlacesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558575F524B5A21200FDAEAE /* PlacesListViewController.swift */; };
+		558575F824B5A38300FDAEAE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558575F724B5A38300FDAEAE /* ProfileViewController.swift */; };
+		558575FA24B5A3EF00FDAEAE /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558575F924B5A3EF00FDAEAE /* OtherViewController.swift */; };
+		55C899DF24B5C22C0048FF59 /* SearchVC + Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899DE24B5C22C0048FF59 /* SearchVC + Map.swift */; };
+		55C899E224B5D0C20048FF59 /* YMKCameraPosition + TS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E124B5D0C20048FF59 /* YMKCameraPosition + TS.swift */; };
+		55C899E524B5E92B0048FF59 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E424B5E92B0048FF59 /* UIFont + Extension.swift */; };
+		55C899E724B60EA40048FF59 /* SearchVC + LocationManager .swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E624B60EA40048FF59 /* SearchVC + LocationManager .swift */; };
+		55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */; };
+		55C899ED24B611D70048FF59 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899EC24B611D70048FF59 /* LocationService.swift */; };
+		55C899F024B614B30048FF59 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899EF24B614B30048FF59 /* ViewModelType.swift */; };
 		5F039E55B55068ECCF6571F9 /* Pods_TheSpaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1061CFA4843D8F4E55B6B7BD /* Pods_TheSpaces.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +53,22 @@
 		557B1CEA24B46D230050289D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		557B1CED24B46E4D0050289D /* UIViewController + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController + Extension.swift"; sourceTree = "<group>"; };
 		557B1CEF24B46EC10050289D /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		558575E624B5A10F00FDAEAE /* Places.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Places.storyboard; sourceTree = "<group>"; };
+		558575E824B5A12800FDAEAE /* PlacesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCoordinator.swift; sourceTree = "<group>"; };
+		558575EB24B5A15400FDAEAE /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		558575ED24B5A15E00FDAEAE /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		558575F124B5A18300FDAEAE /* Other.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Other.storyboard; sourceTree = "<group>"; };
+		558575F324B5A19200FDAEAE /* OtherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCoordinator.swift; sourceTree = "<group>"; };
+		558575F524B5A21200FDAEAE /* PlacesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewController.swift; sourceTree = "<group>"; };
+		558575F724B5A38300FDAEAE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		558575F924B5A3EF00FDAEAE /* OtherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
+		55C899DE24B5C22C0048FF59 /* SearchVC + Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC + Map.swift"; sourceTree = "<group>"; };
+		55C899E124B5D0C20048FF59 /* YMKCameraPosition + TS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "YMKCameraPosition + TS.swift"; sourceTree = "<group>"; };
+		55C899E424B5E92B0048FF59 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		55C899E624B60EA40048FF59 /* SearchVC + LocationManager .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC + LocationManager .swift"; sourceTree = "<group>"; };
+		55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceViewModel.swift; sourceTree = "<group>"; };
+		55C899EC24B611D70048FF59 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		55C899EF24B614B30048FF59 /* ViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		6575D05773BC03660780F254 /* Pods-TheSpaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheSpaces.debug.xcconfig"; path = "Target Support Files/Pods-TheSpaces/Pods-TheSpaces.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,9 +108,13 @@
 				557B1CE124B469D00050289D /* Application */,
 				557B1CE224B46A740050289D /* Resources */,
 				557B1CEC24B46DAA0050289D /* Extensions */,
+				55C899EE24B614970048FF59 /* Components */,
 				551CEA6824B1CF8A00465B69 /* Router */,
 				557B1CDF24B458C60050289D /* TabBarSource.swift */,
 				557B1CE324B46AC20050289D /* Search */,
+				558575E524B5A09E00FDAEAE /* Places */,
+				558575E424B5A09D00FDAEAE /* Profile */,
+				558575E224B5A09500FDAEAE /* Other */,
 			);
 			path = TheSpaces;
 			sourceTree = "<group>";
@@ -123,7 +159,10 @@
 		557B1CE424B46ADA0050289D /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				55C899E824B60FC70048FF59 /* BussinesLogic */,
 				557B1CEA24B46D230050289D /* SearchViewController.swift */,
+				55C899E624B60EA40048FF59 /* SearchVC + LocationManager .swift */,
+				55C899DE24B5C22C0048FF59 /* SearchVC + Map.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -131,10 +170,99 @@
 		557B1CEC24B46DAA0050289D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				55C899E024B5D0A00048FF59 /* YandexMaps */,
 				557B1CED24B46E4D0050289D /* UIViewController + Extension.swift */,
 				557B1CEF24B46EC10050289D /* UIColor + Extension.swift */,
+				55C899E424B5E92B0048FF59 /* UIFont + Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		558575E224B5A09500FDAEAE /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				558575F124B5A18300FDAEAE /* Other.storyboard */,
+				558575F324B5A19200FDAEAE /* OtherCoordinator.swift */,
+				558575F024B5A17300FDAEAE /* Other */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		558575E424B5A09D00FDAEAE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				558575EB24B5A15400FDAEAE /* Profile.storyboard */,
+				558575ED24B5A15E00FDAEAE /* ProfileCoordinator.swift */,
+				558575EF24B5A16200FDAEAE /* Profile */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		558575E524B5A09E00FDAEAE /* Places */ = {
+			isa = PBXGroup;
+			children = (
+				558575E624B5A10F00FDAEAE /* Places.storyboard */,
+				558575E824B5A12800FDAEAE /* PlacesCoordinator.swift */,
+				558575EA24B5A13000FDAEAE /* PlacesList */,
+			);
+			path = Places;
+			sourceTree = "<group>";
+		};
+		558575EA24B5A13000FDAEAE /* PlacesList */ = {
+			isa = PBXGroup;
+			children = (
+				558575F524B5A21200FDAEAE /* PlacesListViewController.swift */,
+			);
+			path = PlacesList;
+			sourceTree = "<group>";
+		};
+		558575EF24B5A16200FDAEAE /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				558575F724B5A38300FDAEAE /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		558575F024B5A17300FDAEAE /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				558575F924B5A3EF00FDAEAE /* OtherViewController.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		55C899E024B5D0A00048FF59 /* YandexMaps */ = {
+			isa = PBXGroup;
+			children = (
+				55C899E124B5D0C20048FF59 /* YMKCameraPosition + TS.swift */,
+			);
+			path = YandexMaps;
+			sourceTree = "<group>";
+		};
+		55C899E824B60FC70048FF59 /* BussinesLogic */ = {
+			isa = PBXGroup;
+			children = (
+				55C899EB24B611CA0048FF59 /* LocationManager */,
+			);
+			path = BussinesLogic;
+			sourceTree = "<group>";
+		};
+		55C899EB24B611CA0048FF59 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				55C899EC24B611D70048FF59 /* LocationService.swift */,
+				55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
+		55C899EE24B614970048FF59 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				55C899EF24B614B30048FF59 /* ViewModelType.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		57B7F1A42554A588AEAB0A4C /* Frameworks */ = {
@@ -166,6 +294,7 @@
 				551CEA4E24B1C8C300465B69 /* Frameworks */,
 				551CEA4F24B1C8C300465B69 /* Resources */,
 				E4EC891788FDEC293FA264F3 /* [CP] Copy Pods Resources */,
+				AC402FE4AD81FB0AF5CB2923 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -214,9 +343,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558575E724B5A10F00FDAEAE /* Places.storyboard in Resources */,
 				551CEA6124B1C8C400465B69 /* LaunchScreen.storyboard in Resources */,
+				558575EC24B5A15400FDAEAE /* Profile.storyboard in Resources */,
 				557B1CE724B46BA30050289D /* Search.storyboard in Resources */,
 				551CEA5E24B1C8C400465B69 /* Assets.xcassets in Resources */,
+				558575F224B5A18300FDAEAE /* Other.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +377,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AC402FE4AD81FB0AF5CB2923 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheSpaces/Pods-TheSpaces-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheSpaces/Pods-TheSpaces-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheSpaces/Pods-TheSpaces-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E4EC891788FDEC293FA264F3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,13 +419,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				557B1CEB24B46D230050289D /* SearchViewController.swift in Sources */,
+				55C899E524B5E92B0048FF59 /* UIFont + Extension.swift in Sources */,
+				55C899ED24B611D70048FF59 /* LocationService.swift in Sources */,
 				557B1CF024B46EC10050289D /* UIColor + Extension.swift in Sources */,
+				558575F424B5A19200FDAEAE /* OtherCoordinator.swift in Sources */,
+				55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */,
+				55C899E724B60EA40048FF59 /* SearchVC + LocationManager .swift in Sources */,
 				551CEA6E24B1CF8A00465B69 /* Coordinator.swift in Sources */,
+				558575F624B5A21200FDAEAE /* PlacesListViewController.swift in Sources */,
+				55C899DF24B5C22C0048FF59 /* SearchVC + Map.swift in Sources */,
 				557B1CE924B46BB70050289D /* SearchCoordinator.swift in Sources */,
 				557B1CEE24B46E4D0050289D /* UIViewController + Extension.swift in Sources */,
+				55C899E224B5D0C20048FF59 /* YMKCameraPosition + TS.swift in Sources */,
+				558575E924B5A12800FDAEAE /* PlacesCoordinator.swift in Sources */,
 				551CEA6D24B1CF8A00465B69 /* RouterManager.swift in Sources */,
+				558575FA24B5A3EF00FDAEAE /* OtherViewController.swift in Sources */,
 				551CEA5524B1C8C300465B69 /* AppDelegate.swift in Sources */,
+				558575F824B5A38300FDAEAE /* ProfileViewController.swift in Sources */,
+				558575EE24B5A15E00FDAEAE /* ProfileCoordinator.swift in Sources */,
 				557B1CE024B458C60050289D /* TabBarSource.swift in Sources */,
+				55C899F024B614B30048FF59 /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,14 +21,14 @@ class RouterManager: NSObject {
     
     //MARK: - Variables
     let window: UIWindow
-    let tabBarController: UITabBarController
+    let tabBarController: TabbarController
     
     //MARK: - Private varables
     
     //MARK: - Setup
     override init() {
         
-        tabBarController = UITabBarController()
+        tabBarController = TabbarController()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .white

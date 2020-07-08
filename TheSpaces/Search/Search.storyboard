@@ -15,13 +15,45 @@
                     <view key="view" contentMode="scaleToFill" id="c6a-cz-aWE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TT6-rU-1hM">
+                                <rect key="frame" x="322.5" y="617" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="lqP-Hk-AHD"/>
+                                    <constraint firstAttribute="height" constant="36" id="qg1-DA-0z9"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="3" maxX="4" maxY="0.0"/>
+                                <state key="normal" image="UserLocation"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JQK-CN-aai">
+                                <rect key="frame" x="130.5" y="617" width="114" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="6iD-5F-RQg"/>
+                                    <constraint firstAttribute="width" constant="114" id="tuS-JM-3iJ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="oHM-6C-Omt" firstAttribute="bottom" secondItem="TT6-rU-1hM" secondAttribute="bottom" constant="14" id="1qf-0K-tDh"/>
+                            <constraint firstItem="oHM-6C-Omt" firstAttribute="bottom" secondItem="JQK-CN-aai" secondAttribute="bottom" constant="14" id="T7r-gU-zai"/>
+                            <constraint firstItem="oHM-6C-Omt" firstAttribute="trailing" secondItem="TT6-rU-1hM" secondAttribute="trailing" constant="16.5" id="fIQ-Nq-hZ0"/>
+                            <constraint firstItem="JQK-CN-aai" firstAttribute="centerX" secondItem="c6a-cz-aWE" secondAttribute="centerX" id="z6P-Gh-5tX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="oHM-6C-Omt"/>
                     </view>
+                    <connections>
+                        <outlet property="showListButton" destination="JQK-CN-aai" id="zQx-Xu-w67"/>
+                        <outlet property="userLocationButton" destination="TT6-rU-1hM" id="cdJ-WK-8Fp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ipq-cS-Xd1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-190" y="120"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="UserLocation" width="25.5" height="23"/>
+    </resources>
 </document>
