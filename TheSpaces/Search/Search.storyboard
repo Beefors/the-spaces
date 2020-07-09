@@ -33,11 +33,21 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXF-He-frh" customClass="SearchPanelView" customModule="TheSpaces" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" placeholder="YES" id="9ZP-Tm-DZq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="oHM-6C-Omt" firstAttribute="bottom" secondItem="TT6-rU-1hM" secondAttribute="bottom" constant="14" id="1qf-0K-tDh"/>
+                            <constraint firstItem="VXF-He-frh" firstAttribute="leading" secondItem="oHM-6C-Omt" secondAttribute="leading" id="CJX-5n-Cvr"/>
                             <constraint firstItem="oHM-6C-Omt" firstAttribute="bottom" secondItem="JQK-CN-aai" secondAttribute="bottom" constant="14" id="T7r-gU-zai"/>
+                            <constraint firstItem="oHM-6C-Omt" firstAttribute="trailing" secondItem="VXF-He-frh" secondAttribute="trailing" id="To3-jn-ctz"/>
+                            <constraint firstItem="VXF-He-frh" firstAttribute="top" secondItem="oHM-6C-Omt" secondAttribute="top" id="bFQ-4i-2jM"/>
                             <constraint firstItem="oHM-6C-Omt" firstAttribute="trailing" secondItem="TT6-rU-1hM" secondAttribute="trailing" constant="16.5" id="fIQ-Nq-hZ0"/>
                             <constraint firstItem="JQK-CN-aai" firstAttribute="centerX" secondItem="c6a-cz-aWE" secondAttribute="centerX" id="z6P-Gh-5tX"/>
                         </constraints>

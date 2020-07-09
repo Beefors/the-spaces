@@ -9,8 +9,8 @@ target 'TheSpaces' do
 
   # Rx is a generic abstraction of computation expressed through Observable<Element> interface.
   # https://github.com/ReactiveX/RxSwift
-  pod 'RxSwift'#, '4.5'
-  pod 'RxCocoa'#, '4.5'
+  pod 'RxSwift'
+  pod 'RxCocoa'
   
   # RxSwift extensions for Swift optionals and "Occupiable" types.
   # https://github.com/RxSwiftCommunity/RxOptional

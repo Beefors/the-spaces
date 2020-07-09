@@ -12,3 +12,9 @@ import RxSwift
 protocol ViewModelType {
     var bag: DisposeBag { get }
 }
+
+extension Disposable {
+    func disposed(by viewModel: ViewModelType) {
+        disposed(by: viewModel.bag)
+    }
+}
