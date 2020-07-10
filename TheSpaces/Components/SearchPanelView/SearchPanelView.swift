@@ -11,7 +11,7 @@ import UIKit
 
 class SearchPanelView: UIView {
     
-    let searchBar = UISearchBar()
+    let textField = UITextField()
     let optionsButton = UIButton()
     
     /// Size is ignoring
@@ -46,16 +46,39 @@ class SearchPanelView: UIView {
             trailingAnchor.constraint(equalTo: optionsButton.trailingAnchor, constant: 16.5)
         ])
         
-        searchBar.backgroundColor = .white
-        searchBar.searchBarStyle = .minimal
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(searchBar)
+        textField.placeholder = "Поиск"
+        textField.backgroundColor = .white
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.layer.cornerRadius = 18
+        addSubview(textField)
         
         NSLayoutConstraint.activate([
-            searchBar.heightAnchor.constraint(equalToConstant: 36),
-            searchBar.topAnchor.constraint(equalTo: topAnchor, constant: 7),
-            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.5),
-            optionsButton.leadingAnchor.constraint(equalTo: searchBar.trailingAnchor, constant: 9)
+            textField.heightAnchor.constraint(equalToConstant: 36),
+            textField.topAnchor.constraint(equalTo: topAnchor, constant: 7),
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.5),
+            optionsButton.leadingAnchor.constraint(equalTo: textField.trailingAnchor, constant: 9)
+        ])
+        
+        let imageContainer = UIView()
+        imageContainer.backgroundColor = .clear
+        imageContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        textField.leftView = imageContainer
+        textField.leftViewMode = .always
+        
+        NSLayoutConstraint.activate([
+            imageContainer.widthAnchor.constraint(equalToConstant: 40),
+            imageContainer.heightAnchor.constraint(equalToConstant: 36)
+        ])
+        
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "magnifierIcon"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageContainer.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor, constant: 3),
+            imageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor)
         ])
         
     }
@@ -70,12 +93,12 @@ class SearchPanelView: UIView {
         optionsButton.layer.shadowRadius = 20
         optionsButton.layer.shadowOffset = CGSize(width: 3, height: 5)
         
-        let searchBarShadowPath = UIBezierPath(roundedRect: searchBar.bounds, cornerRadius: 18)
-        searchBar.layer.shadowPath = searchBarShadowPath.cgPath
-        searchBar.layer.shadowColor = UIColor(red: 0.375, green: 0.367, blue: 0.367, alpha: 0.15).cgColor
-        searchBar.layer.shadowOpacity = 1
-        searchBar.layer.shadowRadius = 20
-        searchBar.layer.shadowOffset = CGSize(width: 3, height: 5)
+        let searchBarShadowPath = UIBezierPath(roundedRect: textField.bounds, cornerRadius: 18)
+        textField.layer.shadowPath = searchBarShadowPath.cgPath
+        textField.layer.shadowColor = UIColor(red: 0.375, green: 0.367, blue: 0.367, alpha: 0.15).cgColor
+        textField.layer.shadowOpacity = 1
+        textField.layer.shadowRadius = 20
+        textField.layer.shadowOffset = CGSize(width: 3, height: 5)
         
     }
     

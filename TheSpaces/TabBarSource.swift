@@ -58,7 +58,7 @@ class TabbarController: UITabBarController {
     
     var customHeight: CGFloat?
     
-    override func viewWillLayoutSubviews() {
+    override func viewDidLayoutSubviews() {
         guard let customHeight = customHeight else { return }
         var tabFrame = self.tabBar.frame
         tabFrame.size.height = customHeight
