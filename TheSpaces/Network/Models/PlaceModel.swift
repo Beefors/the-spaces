@@ -30,11 +30,18 @@ struct PlaceModel: Decodable {
     let longtitude:Double
     let priceRange: String
     let seatTypes: [SeatType]
-
 }
 
 struct SeatType: Decodable {
     let seatTypeName: String
     let paymentTypeName: String
     let price: Float
+}
+
+extension PlaceModel {
+    var minPrice: Float {
+        return seatTypes.map { (seatType) -> Float in
+            return seatType.price
+        }.min() ?? 0
+    }
 }

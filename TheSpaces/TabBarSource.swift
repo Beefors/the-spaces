@@ -24,6 +24,11 @@ class TabBarSource: NSObject, UITabBarControllerDelegate {
         tabBarController.tabBar.isTranslucent = false
         tabBarController.delegate = TabBarSource.shared
         
+//        let testView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 50, height: 50)))
+//        testView.backgroundColor = .blue
+//        
+//        tabBarController.view.addSubview(testView)
+        
         setupControllers()
     }
     

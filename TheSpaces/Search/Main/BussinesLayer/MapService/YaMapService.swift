@@ -18,6 +18,7 @@ class YaMapService: NSObject, MapServiceType {
     let mapView: YMKMapView
     let map: YMKMap
     let userLocationLayer: YMKUserLocationLayer
+    private(set) var clusterizedCollection: YMKClusterizedPlacemarkCollection!
     
     init(_ controller: SearchViewController) {
         self.controller = controller
@@ -26,7 +27,10 @@ class YaMapService: NSObject, MapServiceType {
         
         let mapKit = YMKMapKit.sharedInstance()
         userLocationLayer = mapKit.createUserLocationLayer(with: mapView.mapWindow)
+        
         super.init()
+        
+        clusterizedCollection = map.mapObjects.addClusterizedPlacemarkCollection(with: self)
         userLocationLayer.setObjectListenerWith(self)
     }
     
@@ -57,6 +61,31 @@ class YaMapService: NSObject, MapServiceType {
         
     }
     
+    func presentPlaces(_ places: Array<PlaceModel>) {
+        
+        clusterizedCollection.clear()
+        
+        for place in places {
+            
+            let label = UILabel(frame: CGRect(origin: CGPoint(x: 10.52, y: 5.44), size: .zero))
+            label.font = .priceButton
+            label.text = "\(Int(place.minPrice))₽"
+            
+            label.sizeToFit()
+            
+            let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: label.frame.maxX + 8.35, height: label.frame.maxY + 4.94)))
+            view.addSubview(label)
+            view.backgroundColor = .white
+            view.layer.cornerRadius = view.bounds.height / 2
+            
+            let point = place.coordinate.toYMKPoint()
+            let marker = clusterizedCollection.addPlacemark(with: point, view: YRTViewProvider(uiView: view, cacheable: false))
+            marker.addTapListener(with: self)
+        }
+        
+        clusterizedCollection.clusterPlacemarks(withClusterRadius: 10, minZoom: 15)
+    }
+    
     func goToUserPosition() {
         guard let userCamera = userLocationLayer.cameraPosition() else { return }
         map.move(with: userCamera, animationType: YMKAnimation(type: .smooth, duration: 0.5), cameraCallback: nil)
@@ -67,6 +96,12 @@ extension YaMapService: YMKMapCameraListener {
     func onCameraPositionChanged(with map: YMKMap, cameraPosition: YMKCameraPosition, cameraUpdateSource: YMKCameraUpdateSource, finished: Bool) {
 //            print("\(cameraPosition.target.latitude) \(cameraPosition.target.longitude) \(cameraPosition.zoom)")
         }
+}
+
+extension YaMapService: YMKMapObjectTapListener {
+    func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
+        return true
+    }
 }
 
 // Customiztion user marker
@@ -84,3 +119,11 @@ extension YaMapService: YMKUserLocationObjectListener {
     }
     
 }
+
+// Setup cluster style
+extension YaMapService: YMKClusterListener {
+    func onClusterAdded(with cluster: YMKCluster) {
+        cluster.appearance.setIconWith(#imageLiteral(resourceName: "clusterIcon"))
+    }
+}
+

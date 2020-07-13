@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		551052CA24BC5BD600D71130 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551052C924BC5BD600D71130 /* UIView + Extension.swift */; };
 		551CEA5524B1C8C300465B69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551CEA5424B1C8C300465B69 /* AppDelegate.swift */; };
 		551CEA5E24B1C8C400465B69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551CEA5D24B1C8C400465B69 /* Assets.xcassets */; };
 		551CEA6124B1C8C400465B69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551CEA5F24B1C8C400465B69 /* LaunchScreen.storyboard */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		1061CFA4843D8F4E55B6B7BD /* Pods_TheSpaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheSpaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3405A610496B9FA96D6D663A /* Pods-TheSpaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheSpaces.release.xcconfig"; path = "Target Support Files/Pods-TheSpaces/Pods-TheSpaces.release.xcconfig"; sourceTree = "<group>"; };
+		551052C924BC5BD600D71130 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		551CEA5124B1C8C300465B69 /* TheSpaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheSpaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		551CEA5424B1C8C300465B69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		551CEA5D24B1C8C400465B69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 			children = (
 				55C899E024B5D0A00048FF59 /* YandexMaps */,
 				557B1CED24B46E4D0050289D /* UIViewController + Extension.swift */,
+				551052C924BC5BD600D71130 /* UIView + Extension.swift */,
 				557B1CEF24B46EC10050289D /* UIColor + Extension.swift */,
 				55C899E424B5E92B0048FF59 /* UIFont + Extension.swift */,
 				55EFB67C24BB519F00C26495 /* Reactive + ST.swift */,
@@ -494,6 +497,7 @@
 				55236E1C24B9E3BE00619510 /* ApiProvider.swift in Sources */,
 				55EFB67724BB326000C26495 /* SearchViewModel.swift in Sources */,
 				55EFB67F24BB54CF00C26495 /* Errors.swift in Sources */,
+				551052CA24BC5BD600D71130 /* UIView + Extension.swift in Sources */,
 				55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */,
 				55440AE024B74794004319D3 /* YMKPoint + TS.swift in Sources */,
 				55E193E124B6F3C100BF8313 /* UIBuilderType.swift in Sources */,

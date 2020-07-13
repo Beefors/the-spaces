@@ -15,21 +15,28 @@ import RxOptional
 class SearchVCMapBehaviorService: NSObject {
     unowned(unsafe) private(set) var owner: SearchViewController
     
+    //MARK: Services
     lazy var mapService: MapServiceType = YaMapService(owner)
     lazy var locationService = LocationService(parent: owner)
     lazy var searchViewModel = SearchViewModel()
     
+    //MARK: - Initialization
     init(_ controller: SearchViewController) {
         owner = controller
         super.init()
     }
     
+    //MARK: - Methods
     func setup() {
+        
+        // Setup services
         mapService.setup()
         locationService.setup()
         
+        // Load places
         searchViewModel.getPlacesTrigger.accept(())
         
+        // Enabling/disabling user location button
         locationService.viewModel
             .hasPermissionsObservable
             .bind {[unowned self] (isSuccessfull) in
@@ -47,6 +54,7 @@ class SearchVCMapBehaviorService: NSObject {
             }
             .disposed(by: locationService.viewModel)
         
+        // Show user position on map
         locationService.viewModel
             .userLocationObservable
             .filterNil()
@@ -56,6 +64,7 @@ class SearchVCMapBehaviorService: NSObject {
             }
             .disposed(by: locationService.viewModel)
         
+        // Show user position on map by user action
         owner.userLocationButton.rx
             .tap
             .subscribe(onNext: {[unowned self] in
@@ -63,6 +72,25 @@ class SearchVCMapBehaviorService: NSObject {
                 self.mapService.goToLocation(coordinate.coordinate, zoom: .near, animated: true)
             })
             .disposed(by: locationService.viewModel)
+        
+        // Show places on map
+        searchViewModel.placesObservable
+            .subscribe(onNext: {[unowned self] (places) in
+                self.mapService.presentPlaces(places)
+            })
+            .disposed(by: searchViewModel)
+        
+        owner.showListButton.rx
+            .tap
+            .bind {[unowned self] _ in
+                let vc = UIViewController()
+                
+                vc.view.backgroundColor = .red
+                vc.modalPresentationStyle = .overCurrentContext
+                
+                self.owner.present(vc, animated: true, completion: nil)
+            }
+            .disposed(by: searchViewModel)
         
     }
     
