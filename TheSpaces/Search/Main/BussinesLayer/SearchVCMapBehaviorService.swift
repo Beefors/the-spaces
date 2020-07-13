@@ -17,6 +17,7 @@ class SearchVCMapBehaviorService: NSObject {
     
     lazy var mapService: MapServiceType = YaMapService(owner)
     lazy var locationService = LocationService(parent: owner)
+    lazy var searchViewModel = SearchViewModel()
     
     init(_ controller: SearchViewController) {
         owner = controller
@@ -26,6 +27,8 @@ class SearchVCMapBehaviorService: NSObject {
     func setup() {
         mapService.setup()
         locationService.setup()
+        
+        searchViewModel.getPlacesTrigger.accept(())
         
         locationService.viewModel
             .hasPermissionsObservable

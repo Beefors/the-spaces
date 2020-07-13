@@ -12,6 +12,9 @@
 		551CEA6124B1C8C400465B69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551CEA5F24B1C8C400465B69 /* LaunchScreen.storyboard */; };
 		551CEA6D24B1CF8A00465B69 /* RouterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551CEA6A24B1CF8A00465B69 /* RouterManager.swift */; };
 		551CEA6E24B1CF8A00465B69 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551CEA6B24B1CF8A00465B69 /* Coordinator.swift */; };
+		55236E1924B9E33200619510 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236E1824B9E33200619510 /* NetworkService.swift */; };
+		55236E1C24B9E3BE00619510 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236E1B24B9E3BE00619510 /* ApiProvider.swift */; };
+		55236E1F24B9FF6900619510 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236E1E24B9FF6900619510 /* PlaceModel.swift */; };
 		55440AE024B74794004319D3 /* YMKPoint + TS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55440ADF24B74794004319D3 /* YMKPoint + TS.swift */; };
 		557B1CE024B458C60050289D /* TabBarSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CDF24B458C60050289D /* TabBarSource.swift */; };
 		557B1CE724B46BA30050289D /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557B1CE624B46BA30050289D /* Search.storyboard */; };
@@ -39,6 +42,10 @@
 		55E193E724B6F7A700BF8313 /* MapServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E193E624B6F7A700BF8313 /* MapServiceType.swift */; };
 		55E193E924B6F82500BF8313 /* YaMapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E193E824B6F82500BF8313 /* YaMapService.swift */; };
 		55E193EC24B7137500BF8313 /* SearchVCMapBehaviorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E193EB24B7137500BF8313 /* SearchVCMapBehaviorService.swift */; };
+		55EFB67724BB326000C26495 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EFB67624BB326000C26495 /* SearchViewModel.swift */; };
+		55EFB67924BB34F100C26495 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EFB67824BB34F100C26495 /* CityModel.swift */; };
+		55EFB67D24BB519F00C26495 /* Reactive + ST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EFB67C24BB519F00C26495 /* Reactive + ST.swift */; };
+		55EFB67F24BB54CF00C26495 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EFB67E24BB54CF00C26495 /* Errors.swift */; };
 		5F039E55B55068ECCF6571F9 /* Pods_TheSpaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1061CFA4843D8F4E55B6B7BD /* Pods_TheSpaces.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +59,9 @@
 		551CEA6224B1C8C400465B69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551CEA6A24B1CF8A00465B69 /* RouterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterManager.swift; sourceTree = "<group>"; };
 		551CEA6B24B1CF8A00465B69 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		55236E1824B9E33200619510 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		55236E1B24B9E3BE00619510 /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		55236E1E24B9FF6900619510 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		55440ADF24B74794004319D3 /* YMKPoint + TS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YMKPoint + TS.swift"; sourceTree = "<group>"; };
 		557B1CDF24B458C60050289D /* TabBarSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSource.swift; sourceTree = "<group>"; };
 		557B1CE624B46BA30050289D /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
@@ -79,6 +89,10 @@
 		55E193E624B6F7A700BF8313 /* MapServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapServiceType.swift; sourceTree = "<group>"; };
 		55E193E824B6F82500BF8313 /* YaMapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaMapService.swift; sourceTree = "<group>"; };
 		55E193EB24B7137500BF8313 /* SearchVCMapBehaviorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVCMapBehaviorService.swift; sourceTree = "<group>"; };
+		55EFB67624BB326000C26495 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		55EFB67824BB34F100C26495 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		55EFB67C24BB519F00C26495 /* Reactive + ST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive + ST.swift"; sourceTree = "<group>"; };
+		55EFB67E24BB54CF00C26495 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		6575D05773BC03660780F254 /* Pods-TheSpaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheSpaces.debug.xcconfig"; path = "Target Support Files/Pods-TheSpaces/Pods-TheSpaces.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,9 +131,9 @@
 			children = (
 				557B1CE124B469D00050289D /* Application */,
 				557B1CE224B46A740050289D /* Resources */,
+				55236E1724B9E31E00619510 /* Network */,
 				557B1CEC24B46DAA0050289D /* Extensions */,
 				55C899EE24B614970048FF59 /* Components */,
-				55E193DF24B6EE2B00BF8313 /* Network */,
 				551CEA6824B1CF8A00465B69 /* Router */,
 				557B1CDF24B458C60050289D /* TabBarSource.swift */,
 				557B1CE324B46AC20050289D /* Search */,
@@ -137,6 +151,26 @@
 				551CEA6B24B1CF8A00465B69 /* Coordinator.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		55236E1724B9E31E00619510 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				55236E1D24B9FF5800619510 /* Models */,
+				55236E1B24B9E3BE00619510 /* ApiProvider.swift */,
+				55236E1824B9E33200619510 /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		55236E1D24B9FF5800619510 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				55236E1E24B9FF6900619510 /* PlaceModel.swift */,
+				55EFB67824BB34F100C26495 /* CityModel.swift */,
+				55EFB67E24BB54CF00C26495 /* Errors.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		557B1CE124B469D00050289D /* Application */ = {
@@ -172,6 +206,7 @@
 			children = (
 				55C899E824B60FC70048FF59 /* BussinesLayer */,
 				557B1CEA24B46D230050289D /* SearchViewController.swift */,
+				55EFB67624BB326000C26495 /* SearchViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -183,6 +218,7 @@
 				557B1CED24B46E4D0050289D /* UIViewController + Extension.swift */,
 				557B1CEF24B46EC10050289D /* UIColor + Extension.swift */,
 				55C899E424B5E92B0048FF59 /* UIFont + Extension.swift */,
+				55EFB67C24BB519F00C26495 /* Reactive + ST.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -286,13 +322,6 @@
 				55E193E024B6F3C100BF8313 /* UIBuilderType.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		55E193DF24B6EE2B00BF8313 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		55E193E524B6F73500BF8313 /* MapService */ = {
@@ -462,18 +491,25 @@
 				55C899ED24B611D70048FF59 /* LocationService.swift in Sources */,
 				557B1CF024B46EC10050289D /* UIColor + Extension.swift in Sources */,
 				558575F424B5A19200FDAEAE /* OtherCoordinator.swift in Sources */,
+				55236E1C24B9E3BE00619510 /* ApiProvider.swift in Sources */,
+				55EFB67724BB326000C26495 /* SearchViewModel.swift in Sources */,
+				55EFB67F24BB54CF00C26495 /* Errors.swift in Sources */,
 				55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */,
 				55440AE024B74794004319D3 /* YMKPoint + TS.swift in Sources */,
 				55E193E124B6F3C100BF8313 /* UIBuilderType.swift in Sources */,
+				55236E1F24B9FF6900619510 /* PlaceModel.swift in Sources */,
 				551CEA6E24B1CF8A00465B69 /* Coordinator.swift in Sources */,
+				55EFB67D24BB519F00C26495 /* Reactive + ST.swift in Sources */,
 				55E193EC24B7137500BF8313 /* SearchVCMapBehaviorService.swift in Sources */,
 				558575F624B5A21200FDAEAE /* PlacesListViewController.swift in Sources */,
 				55E193E724B6F7A700BF8313 /* MapServiceType.swift in Sources */,
 				557B1CE924B46BB70050289D /* SearchCoordinator.swift in Sources */,
+				55236E1924B9E33200619510 /* NetworkService.swift in Sources */,
 				557B1CEE24B46E4D0050289D /* UIViewController + Extension.swift in Sources */,
 				55C899E224B5D0C20048FF59 /* YMKCameraPosition + TS.swift in Sources */,
 				558575E924B5A12800FDAEAE /* PlacesCoordinator.swift in Sources */,
 				551CEA6D24B1CF8A00465B69 /* RouterManager.swift in Sources */,
+				55EFB67924BB34F100C26495 /* CityModel.swift in Sources */,
 				558575FA24B5A3EF00FDAEAE /* OtherViewController.swift in Sources */,
 				55E193E424B6F47600BF8313 /* SearchVCUIBuilder.swift in Sources */,
 				557BF2F624B7516100CE5F1C /* SearchPanelView.swift in Sources */,
