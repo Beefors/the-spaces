@@ -77,9 +77,12 @@ class YaMapService: NSObject, MapServiceType {
             view.addSubview(label)
             view.backgroundColor = .white
             view.layer.cornerRadius = view.bounds.height / 2
+            view.isOpaque = false
+            view.layer.borderColor = UIColor.STLightGray.cgColor
+            view.layer.borderWidth = 1
             
             let point = place.coordinate.toYMKPoint()
-            let marker = clusterizedCollection.addPlacemark(with: point, view: YRTViewProvider(uiView: view, cacheable: false))
+            let marker = clusterizedCollection.addPlacemark(with: point, view: YRTViewProvider(uiView: view))
             marker.addTapListener(with: self)
         }
         
