@@ -33,10 +33,18 @@ target 'TheSpaces' do
   # How use https://github.com/Moya/Moya/blob/master/docs/Examples/Basic.md
   pod 'Moya/RxSwift'
   
+  # UITableView and UICollectionView Data Sources for RxSwift
+  # https://github.com/RxSwiftCommunity/RxDataSources
+  pod 'RxDataSources'
+  
   ##################
   ### Other Pods ###
   ##################
   
   pod 'YandexMapKit', '3.5'
+  
+  # Image management
+  # https://github.com/onevcat/Kingfisher
+  pod 'Kingfisher'
   
 end

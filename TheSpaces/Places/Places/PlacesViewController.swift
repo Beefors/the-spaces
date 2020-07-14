@@ -1,5 +1,5 @@
 //
-//  PlacesListViewController.swift
+//  PlacesViewController.swift
 //  TheSpaces
 //
 //  Created by Денис Швыров on 08.07.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlacesListViewController: UIViewController {
+class PlacesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

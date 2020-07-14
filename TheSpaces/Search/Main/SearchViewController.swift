@@ -12,12 +12,13 @@ import YandexMapKit
 class SearchViewController: UIViewController {
 
     //MARK: Outlets
+    @IBOutlet weak var searchPanelView: SearchPanelView!
     @IBOutlet weak var userLocationButton: UIButton!
     @IBOutlet weak var showListButton: UIButton!
     
     //MARK: - Services
     lazy var builderUI = SearchVCUIBuilder(self)
-    lazy var behaviorService = SearchVCMapBehaviorService(self)
+    lazy var behaviorService = SearchVCBehaviorService(self)
     
     //MARK: - Lifecycle
     override func viewDidLoad() {

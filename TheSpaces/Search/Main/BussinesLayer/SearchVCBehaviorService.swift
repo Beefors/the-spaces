@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxOptional
 
-class SearchVCMapBehaviorService: NSObject {
+class SearchVCBehaviorService: NSObject {
     unowned(unsafe) private(set) var owner: SearchViewController
     
     //MARK: Services
@@ -83,12 +83,20 @@ class SearchVCMapBehaviorService: NSObject {
         owner.showListButton.rx
             .tap
             .bind {[unowned self] _ in
-                let vc = UIViewController()
                 
-                vc.view.backgroundColor = .red
-                vc.modalPresentationStyle = .overCurrentContext
+                self.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
                 
-                self.owner.present(vc, animated: true, completion: nil)
+                var vc: UIViewController?
+                
+                let presentType = RouterManager.PresentationType.present(animated: true) {[unowned self, weak vc] in
+                    guard vc != nil else { return }
+                    self.owner.searchPanelView.transite(to: vc!.view)
+                }
+                
+                let coordinator = SearchCoordinator.placesList(searckPanelView: self.owner.searchPanelView, placesDataViewModel: self.searchViewModel)
+                
+                vc =  RouterManager.shared.present(coordinator, presentationType: presentType)
+                
             }
             .disposed(by: searchViewModel)
         

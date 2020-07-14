@@ -102,4 +102,24 @@ class SearchPanelView: UIView {
         
     }
     
+    //MARK: Helpers
+    func transite(to superView: UIView) {
+        removeFromSuperview()
+        superView.addSubview(self)
+        
+        let superViewTopAnchor: NSLayoutYAxisAnchor
+        
+        if #available(iOS 11.0, *) {
+            superViewTopAnchor = superView.safeAreaLayoutGuide.topAnchor
+        } else {
+            superViewTopAnchor = superView.topAnchor
+        }
+        
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: superViewTopAnchor),
+            leadingAnchor.constraint(equalTo: superView.leadingAnchor),
+            trailingAnchor.constraint(equalTo: superView.trailingAnchor)
+        ])
+    }
+    
 }

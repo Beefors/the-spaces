@@ -58,7 +58,13 @@ extension RouterManager {
             case onTab(id: Int)
         }
         
+        /// Presenting view controller by navigation controller
         case push(by: PushTabBarType, animated: Bool)
+        
+        typealias Completion = () -> ()
+        /// Use standart present(vc:animated:complition) method of UIViewController. Using UINavigationController of current tab
+        case present(animated: Bool, completion: Completion?)
+        
     }
     
     @discardableResult // Return nil value when presentation aborted
@@ -81,6 +87,10 @@ extension RouterManager {
                 
                 navController.pushViewController(vc, animated: animated)
             }
+            
+        case .present(let animated, let completion):
+            guard let selectedNavController = tabBarController.selectedViewController as? UINavigationController else { return nil }
+            selectedNavController.present(vc, animated: animated, completion: completion)
         }
         
         return vc
