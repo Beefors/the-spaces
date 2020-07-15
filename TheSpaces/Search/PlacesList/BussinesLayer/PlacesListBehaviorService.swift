@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class PlacesListVCBehaviorService: NSObject {
+class PlacesListBehaviorService: NSObject {
     
     unowned(unsafe) let owner: PlacesListViewController
     unowned(unsafe) let dataViewModel: SearchViewModel
@@ -21,10 +21,12 @@ class PlacesListVCBehaviorService: NSObject {
     init(owner: PlacesListViewController, placesDataProvider: SearchViewModel) {
         self.owner = owner
         dataViewModel = placesDataProvider
-        tableViewService = .init(tableView: owner.tableView, viewModel: dataViewModel)
+        tableViewService = .init(owner: owner, viewModel: dataViewModel)
     }
     
     func setup() {
+        
+        tableViewService.setup()
         
         owner.dismissButton.rx
             .tap

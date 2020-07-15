@@ -93,7 +93,7 @@ class SearchVCBehaviorService: NSObject {
                     self.owner.searchPanelView.transite(to: vc!.view)
                 }
                 
-                let coordinator = SearchCoordinator.placesList(searckPanelView: self.owner.searchPanelView, placesDataViewModel: self.searchViewModel)
+                let coordinator = SearchCoordinator.placesList(searchPanelView: self.owner.searchPanelView, placesDataViewModel: self.searchViewModel)
                 
                 vc =  RouterManager.shared.present(coordinator, presentationType: presentType)
                 

@@ -17,7 +17,7 @@ class PlacesListViewController: UIViewController {
     
     //MARK: - Services
     var builderUI: PlacesListUIBuilder!
-    var behaviorService: PlacesListVCBehaviorService!
+    var behaviorService: PlacesListBehaviorService!
     
     //MARK: - Views
     var searchPanelView: SearchPanelView!

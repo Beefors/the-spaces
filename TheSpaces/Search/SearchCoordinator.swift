@@ -11,7 +11,7 @@ import UIKit.UIViewController
 
 enum SearchCoordinator {
     case main
-    case placesList(searckPanelView: SearchPanelView, placesDataViewModel: SearchViewModel)
+    case placesList(searchPanelView: SearchPanelView, placesDataViewModel: SearchViewModel)
 }
 
 extension SearchCoordinator: StoryboardCoordinator {
@@ -33,7 +33,7 @@ extension SearchCoordinator: StoryboardCoordinator {
             
             placesListVC.searchPanelView = searchPanelView
             placesListVC.builderUI = PlacesListUIBuilder(owner: placesListVC, tableViewTopInset: searchPanelView.frame.maxY)
-            placesListVC.behaviorService = PlacesListVCBehaviorService(owner: placesListVC, placesDataProvider: placesDataViewModel)
+            placesListVC.behaviorService = PlacesListBehaviorService(owner: placesListVC, placesDataProvider: placesDataViewModel)
             
         default: break
         }

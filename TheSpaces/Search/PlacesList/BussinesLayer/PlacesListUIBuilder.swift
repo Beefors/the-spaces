@@ -14,8 +14,6 @@ class PlacesListUIBuilder: NSObject {
     let tableViewTopInset: CGFloat
     unowned(unsafe) let owner: PlacesListViewController
     
-    private let cellIdentifier = String(describing: type(of: PlaceListCell.self))
-    
     init(owner: PlacesListViewController, tableViewTopInset: CGFloat) {
         self.tableViewTopInset = tableViewTopInset
         self.owner = owner
@@ -26,17 +24,20 @@ class PlacesListUIBuilder: NSObject {
         owner.containerBottomConstr.constant = TabBarSource.shared.tabBarController.tabBar.bounds.height
         
         owner.dismissButton.setTitle("На карте", for: .normal)
-        
         owner.dismissButton.backgroundColor = .white
         owner.dismissButton.layer.cornerRadius = owner.dismissButton.bounds.height / 2
         owner.dismissButton.layer.borderColor = UIColor.STGray.cgColor
         owner.dismissButton.titleLabel?.font = .priceButton
         owner.dismissButton.setTitleColor(.STGraphite, for: .normal)
+        owner.dismissButton.layer.borderWidth = 1
+        owner.dismissButton.layer.borderColor = UIColor.STGray.cgColor
         
+        owner.tableView.contentInset = .init(top: tableViewTopInset, left: 0, bottom: 0, right: 0)
         owner.tableView.backgroundColor = .blue
         
-        let cellNib = UINib(nibName: cellIdentifier, bundle: Bundle.main)
-        owner.tableView.register(cellNib, forCellReuseIdentifier: cellIdentifier)
+        PlacesListViewsFactory().registerPlaceListCell(to: owner.tableView)
+        
+        
         
     }
     

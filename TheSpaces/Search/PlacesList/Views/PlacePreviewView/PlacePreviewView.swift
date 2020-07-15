@@ -19,15 +19,22 @@ class PlacePreviewView: UIView {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     
+    @IBOutlet weak var textViewHeightConstr: NSLayoutConstraint!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        commonInit()
     }
     
     func commonInit() {
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
         Bundle.main.loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)
         
         addSubview(contentView)
@@ -39,22 +46,40 @@ class PlacePreviewView: UIView {
             contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
+        nameLabel.font = .titles
+        priceLabel.font = .subtitles
+        addressLabel.font = .mainText
+        
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.layer.cornerRadius = imageView.bounds.height / 2
+        updateImageRadius()
     }
     
     func setupData(_ model: PlaceModel) {
         
 //        imageView.kf.setImage(with: <#T##ImageDataProvider?#>)
-        imageView.backgroundColor = .STGraphite
+//        imageView.backgroundColor = .STGraphite
+        imageView.image = UIImage(named: "test")
         
-        nameLabel.text = model.name
+        nameLabel.text = model.name + model.name + model.name + model.name
         priceLabel.text = "\(model.minPrice)"
         addressLabel.text = model.address
         textView.text = model.phone + " " + (model.email ?? "")
+        
+        nameLabel.sizeToFit()
+        priceLabel.sizeToFit()
+        addressLabel.sizeToFit()
+        textView.sizeToFit()
+        
+        textViewHeightConstr.constant = textView.contentSize.height
+        
+        updateImageRadius()
+    }
+    
+    func updateImageRadius() {
+        imageView.layer.cornerRadius = imageView.bounds.height / 2
     }
     
 }
