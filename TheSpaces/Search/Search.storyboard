@@ -100,7 +100,7 @@
                             <constraint firstItem="Yp1-Po-4qA" firstAttribute="top" secondItem="93j-u6-bDN" secondAttribute="top" id="1xZ-Rd-RvV"/>
                             <constraint firstItem="Yp1-Po-4qA" firstAttribute="leading" secondItem="Mnv-lS-VZT" secondAttribute="leading" id="3ac-fh-VNh"/>
                             <constraint firstItem="Yp1-Po-4qA" firstAttribute="trailing" secondItem="Mnv-lS-VZT" secondAttribute="trailing" id="8Hy-a0-NVC"/>
-                            <constraint firstAttribute="bottom" secondItem="Yp1-Po-4qA" secondAttribute="bottom" id="oEX-vp-DqE"/>
+                            <constraint firstItem="Mnv-lS-VZT" firstAttribute="bottom" secondItem="Yp1-Po-4qA" secondAttribute="bottom" id="oEX-vp-DqE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mnv-lS-VZT"/>
                     </view>

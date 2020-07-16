@@ -28,19 +28,55 @@ class PlacesListBehaviorService: NSObject {
         
         tableViewService.setup()
         
-        owner.dismissButton.rx
-            .tap
-            .subscribe(onNext: {[unowned self] _ in
+        Observable.just(self)
+            .flatMap { (behaviorService) in
+                return behaviorService.owner.dismissButton.rx.tap.map({ behaviorService })
+            }
+            .bind { (behaviorService) in
+                guard let searchViewController = behaviorService.owner.parent as? SearchViewController else { return }
                 
-                guard let presentingNavVC = self.owner.presentingViewController as? UINavigationController else { return }
-                guard let searchVC = presentingNavVC.viewControllers.first as? SearchViewController else { return }
-                self.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
+                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {[unowned behaviorService, unowned searchViewController] in
+                    behaviorService.owner.view.frame.origin = CGPoint(x: .zero, y: searchViewController.view.bounds.height)
+                }, completion: {[unowned behaviorService] _ in
+                    behaviorService.owner.view.removeFromSuperview()
+                    behaviorService.owner.removeFromParent()
+                })
                 
-                self.owner.dismiss(animated: true) {[unowned self, unowned searchVC] in
-                    self.owner.searchPanelView.transite(to: searchVC.view)
-                }
-            })
+            }
             .disposed(by: dataViewModel)
+        
+//        owner.dismissButton.rx
+//        .tap
+//        .subscribe(onNext: {[unowned self] _ in
+//
+//            guard let presentingNavVC = self.owner.presentingViewController as? UINavigationController else { return }
+//            guard let searchVC = presentingNavVC.viewControllers.first as? SearchViewController else { return }
+//            self.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
+//
+//            self.owner.dismiss(animated: true) {[unowned self, unowned searchVC] in
+//                self.owner.searchPanelView.transite(to: searchVC.view)
+//            }
+//        })
+//        .disposed(by: dataViewModel)
+        
+//        Observable.just(self)
+//            .flatMap { (behaviorService) in
+//                return behaviorService.owner.dismissButton.rx.tap.map({ behaviorService })
+//            }
+//            .do(onNext: { (behaviorService) in
+//                guard let navVC = self.owner.navigationController else { return }
+//                navVC.popViewController(animated: false)
+//                behaviorService.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
+//            })
+//            .flatMap { (behaviorService) in
+//                return behaviorService.owner.rx.viewDidDisappear.map({ _ in behaviorService})
+//            }
+//            .bind { (behaviorService) in
+//                guard let navVC = behaviorService.owner.navigationController else { return }
+//                guard let searchVC = navVC.viewControllers.first as? SearchViewController else { return }
+//                behaviorService.owner.searchPanelView.transite(to: searchVC.view)
+//            }
+//            .disposed(by: dataViewModel)
         
     }
     

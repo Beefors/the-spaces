@@ -59,17 +59,11 @@ class SearchPanelView: UIView {
             optionsButton.leadingAnchor.constraint(equalTo: textField.trailingAnchor, constant: 9)
         ])
         
-        let imageContainer = UIView()
+        let imageContainer = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 36)))
         imageContainer.backgroundColor = .clear
-        imageContainer.translatesAutoresizingMaskIntoConstraints = false
         
         textField.leftView = imageContainer
         textField.leftViewMode = .always
-        
-        NSLayoutConstraint.activate([
-            imageContainer.widthAnchor.constraint(equalToConstant: 40),
-            imageContainer.heightAnchor.constraint(equalToConstant: 36)
-        ])
         
         let imageView = UIImageView(image: #imageLiteral(resourceName: "magnifierIcon"))
         imageView.translatesAutoresizingMaskIntoConstraints = false

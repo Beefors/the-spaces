@@ -32,12 +32,12 @@ class PlacesListUIBuilder: NSObject {
         owner.dismissButton.layer.borderWidth = 1
         owner.dismissButton.layer.borderColor = UIColor.STGray.cgColor
         
-        owner.tableView.contentInset = .init(top: tableViewTopInset, left: 0, bottom: 0, right: 0)
-        owner.tableView.backgroundColor = .blue
+        let tableViewBottomInset = owner.tableView.bounds.height - (owner.dismissButton.frame.minY - 14)
+        owner.tableView.contentInset = .init(top: tableViewTopInset, left: 0, bottom: tableViewBottomInset, right: 0)
+        owner.tableView.scrollIndicatorInsets = .init(top: tableViewTopInset, left: 0, bottom: 0, right: 0)
+        owner.tableView.separatorInset = .init(top: 0, left: 16.5, bottom: 0, right: 16.5)
         
         PlacesListViewsFactory().registerPlaceListCell(to: owner.tableView)
-        
-        
         
     }
     

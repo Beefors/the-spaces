@@ -11,6 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxOptional
+import RxAppState
 
 class SearchVCBehaviorService: NSObject {
     unowned(unsafe) private(set) var owner: SearchViewController
@@ -80,25 +81,75 @@ class SearchVCBehaviorService: NSObject {
             })
             .disposed(by: searchViewModel)
         
-        owner.showListButton.rx
-            .tap
-            .bind {[unowned self] _ in
-                
-                self.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
-                
-                var vc: UIViewController?
-                
-                let presentType = RouterManager.PresentationType.present(animated: true) {[unowned self, weak vc] in
-                    guard vc != nil else { return }
-                    self.owner.searchPanelView.transite(to: vc!.view)
-                }
-                
-                let coordinator = SearchCoordinator.placesList(searchPanelView: self.owner.searchPanelView, placesDataViewModel: self.searchViewModel)
-                
-                vc =  RouterManager.shared.present(coordinator, presentationType: presentType)
-                
+        Observable.just(self)
+            .flatMap { (behaviorService) in
+                return behaviorService.owner.showListButton.rx.tap.map({behaviorService})
             }
+            .do(onNext: { (behaviorService) in
+                
+                let placesList = SearchCoordinator.placesList(searchPanelView: behaviorService.owner.searchPanelView, placesDataViewModel: behaviorService.searchViewModel).viewController
+                
+                behaviorService.owner.addChild(placesList)
+                behaviorService.owner.view.insertSubview(placesList.view, belowSubview: behaviorService.owner.searchPanelView)
+                
+                placesList.view.frame.origin = CGPoint(x: .zero, y: behaviorService.owner.view.bounds.height)
+                
+                UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {[unowned placesList] in
+                    placesList.view.frame.origin = .zero
+                }, completion: nil)
+                
+            })
+            .subscribe()
             .disposed(by: searchViewModel)
+        
+//        owner.showListButton.rx
+//            .tap
+//            .map({[unowned self] (_) -> SearchVCBehaviorService in
+//                return self
+//            })
+//            .do(onNext: { (service) in
+//                service.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
+//            })
+//            .flatMap({ behaviorService -> Observable<(SearchVCBehaviorService, UIViewController)> in
+//                return Observable<UIViewController>.create { (observer) -> Disposable in
+//                    let coordinator = SearchCoordinator.placesList(searchPanelView: behaviorService.owner.searchPanelView, placesDataViewModel: behaviorService.searchViewModel)
+//
+//                    RouterManager.shared.present(coordinator, presentationType: .present(animated: true) { presentingVC in
+//                        guard presentingVC != nil else {
+//                            observer.onCompleted()
+//                            return
+//                        }
+//
+//                        observer.on(.next(presentingVC!))
+//                        observer.onCompleted()
+//                    })
+//
+//                    return Disposables.create()
+//                }
+//                .map({ (behaviorService, $0) })
+//            })
+//            .bind { behaviorService, presentingVC in
+//                behaviorService.owner.searchPanelView.transite(to: presentingVC.view)
+//            }
+//            .disposed(by: searchViewModel)
+        
+//        owner.showListButton.rx
+//            .tap
+//            .map({[unowned self] _ -> UIViewController? in
+//
+//                self.owner.searchPanelView.transite(to: self.owner.navigationController!.view)
+//
+//                return RouterManager.shared.present(SearchCoordinator.placesList(searchPanelView: self.owner.searchPanelView, placesDataViewModel: self.searchViewModel), presentationType: .push(by: .onSelectedTab, animated: .fromBottom))
+//            })
+//            .filterNil()
+////            .flatMap({ viewController in
+////                return viewController.rx.viewDidAppear.take(1).map({ _ in viewController })
+////            })
+//            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
+//            .bind {[unowned self] (viewController) in
+//                self.owner.searchPanelView.transite(to: viewController.view)
+//            }
+//            .disposed(by: searchViewModel)
         
     }
     

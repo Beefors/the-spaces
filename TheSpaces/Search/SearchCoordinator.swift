@@ -29,8 +29,6 @@ extension SearchCoordinator: StoryboardCoordinator {
         case .placesList(let searchPanelView, let placesDataViewModel):
             let placesListVC = viewController as! PlacesListViewController
             
-            placesListVC.modalPresentationStyle = .overCurrentContext
-            
             placesListVC.searchPanelView = searchPanelView
             placesListVC.builderUI = PlacesListUIBuilder(owner: placesListVC, tableViewTopInset: searchPanelView.frame.maxY)
             placesListVC.behaviorService = PlacesListBehaviorService(owner: placesListVC, placesDataProvider: placesDataViewModel)
