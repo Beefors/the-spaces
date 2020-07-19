@@ -45,39 +45,6 @@ class PlacesListBehaviorService: NSObject {
             }
             .disposed(by: dataViewModel)
         
-//        owner.dismissButton.rx
-//        .tap
-//        .subscribe(onNext: {[unowned self] _ in
-//
-//            guard let presentingNavVC = self.owner.presentingViewController as? UINavigationController else { return }
-//            guard let searchVC = presentingNavVC.viewControllers.first as? SearchViewController else { return }
-//            self.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
-//
-//            self.owner.dismiss(animated: true) {[unowned self, unowned searchVC] in
-//                self.owner.searchPanelView.transite(to: searchVC.view)
-//            }
-//        })
-//        .disposed(by: dataViewModel)
-        
-//        Observable.just(self)
-//            .flatMap { (behaviorService) in
-//                return behaviorService.owner.dismissButton.rx.tap.map({ behaviorService })
-//            }
-//            .do(onNext: { (behaviorService) in
-//                guard let navVC = self.owner.navigationController else { return }
-//                navVC.popViewController(animated: false)
-//                behaviorService.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
-//            })
-//            .flatMap { (behaviorService) in
-//                return behaviorService.owner.rx.viewDidDisappear.map({ _ in behaviorService})
-//            }
-//            .bind { (behaviorService) in
-//                guard let navVC = behaviorService.owner.navigationController else { return }
-//                guard let searchVC = navVC.viewControllers.first as? SearchViewController else { return }
-//                behaviorService.owner.searchPanelView.transite(to: searchVC.view)
-//            }
-//            .disposed(by: dataViewModel)
-        
     }
     
 }

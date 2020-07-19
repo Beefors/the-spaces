@@ -33,7 +33,7 @@ class PlacesListTableViewService: NSObject {
         
         let dataSource = RxTableViewSectionedReloadDataSource<RxSectionModel<PlaceModel>>(configureCell: { (dataSource, tableView, IndexPath, place) -> UITableViewCell in
             let cell = PlacesListViewsFactory().dequeuePlaceListCell(tableView)
-            cell.placeView.setupData(place)
+            cell.placeView.behaviorService.setupData(place)
             return cell
         })
         
@@ -41,6 +41,15 @@ class PlacesListTableViewService: NSObject {
             .placesObservable
             .map({ [RxSectionModel(items: $0)] })
             .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: viewModel)
+        
+        Observable.just(tableView!)
+            .flatMap { (tableView) -> Observable<(UITableView, IndexPath)> in
+                return tableView.rx.itemSelected.map({(tableView, $0)})
+            }
+            .bind { (tableView, indexPath) in
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
             .disposed(by: viewModel)
         
     }

@@ -37,6 +37,8 @@ class SearchPanelView: UIView {
         optionsButton.setImage(#imageLiteral(resourceName: "paramsIcon"), for: .normal)
         optionsButton.translatesAutoresizingMaskIntoConstraints = false
         optionsButton.layer.cornerRadius = 6
+        optionsButton.layer.borderWidth = 1
+        optionsButton.layer.borderColor = UIColor.STGray.cgColor
         addSubview(optionsButton)
         
         NSLayoutConstraint.activate([
@@ -50,6 +52,10 @@ class SearchPanelView: UIView {
         textField.backgroundColor = .white
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.layer.cornerRadius = 18
+        
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.STGray.cgColor
+        
         addSubview(textField)
         
         NSLayoutConstraint.activate([
@@ -59,11 +65,17 @@ class SearchPanelView: UIView {
             optionsButton.leadingAnchor.constraint(equalTo: textField.trailingAnchor, constant: 9)
         ])
         
-        let imageContainer = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 40, height: 36)))
+        let imageContainer = UIView()
         imageContainer.backgroundColor = .clear
+        imageContainer.translatesAutoresizingMaskIntoConstraints = false
         
         textField.leftView = imageContainer
         textField.leftViewMode = .always
+        
+        NSLayoutConstraint.activate([
+            imageContainer.widthAnchor.constraint(equalToConstant: 40),
+            imageContainer.heightAnchor.constraint(equalToConstant: 36)
+        ])
         
         let imageView = UIImageView(image: #imageLiteral(resourceName: "magnifierIcon"))
         imageView.translatesAutoresizingMaskIntoConstraints = false

@@ -21,8 +21,6 @@ class PlacesListUIBuilder: NSObject {
     
     func setup() {
         
-        owner.containerBottomConstr.constant = TabBarSource.shared.tabBarController.tabBar.bounds.height
-        
         owner.dismissButton.setTitle("На карте", for: .normal)
         owner.dismissButton.backgroundColor = .white
         owner.dismissButton.layer.cornerRadius = owner.dismissButton.bounds.height / 2

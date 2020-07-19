@@ -81,6 +81,7 @@ class SearchVCBehaviorService: NSObject {
             })
             .disposed(by: searchViewModel)
         
+        // Show places list screen
         Observable.just(self)
             .flatMap { (behaviorService) in
                 return behaviorService.owner.showListButton.rx.tap.map({behaviorService})
@@ -92,6 +93,7 @@ class SearchVCBehaviorService: NSObject {
                 behaviorService.owner.addChild(placesList)
                 behaviorService.owner.view.insertSubview(placesList.view, belowSubview: behaviorService.owner.searchPanelView)
                 
+                placesList.view.frame.size = behaviorService.owner.view.bounds.size
                 placesList.view.frame.origin = CGPoint(x: .zero, y: behaviorService.owner.view.bounds.height)
                 
                 UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {[unowned placesList] in

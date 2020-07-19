@@ -9,15 +9,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="wT4-jf-qPT" customClass="PlaceListCell" customModule="TheSpaces" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="523" height="294"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="wT4-jf-qPT" customClass="PlaceListCell" customModule="TheSpaces" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="523" height="160"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wT4-jf-qPT" id="k8S-ks-bki">
-                <rect key="frame" x="0.0" y="0.0" width="492" height="294"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wT4-jf-qPT" id="k8S-ks-bki">
+                <rect key="frame" x="0.0" y="0.0" width="492" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjx-bT-XLl" customClass="PlacePreviewView" customModule="TheSpaces" customModuleProvider="target">
-                        <rect key="frame" x="20.5" y="19" width="471.5" height="256"/>
+                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="Bjx-bT-XLl" customClass="PlacePreviewView" customModule="TheSpaces" customModuleProvider="target">
+                        <rect key="frame" x="20.5" y="19" width="471.5" height="122"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </view>
                 </subviews>
@@ -31,7 +31,7 @@
             <connections>
                 <outlet property="placeView" destination="Bjx-bT-XLl" id="nhw-NQ-IUa"/>
             </connections>
-            <point key="canvasLocation" x="325.36231884057975" y="118.52678571428571"/>
+            <point key="canvasLocation" x="325.36231884057975" y="73.660714285714278"/>
         </tableViewCell>
     </objects>
 </document>

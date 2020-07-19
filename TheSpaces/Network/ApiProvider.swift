@@ -13,7 +13,7 @@ enum ApiProvider {
     case avalibleCities
     case placesList(byCity: Int)
     case getPlace(id: Int)
-    case placeImage(id: Int)
+    case placeImage(placeId: Int, imageNumber: Int)
 }
 
 extension ApiProvider: TargetType {
@@ -24,7 +24,7 @@ extension ApiProvider: TargetType {
         case .avalibleCities: return "dictionaries/cities"
         case .placesList: return "Entities"
         case .getPlace(let id): return "entities/\(id)"
-        case .placeImage(let id): return "entities/\(id)/image"
+        case .placeImage(let id, let imageNumber): return "entities/\(id)/image/\(imageNumber)"
         }
     }
     

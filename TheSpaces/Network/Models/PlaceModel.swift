@@ -29,7 +29,16 @@ struct PlaceModel: Decodable {
     let latitude: Double
     let longtitude:Double
     let priceRange: String
+    let imagesCount: Int
     let seatTypes: [SeatType]
+    
+    var imagesLinks: [URL] {
+        return (1 ... imagesCount).map { (value) -> URL in
+            let target = ApiProvider.placeImage(placeId: id, imageNumber: value)
+            return target.baseURL.appendingPathComponent(target.path)
+        }
+    }
+    
 }
 
 struct SeatType: Decodable {

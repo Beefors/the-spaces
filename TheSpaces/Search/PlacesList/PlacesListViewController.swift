@@ -22,12 +22,21 @@ class PlacesListViewController: UIViewController {
     //MARK: - Views
     var searchPanelView: SearchPanelView!
     
+    //MARK: - States
+    private var setuped = false
+    
     //MARK: - Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard !setuped else { return }
+        commonSetup()
+    }
+    
+    //MARK: - Helpers
+    private func commonSetup() {
+        setuped = true
         builderUI.setup()
         behaviorService.setup()
     }
-
+    
 }

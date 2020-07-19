@@ -37,6 +37,14 @@ target 'TheSpaces' do
   # https://github.com/RxSwiftCommunity/RxDataSources
   pod 'RxDataSources'
   
+  ###############
+  ### UI Pods ###
+  ###############
+  
+  # A flexible UIPageControl like Instagram.
+  # https://github.com/shima11/FlexiblePageControl
+  pod "FlexiblePageControl"
+  
   ##################
   ### Other Pods ###
   ##################
