@@ -24,10 +24,10 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
+        <view clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="312" height="145"/>
             <subviews>
-                <view contentMode="scaleToFill" horizontalHuggingPriority="260" translatesAutoresizingMaskIntoConstraints="NO" id="xfJ-Dq-GNZ">
+                <view contentMode="scaleToFill" horizontalHuggingPriority="260" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="xfJ-Dq-GNZ">
                     <rect key="frame" x="0.0" y="0.0" width="126.5" height="145"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XBa-QZ-f25">
@@ -61,12 +61,12 @@
                     <constraints>
                         <constraint firstItem="XBa-QZ-f25" firstAttribute="leading" secondItem="xfJ-Dq-GNZ" secondAttribute="leading" id="R7h-pW-2ue"/>
                         <constraint firstItem="VAh-uG-x7r" firstAttribute="trailing" secondItem="XBa-QZ-f25" secondAttribute="trailing" priority="900" id="WXW-O9-7t0"/>
-                        <constraint firstAttribute="bottom" secondItem="XBa-QZ-f25" secondAttribute="bottom" priority="950" id="hIq-qh-MXv"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XBa-QZ-f25" secondAttribute="bottom" id="hIq-qh-MXv"/>
                         <constraint firstAttribute="trailing" secondItem="XBa-QZ-f25" secondAttribute="trailing" id="lnN-og-YYb"/>
                         <constraint firstItem="VAh-uG-x7r" firstAttribute="leading" secondItem="XBa-QZ-f25" secondAttribute="leading" priority="900" id="pXl-IB-Frw"/>
                         <constraint firstItem="XBa-QZ-f25" firstAttribute="centerY" secondItem="xfJ-Dq-GNZ" secondAttribute="centerY" id="qbB-I0-yha"/>
                         <constraint firstItem="VAh-uG-x7r" firstAttribute="centerX" secondItem="xfJ-Dq-GNZ" secondAttribute="centerX" id="sRM-LR-5LO"/>
-                        <constraint firstItem="XBa-QZ-f25" firstAttribute="top" secondItem="xfJ-Dq-GNZ" secondAttribute="top" priority="950" id="ulA-jd-nt9"/>
+                        <constraint firstItem="XBa-QZ-f25" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xfJ-Dq-GNZ" secondAttribute="top" id="ulA-jd-nt9"/>
                         <constraint firstItem="XBa-QZ-f25" firstAttribute="bottom" secondItem="VAh-uG-x7r" secondAttribute="bottom" constant="10" id="yo7-Vk-qcM"/>
                     </constraints>
                 </view>
@@ -100,7 +100,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="200" insetsLayoutMarginsFromSafeArea="NO" contentInsetAdjustmentBehavior="never" editable="NO" text="Number" translatesAutoresizingMaskIntoConstraints="NO" id="hYd-nT-VNF">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="200" insetsLayoutMarginsFromSafeArea="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" editable="NO" text="Number" translatesAutoresizingMaskIntoConstraints="NO" id="hYd-nT-VNF">
                             <rect key="frame" x="0.0" y="107" width="175.5" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>

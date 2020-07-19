@@ -42,6 +42,8 @@ class PlacePreviewViewBehaviorService: NSObject {
         owner.priceLabel.font = .subtitles
         owner.addressLabel.font = .mainText
         
+        owner.textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
+        
         owner.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         owner.collectionView.decelerationRate = .fast
         
@@ -69,8 +71,15 @@ class PlacePreviewViewBehaviorService: NSObject {
         owner.addressLabel.text = model.address
         owner.addressLabelHeightConstr.constant = owner.addressLabel.sizeThatFits(CGSize(width: owner.addressLabel.bounds.width, height: .infinity)).height
         
-        owner.textView.text = model.phone + " " + (model.email ?? "")
-        owner.textViewHeightConstr.constant = owner.textView.contentSize.height
+        let textViewText = model.phone + (model.email != nil ? "\n\(model.email!)" : "")
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.STText, .font: UIFont.mainText]
+        let attrText = NSMutableAttributedString(string: textViewText, attributes: attributes)
+        
+        owner.textView.linkTextAttributes = attributes
+        owner.textView.attributedText = attrText
+
+        self.owner.textView.sizeToFit()
+        self.owner.textViewHeightConstr.constant = self.owner.textView.contentSize.height
         
         owner.collectionView.dataSource = self
         owner.collectionView.delegate = self

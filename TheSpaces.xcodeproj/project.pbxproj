@@ -40,6 +40,7 @@
 		558575F824B5A38300FDAEAE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558575F724B5A38300FDAEAE /* ProfileViewController.swift */; };
 		558575FA24B5A3EF00FDAEAE /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558575F924B5A3EF00FDAEAE /* OtherViewController.swift */; };
 		55C3F90C24C42A06000778F5 /* PlacePreviewViewBehaviorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3F90B24C42A06000778F5 /* PlacePreviewViewBehaviorService.swift */; };
+		55C3F90E24C45595000778F5 /* SearchPlacePreviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3F90D24C45595000778F5 /* SearchPlacePreviewService.swift */; };
 		55C899E224B5D0C20048FF59 /* YMKCameraPosition + TS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E124B5D0C20048FF59 /* YMKCameraPosition + TS.swift */; };
 		55C899E524B5E92B0048FF59 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E424B5E92B0048FF59 /* UIFont + Extension.swift */; };
 		55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */; };
@@ -100,6 +101,7 @@
 		558575F724B5A38300FDAEAE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		558575F924B5A3EF00FDAEAE /* OtherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		55C3F90B24C42A06000778F5 /* PlacePreviewViewBehaviorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePreviewViewBehaviorService.swift; sourceTree = "<group>"; };
+		55C3F90D24C45595000778F5 /* SearchPlacePreviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlacePreviewService.swift; sourceTree = "<group>"; };
 		55C899E124B5D0C20048FF59 /* YMKCameraPosition + TS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "YMKCameraPosition + TS.swift"; sourceTree = "<group>"; };
 		55C899E424B5E92B0048FF59 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceViewModel.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				557BF2F424B7513300CE5F1C /* SearchPanelView */,
+				554140E124BDD6AA00FF9A38 /* PlacePreviewView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				55E193E524B6F73500BF8313 /* MapService */,
 				55C899EB24B611CA0048FF59 /* LocationService */,
 				55E193E324B6F47600BF8313 /* SearchVCUIBuilder.swift */,
+				55C3F90D24C45595000778F5 /* SearchPlacePreviewService.swift */,
 				55E193EB24B7137500BF8313 /* SearchVCBehaviorService.swift */,
 			);
 			path = BussinesLayer;
@@ -446,7 +450,6 @@
 		55EF8C4E24BDC11F00E822E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				554140E124BDD6AA00FF9A38 /* PlacePreviewView */,
 				554140E624BDE20C00FF9A38 /* PlaceListCell */,
 			);
 			path = Views;
@@ -639,6 +642,7 @@
 				551CEA6D24B1CF8A00465B69 /* RouterManager.swift in Sources */,
 				55EFB67924BB34F100C26495 /* CityModel.swift in Sources */,
 				55EF8C4924BDABD100E822E8 /* PlacesListUIBuilder.swift in Sources */,
+				55C3F90E24C45595000778F5 /* SearchPlacePreviewService.swift in Sources */,
 				5562FBBF24BEEA320030F43D /* PlacesListViewsFactory.swift in Sources */,
 				554809A424BED75E008BF41E /* PlacesListTableViewServiceViewModel.swift in Sources */,
 				558575FA24B5A3EF00FDAEAE /* OtherViewController.swift in Sources */,

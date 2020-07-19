@@ -14,11 +14,12 @@ import RxOptional
 import RxAppState
 
 class SearchVCBehaviorService: NSObject {
-    unowned(unsafe) private(set) var owner: SearchViewController
+    unowned(unsafe) let owner: SearchViewController
     
     //MARK: Services
     lazy var mapService: MapServiceType = YaMapService(owner)
     lazy var locationService = LocationService(parent: owner)
+    lazy var placePreviewService = SearchPlacePreviewService(owner: owner)
     lazy var searchViewModel = SearchViewModel()
     
     //MARK: - Initialization
@@ -33,6 +34,7 @@ class SearchVCBehaviorService: NSObject {
         // Setup services
         mapService.setup()
         locationService.setup()
+        placePreviewService.setup()
         
         // Load places
         searchViewModel.getPlacesTrigger.accept(())
@@ -78,6 +80,8 @@ class SearchVCBehaviorService: NSObject {
         searchViewModel.placesObservable
             .subscribe(onNext: {[unowned self] (places) in
                 self.mapService.presentPlaces(places)
+                guard let firstPlace = places.first else { return }
+                self.placePreviewService.setupData(firstPlace)
             })
             .disposed(by: searchViewModel)
         
@@ -103,55 +107,6 @@ class SearchVCBehaviorService: NSObject {
             })
             .subscribe()
             .disposed(by: searchViewModel)
-        
-//        owner.showListButton.rx
-//            .tap
-//            .map({[unowned self] (_) -> SearchVCBehaviorService in
-//                return self
-//            })
-//            .do(onNext: { (service) in
-//                service.owner.searchPanelView.transite(to: TabBarSource.shared.tabBarController.view)
-//            })
-//            .flatMap({ behaviorService -> Observable<(SearchVCBehaviorService, UIViewController)> in
-//                return Observable<UIViewController>.create { (observer) -> Disposable in
-//                    let coordinator = SearchCoordinator.placesList(searchPanelView: behaviorService.owner.searchPanelView, placesDataViewModel: behaviorService.searchViewModel)
-//
-//                    RouterManager.shared.present(coordinator, presentationType: .present(animated: true) { presentingVC in
-//                        guard presentingVC != nil else {
-//                            observer.onCompleted()
-//                            return
-//                        }
-//
-//                        observer.on(.next(presentingVC!))
-//                        observer.onCompleted()
-//                    })
-//
-//                    return Disposables.create()
-//                }
-//                .map({ (behaviorService, $0) })
-//            })
-//            .bind { behaviorService, presentingVC in
-//                behaviorService.owner.searchPanelView.transite(to: presentingVC.view)
-//            }
-//            .disposed(by: searchViewModel)
-        
-//        owner.showListButton.rx
-//            .tap
-//            .map({[unowned self] _ -> UIViewController? in
-//
-//                self.owner.searchPanelView.transite(to: self.owner.navigationController!.view)
-//
-//                return RouterManager.shared.present(SearchCoordinator.placesList(searchPanelView: self.owner.searchPanelView, placesDataViewModel: self.searchViewModel), presentationType: .push(by: .onSelectedTab, animated: .fromBottom))
-//            })
-//            .filterNil()
-////            .flatMap({ viewController in
-////                return viewController.rx.viewDidAppear.take(1).map({ _ in viewController })
-////            })
-//            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
-//            .bind {[unowned self] (viewController) in
-//                self.owner.searchPanelView.transite(to: viewController.view)
-//            }
-//            .disposed(by: searchViewModel)
         
     }
     
