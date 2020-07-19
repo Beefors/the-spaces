@@ -77,6 +77,7 @@
 		55236E1824B9E33200619510 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		55236E1B24B9E3BE00619510 /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		55236E1E24B9FF6900619510 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		55272D7524C4DD7400727E30 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		554140E224BDD6C700FF9A38 /* PlacePreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacePreviewView.xib; sourceTree = "<group>"; };
 		554140E424BDDDC600FF9A38 /* PlacePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePreviewView.swift; sourceTree = "<group>"; };
 		554140E724BDF77100FF9A38 /* PlacesListTableViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListTableViewService.swift; sourceTree = "<group>"; };
@@ -517,6 +518,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 551CEA4824B1C8C300465B69;
 			productRefGroup = 551CEA5224B1C8C300465B69 /* Products */;
@@ -665,6 +667,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				551CEA6024B1C8C400465B69 /* Base */,
+				55272D7524C4DD7400727E30 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -736,6 +740,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
