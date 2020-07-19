@@ -31,9 +31,16 @@ class PlacesListTableViewService: NSObject {
     
     private func setupObservables() {
         
-        let dataSource = RxTableViewSectionedReloadDataSource<RxSectionModel<PlaceModel>>(configureCell: { (dataSource, tableView, IndexPath, place) -> UITableViewCell in
+        let dataSource = RxTableViewSectionedReloadDataSource<RxSectionModel<PlaceModel>>(configureCell: { (dataSource, tableView, indexPath, place) -> UITableViewCell in
             let cell = PlacesListViewsFactory().dequeuePlaceListCell(tableView)
             cell.placeView.behaviorService.setupData(place)
+            
+            if dataSource.sectionModels[indexPath.section].items.count - 1 == indexPath.row {
+                cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 1000)
+            } else {
+                cell.separatorInset = .zero
+            }
+            
             return cell
         })
         

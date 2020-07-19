@@ -75,10 +75,13 @@ class PlacePreviewViewBehaviorService: NSObject {
         owner.collectionView.dataSource = self
         owner.collectionView.delegate = self
         
+        owner.pageControl.isHidden = model.imagesCount == 1
         owner.pageControl.numberOfPages = model.imagesCount
         owner.pageControl.setProgress(contentOffsetX: owner.collectionView.contentOffset.x, pageWidth: owner.collectionView.bounds.width)
         
-        updateCollectionRadius()
+        DispatchQueue.main.async {
+            self.updateCollectionRadius()
+        }
     }
     
     func updateCollectionRadius() {

@@ -47,8 +47,8 @@ class PlacePreviewView: UIView {
     }
     
     //MARK: - Lifecycle
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
         behaviorService.updateCollectionRadius()
     }
     
