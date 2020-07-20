@@ -116,7 +116,6 @@ extension RouterManager {
             
         case .present(let animated, let completion):
             guard let selectedNavController = tabBarController.selectedViewController as? UINavigationController else { return nil }
-//            selectedNavController.present(vc, animated: animated, completion: { [weak vc] in completion?(vc) })
             selectedNavController.viewControllers.last?.present(vc, animated: animated, completion: { [weak vc] in completion?(vc) })
         }
         

@@ -13,11 +13,19 @@ class SearchPlacePreviewService: NSObject {
     
     unowned(unsafe) let owner: SearchViewController
     
+    private(set) var previewIsHidden = true {
+        didSet {
+            print("PreviewService preview did \(previewIsHidden ? "hidden" : "showed")")
+        }
+    }
+    
     let previewContainer: UIView
     let placeView: PlacePreviewView
     
-    private var showedConstraintValue = CGFloat()
-    private var hidedConstraintValue = CGFloat()
+    private var previewContainerLeadingConstr: NSLayoutConstraint!
+    private var previewContainerCenterXConstr: NSLayoutConstraint!
+    
+    private var animator: UIViewPropertyAnimator!
     
     init(owner: SearchViewController) {
         self.owner = owner
@@ -34,17 +42,14 @@ class SearchPlacePreviewService: NSObject {
         
         owner.view.insertSubview(previewContainer, belowSubview: owner.searchPanelView)
         
-        let widthMultiplier: CGFloat = 340 / 375
-        let padding = (owner.view.bounds.width - owner.view.bounds.width * widthMultiplier) / 2
+        previewContainerLeadingConstr = previewContainer.leadingAnchor.constraint(equalTo: owner.view.trailingAnchor)
+        previewContainerCenterXConstr = previewContainer.centerXAnchor.constraint(equalTo: owner.view.centerXAnchor)
         
         NSLayoutConstraint.activate([
-            previewContainer.widthAnchor.constraint(equalTo: owner.view.widthAnchor, multiplier: widthMultiplier),
+            previewContainer.widthAnchor.constraint(equalTo: owner.view.widthAnchor, multiplier: 340 / 375),
             owner.showListButton.topAnchor.constraint(equalTo: previewContainer.bottomAnchor, constant: 15),
-            owner.view.trailingAnchor.constraint(equalTo: previewContainer.trailingAnchor, constant: padding)
+            previewContainerLeadingConstr
         ])
-        
-        showedConstraintValue = padding
-        hidedConstraintValue = previewContainer.bounds.width
         
         previewContainer.addSubview(placeView)
         
@@ -60,6 +65,7 @@ class SearchPlacePreviewService: NSObject {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
         previewContainer.addGestureRecognizer(pan)
         
+        createAnimator(forHiddedState: !previewIsHidden)
     }
     
     func setupData(_ model: PlaceModel) {
@@ -81,24 +87,82 @@ class SearchPlacePreviewService: NSObject {
         previewContainer.layer.shadowPath = shadowPath.cgPath
     }
     
-    @objc func handlePan (recognizer:UIPanGestureRecognizer) {
+    var pausedFraction = CGFloat()
+    
+    @objc
+    func handlePan (recognizer:UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: owner.view)
+        let horizontalValue = translation.x * (previewIsHidden && !animator.isReversed ? -1 : 1)
         
-        print(translation)
+        let horizontalVelosity = recognizer.velocity(in: owner.view).x
         
-        
-        
-//        switch recognizer.state {
-//        case .began:
-//            startPanning()
-//        case .changed:
-//            scrub(translation: translation)
-//        case .ended:
-//            print("Ended animation")
+        switch recognizer.state {
+        case .began:
+            
+            if animator.isRunning {
+                animator.pauseAnimation()
+                pausedFraction = animator.fractionComplete
+            }
+            
+            print("PreviewService began handlePan animator fractionComplete \(String(describing: animator?.fractionComplete))")
+        case .changed:
+            let fractionComplete = horizontalValue / owner.view.bounds.width + pausedFraction
+            let result = !animator.isReversed ? fractionComplete : 1 - fractionComplete
+            animator.fractionComplete = result
+            print("PreviewService pan changed animator.isReversed: \(animator.isReversed) fractionComplete: \(fractionComplete) result: \(result)")
+            
+        case .ended, .cancelled, .failed:
+            
+            pausedFraction = CGFloat()
+            
+            let fraction = animator.fractionComplete
+//            animator.continueAnimation(withTimingParameters: UICubicTimingParameters(animationCurve: .easeInOut), durationFactor: CGFloat(animator.duration) * (1 - fraction))
+            
+            if fraction < 0.3 {
+                animator.isReversed = true
+            }
+            
+            animator.startAnimation()
+            
+            print("PreviewService Ended handlePan")
 //            end()
-//        default:
-//            print("Something went wrong")
-//        }
+        default:
+            print("Something went wrong")
+        }
+    }
+    
+    func showPreview() {
+        
+        guard previewIsHidden else { return }
+        
+        owner.view.layoutIfNeeded()
+        animator.startAnimation()
+    }
+    
+    private func setupConstraints(forHiddedState willBeHidden: Bool) {
+        self.previewContainerLeadingConstr.isActive = willBeHidden
+        self.previewContainerCenterXConstr.isActive = !willBeHidden
+    }
+    
+    private func createAnimator(forHiddedState willBeHidden: Bool) {
+        
+        let animationFuction: UIView.AnimationCurve = willBeHidden ? .easeIn : .easeOut
+        
+        let animator = UIViewPropertyAnimator(duration: 5.3, curve: animationFuction) {[unowned self] in
+            self.setupConstraints(forHiddedState: willBeHidden)
+            self.owner.view.layoutIfNeeded()
+        }
+        
+        animator.addCompletion {[unowned self] (position) in
+            if position == .end {
+                self.previewIsHidden = !self.previewIsHidden
+                self.createAnimator(forHiddedState: !self.previewIsHidden)
+            } else {
+                self.createAnimator(forHiddedState: self.previewIsHidden)
+            }
+        }
+        
+        self.animator = animator
     }
     
 }

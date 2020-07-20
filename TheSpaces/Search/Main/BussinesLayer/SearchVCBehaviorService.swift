@@ -36,6 +36,8 @@ class SearchVCBehaviorService: NSObject {
         locationService.setup()
         placePreviewService.setup()
         
+        mapService.delegate = self
+        
         // Load places
         searchViewModel.getPlacesTrigger.accept(())
         
@@ -82,6 +84,7 @@ class SearchVCBehaviorService: NSObject {
                 self.mapService.presentPlaces(places)
                 guard let firstPlace = places.first else { return }
                 self.placePreviewService.setupData(firstPlace)
+                self.placePreviewService.showPreview()
             })
             .disposed(by: searchViewModel)
         
@@ -110,4 +113,11 @@ class SearchVCBehaviorService: NSObject {
         
     }
     
+}
+
+extension SearchVCBehaviorService: MapServiceDelegate {
+    func mapService(_ mapService: MapServiceType, didSelectPlace place: PlaceModel) {
+        placePreviewService.setupData(place)
+        placePreviewService.showPreview()
+    }
 }

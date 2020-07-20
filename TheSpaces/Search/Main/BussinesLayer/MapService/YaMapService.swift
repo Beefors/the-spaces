@@ -14,12 +14,20 @@ import RxCocoa
 
 class YaMapService: NSObject, MapServiceType {
     
+    //MARK: Owner
     unowned(unsafe) private(set) var controller: SearchViewController
-    let mapView: YMKMapView
-    let map: YMKMap
-    let userLocationLayer: YMKUserLocationLayer
-    private(set) var clusterizedCollection: YMKClusterizedPlacemarkCollection!
+
+    //MARK: - Variables
+    weak var delegate: MapServiceDelegate?
     
+    //MARK: - Private properties
+    private let mapView: YMKMapView
+    private let map: YMKMap
+    private let userLocationLayer: YMKUserLocationLayer
+    private var clusterizedCollection: YMKClusterizedPlacemarkCollection!
+    private var markersAdapters = Set<MarkerAdapter>()
+    
+    //MARK: - Initialization
     init(_ controller: SearchViewController) {
         self.controller = controller
         mapView = YMKMapView()
@@ -34,6 +42,7 @@ class YaMapService: NSObject, MapServiceType {
         userLocationLayer.setObjectListenerWith(self)
     }
     
+    //MARK: - Main logic
     func setup() {
         mapView.frame = controller.view.bounds
         controller.view.insertSubview(mapView, at: 0)
@@ -67,23 +76,13 @@ class YaMapService: NSObject, MapServiceType {
         
         for place in places {
             
-            let label = UILabel(frame: CGRect(origin: CGPoint(x: 10.52, y: 5.44), size: .zero))
-            label.font = .priceButton
-            label.text = "\(Int(place.minPrice))₽"
-            
-            label.sizeToFit()
-            
-            let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: label.frame.maxX + 8.35, height: label.frame.maxY + 4.94)))
-            view.addSubview(label)
-            view.backgroundColor = .white
-            view.layer.cornerRadius = view.bounds.height / 2
-            view.isOpaque = false
-            view.layer.borderColor = UIColor.STLightGray.cgColor
-            view.layer.borderWidth = 1
+            let view = MapServiceViewsFactory.createMarkerView(isSelected: false, place: place)
             
             let point = place.coordinate.toYMKPoint()
             let marker = clusterizedCollection.addPlacemark(with: point, view: YRTViewProvider(uiView: view))
             marker.addTapListener(with: self)
+            
+            markersAdapters.insert(MarkerAdapter(marker: marker, place: place))
         }
         
         clusterizedCollection.clusterPlacemarks(withClusterRadius: 10, minZoom: 15)
@@ -103,6 +102,14 @@ extension YaMapService: YMKMapCameraListener {
 
 extension YaMapService: YMKMapObjectTapListener {
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
+        
+        guard let placemark = mapObject as? YMKPlacemarkMapObject else { return false }
+        guard let adapter = markersAdapters.first(where: { $0.marker == placemark }) else { return false }
+        
+        let view = MapServiceViewsFactory.createMarkerView(isSelected: true, place: adapter.place)
+        placemark.setViewWithView(YRTViewProvider(uiView: view))
+        delegate?.mapService(self, didSelectPlace: adapter.place)
+        
         return true
     }
 }
@@ -130,3 +137,14 @@ extension YaMapService: YMKClusterListener {
     }
 }
 
+extension YaMapService {
+    class MarkerAdapter: NSObject {
+        let marker: YMKPlacemarkMapObject
+        let place: PlaceModel
+        
+        required init(marker: YMKPlacemarkMapObject, place: PlaceModel) {
+            self.marker = marker
+            self.place = place
+        }
+    }
+}

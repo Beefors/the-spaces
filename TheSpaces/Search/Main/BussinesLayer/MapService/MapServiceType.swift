@@ -21,6 +21,17 @@ protocol MapServiceType: class {
     func setup()
     func goToLocation(_ location: CLLocationCoordinate2D, zoom zoomType: ZoomType, animated: Bool)
     func presentPlaces(_ places: Array<PlaceModel>)
+    
+    var delegate: MapServiceDelegate? {get set}
+    
+}
+
+protocol MapServiceDelegate: class {
+    func mapService(_ mapService: MapServiceType, didSelectPlace place: PlaceModel)
+}
+
+extension MapServiceDelegate {
+    func mapService(_ mapService: MapServiceType, didSelectPlace: PlaceModel) {}
 }
 
 extension Reactive where Base: MapServiceType {
