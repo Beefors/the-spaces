@@ -54,3 +54,9 @@ extension PlaceModel {
         }.min() ?? 0
     }
 }
+
+extension PlaceModel: Equatable {
+    static func == (lhs: PlaceModel, rhs: PlaceModel) -> Bool {
+        lhs.id == rhs.id
+    }
+}

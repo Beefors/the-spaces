@@ -85,7 +85,12 @@ class YaMapService: NSObject, MapServiceType {
             markersAdapters.insert(MarkerAdapter(marker: marker, place: place))
         }
         
-        clusterizedCollection.clusterPlacemarks(withClusterRadius: 10, minZoom: 15)
+        clusterizedCollection.clusterPlacemarks(withClusterRadius: 20, minZoom: 15)
+    }
+    
+    func deselectPlace(_ place: PlaceModel) {
+        let adapter = markersAdapters.first(where: {$0.place == place})
+        adapter?.marker.setViewWithView(YRTViewProvider(uiView: MapServiceViewsFactory.createMarkerView(isSelected: false, place: place)))
     }
     
     func goToUserPosition() {
@@ -105,6 +110,9 @@ extension YaMapService: YMKMapObjectTapListener {
         
         guard let placemark = mapObject as? YMKPlacemarkMapObject else { return false }
         guard let adapter = markersAdapters.first(where: { $0.marker == placemark }) else { return false }
+        
+        // Disabling all markers without new selected placemark
+        markersAdapters.subtracting([adapter]).forEach({$0.marker.setViewWithView(YRTViewProvider(uiView: MapServiceViewsFactory.createMarkerView(isSelected: false, place: $0.place)))})
         
         let view = MapServiceViewsFactory.createMarkerView(isSelected: true, place: adapter.place)
         placemark.setViewWithView(YRTViewProvider(uiView: view))

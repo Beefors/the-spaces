@@ -58,6 +58,8 @@ class PlacePreviewViewBehaviorService: NSObject {
     //MARK: - Helpers
     func setupData(_ model: PlaceModel) {
         
+        guard model != self.model else { return }
+        
         self.model = model
         
         owner.collectionView.backgroundColor = .STGraphite
@@ -83,6 +85,7 @@ class PlacePreviewViewBehaviorService: NSObject {
         
         owner.collectionView.dataSource = self
         owner.collectionView.delegate = self
+        owner.collectionView.reloadData()
         
         owner.pageControl.isHidden = model.imagesCount == 1
         owner.pageControl.numberOfPages = model.imagesCount

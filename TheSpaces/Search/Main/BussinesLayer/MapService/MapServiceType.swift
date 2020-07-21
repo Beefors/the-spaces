@@ -21,9 +21,9 @@ protocol MapServiceType: class {
     func setup()
     func goToLocation(_ location: CLLocationCoordinate2D, zoom zoomType: ZoomType, animated: Bool)
     func presentPlaces(_ places: Array<PlaceModel>)
+    func deselectPlace(_ place: PlaceModel)
     
     var delegate: MapServiceDelegate? {get set}
-    
 }
 
 protocol MapServiceDelegate: class {
