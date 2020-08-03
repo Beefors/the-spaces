@@ -18,7 +18,7 @@ class PlacesListTableViewService: NSObject {
     unowned(unsafe) private(set) var tableView: UITableView!
     let viewModel: PlacesListTableViewServiceViewModel
     
-    required init(owner: PlacesListViewController, viewModel: SearchViewModel) {
+    required init(owner: PlacesListViewController, viewModel: MapViewModel) {
         self.owner = owner
         self.viewModel = PlacesListTableViewServiceViewModel(searchViewModel: viewModel)
         super.init()

@@ -1,5 +1,5 @@
 //
-//  SearchPlacePreviewService.swift
+//  MapPlacePreviewService.swift
 //  TheSpaces
 //
 //  Created by Денис Швыров on 19.07.2020.
@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 protocol SearchPlacePreviewServiceDelegate: class {
-    func placePreviewService(_ service: SearchPlacePreviewService, didHidePreviewForPlace place: PlaceModel)
+    func placePreviewService(_ service: MapPlacePreviewService, didHidePreviewForPlace place: PlaceModel)
 }
 
-class SearchPlacePreviewService: NSObject {
+class MapPlacePreviewService: NSObject {
     
-    unowned(unsafe) let owner: SearchViewController
+    unowned(unsafe) let owner: MapViewController
     weak var delegate: SearchPlacePreviewServiceDelegate?
     
     private(set) var previewIsHidden = true {
@@ -34,7 +34,7 @@ class SearchPlacePreviewService: NSObject {
     private var positionAnimator: UIViewPropertyAnimator!
     private var blinkAnimator: UIViewPropertyAnimator!
     
-    init(owner: SearchViewController) {
+    init(owner: MapViewController) {
         self.owner = owner
         
         previewContainer = UIView()

@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  MapViewController.swift
 //  TheSpaces
 //
 //  Created by Денис Швыров on 07.07.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import YandexMapKit
 
-class SearchViewController: UIViewController {
+class MapViewController: UIViewController {
 
     //MARK: Outlets
     @IBOutlet weak var searchPanelView: SearchPanelView!
@@ -17,8 +17,8 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var showListButton: UIButton!
     
     //MARK: - Services
-    lazy var builderUI = SearchVCUIBuilder(self)
-    lazy var behaviorService = SearchVCBehaviorService(self)
+    lazy var builderUI = MapVCUIBuilder(self)
+    lazy var behaviorService = MapVCBehaviorService(self)
     
     //MARK: - Lifecycle
     override func viewDidLoad() {

@@ -15,10 +15,10 @@ import RxDataSources
 class PlacesListBehaviorService: NSObject {
     
     unowned(unsafe) let owner: PlacesListViewController
-    unowned(unsafe) let dataViewModel: SearchViewModel
+    unowned(unsafe) let dataViewModel: MapViewModel
     let tableViewService: PlacesListTableViewService
     
-    init(owner: PlacesListViewController, placesDataProvider: SearchViewModel) {
+    init(owner: PlacesListViewController, placesDataProvider: MapViewModel) {
         self.owner = owner
         dataViewModel = placesDataProvider
         tableViewService = .init(owner: owner, viewModel: dataViewModel)
@@ -33,7 +33,7 @@ class PlacesListBehaviorService: NSObject {
                 return behaviorService.owner.dismissButton.rx.tap.map({ behaviorService })
             }
             .bind { (behaviorService) in
-                guard let searchViewController = behaviorService.owner.parent as? SearchViewController else { return }
+                guard let searchViewController = behaviorService.owner.parent as? MapViewController else { return }
                 
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {[unowned behaviorService, unowned searchViewController] in
                     behaviorService.owner.view.frame.origin = CGPoint(x: .zero, y: searchViewController.view.bounds.height)

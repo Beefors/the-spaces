@@ -1,5 +1,5 @@
 //
-//  SearchVCUIBuilder.swift
+//  MapVCUIBuilder.swift
 //  TheSpaces
 //
 //  Created by Денис Швыров on 09.07.2020.
@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-class SearchVCUIBuilder: UIBuilderType {
-    unowned(unsafe) private(set) var controller: SearchViewController
+class MapVCUIBuilder: UIBuilderType {
+    unowned(unsafe) private(set) var controller: MapViewController
     
-    init(_ controller: SearchViewController) {
+    init(_ controller: MapViewController) {
         self.controller = controller
     }
     

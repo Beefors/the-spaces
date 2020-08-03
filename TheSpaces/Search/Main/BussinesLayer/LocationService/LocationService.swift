@@ -13,10 +13,10 @@ import RxAppState
 
 class LocationService: NSObject {
     
-    unowned(unsafe) private(set) var owner: SearchViewController
+    unowned(unsafe) private(set) var owner: MapViewController
     let viewModel = LocationServiceViewModel()
  
-    init(parent: SearchViewController) {
+    init(parent: MapViewController) {
         self.owner = parent
         super.init()
     }

@@ -74,6 +74,11 @@ extension UIColor {
         UIColor(red: 0.953, green: 0.949, blue: 0.949, alpha: 1)
     }
     
+    /// Серый подчеркивание #C4C4C4
+    @nonobjc class var STGrayUnderline: UIColor {
+        UIColor(red: 0.769, green: 0.769, blue: 0.769, alpha: 1)
+    }
+    
     /// Основной текст #333333
     @nonobjc class var STText: UIColor {
         UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)

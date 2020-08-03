@@ -13,9 +13,9 @@ import RxCocoa
 class PlacesListTableViewServiceViewModel: ViewModelType {
     let bag = DisposeBag()
     
-    unowned(unsafe) let searchViewMode: SearchViewModel
+    unowned(unsafe) let searchViewMode: MapViewModel
     
-    init(searchViewModel: SearchViewModel) {
+    init(searchViewModel: MapViewModel) {
         self.searchViewMode = searchViewModel
     }
     

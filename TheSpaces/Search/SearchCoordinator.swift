@@ -11,7 +11,7 @@ import UIKit.UIViewController
 
 enum SearchCoordinator {
     case main
-    case placesList(searchPanelView: SearchPanelView, placesDataViewModel: SearchViewModel)
+    case placesList(searchPanelView: SearchPanelView, placesDataViewModel: MapViewModel)
 }
 
 extension SearchCoordinator: StoryboardCoordinator {

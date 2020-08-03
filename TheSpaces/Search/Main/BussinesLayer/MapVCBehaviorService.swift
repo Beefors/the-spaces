@@ -1,5 +1,5 @@
 //
-//  SearchVCBehaviorService.swift
+//  MapVCBehaviorService.swift
 //  TheSpaces
 //
 //  Created by Денис Швыров on 09.07.2020.
@@ -13,17 +13,18 @@ import RxCocoa
 import RxOptional
 import RxAppState
 
-class SearchVCBehaviorService: NSObject {
-    unowned(unsafe) let owner: SearchViewController
+class MapVCBehaviorService: NSObject {
+    unowned(unsafe) let owner: MapViewController
     
     //MARK: Services
     lazy var mapService: MapServiceType = YaMapService(owner)
     lazy var locationService = LocationService(parent: owner)
-    lazy var placePreviewService = SearchPlacePreviewService(owner: owner)
-    lazy var searchViewModel = SearchViewModel()
+    lazy var placePreviewService = MapPlacePreviewService(owner: owner)
+    lazy var searchViewModel = MapViewModel()
+    lazy var presentationService: MapPresentationServiceType = MapPresentationService(parent: owner)
     
     //MARK: - Initialization
-    init(_ controller: SearchViewController) {
+    init(_ controller: MapViewController) {
         owner = controller
         super.init()
     }
@@ -91,36 +92,31 @@ class SearchVCBehaviorService: NSObject {
             .flatMap { (behaviorService) in
                 return behaviorService.owner.showListButton.rx.tap.map({behaviorService})
             }
+            .flatMap({ (behaviorService) -> Observable<MapVCBehaviorService> in
+                let placesListCoordinator = SearchCoordinator.placesList(searchPanelView: behaviorService.owner.searchPanelView, placesDataViewModel: behaviorService.searchViewModel)
+                let placesListVC = placesListCoordinator.viewController as! PlacesListViewController
+                
+                behaviorService.presentationService.present(viewController: placesListVC)
+                
+                return placesListVC.dismissButton.rx.tap.map({behaviorService})
+            })
             .do(onNext: { (behaviorService) in
-                
-                let placesList = SearchCoordinator.placesList(searchPanelView: behaviorService.owner.searchPanelView, placesDataViewModel: behaviorService.searchViewModel).viewController
-                
-                behaviorService.owner.addChild(placesList)
-                behaviorService.owner.view.insertSubview(placesList.view, belowSubview: behaviorService.owner.searchPanelView)
-                
-                placesList.view.frame.size = behaviorService.owner.view.bounds.size
-                placesList.view.frame.origin = CGPoint(x: .zero, y: behaviorService.owner.view.bounds.height)
-                
-                UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: {[unowned placesList] in
-                    placesList.view.frame.origin = .zero
-                }, completion: nil)
-                
+                behaviorService.presentationService.dismissPresented()
             })
             .subscribe()
             .disposed(by: searchViewModel)
-        
     }
     
 }
 
-extension SearchVCBehaviorService: MapServiceDelegate {
+extension MapVCBehaviorService: MapServiceDelegate {
     func mapService(_ mapService: MapServiceType, didSelectPlace place: PlaceModel) {
         placePreviewService.showPreview(withPlace: place)
     }
 }
 
-extension SearchVCBehaviorService: SearchPlacePreviewServiceDelegate {
-    func placePreviewService(_ service: SearchPlacePreviewService, didHidePreviewForPlace place: PlaceModel) {
+extension MapVCBehaviorService: SearchPlacePreviewServiceDelegate {
+    func placePreviewService(_ service: MapPlacePreviewService, didHidePreviewForPlace place: PlaceModel) {
         mapService.deselectPlace(place)
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="USV-7B-Ldb">
             <objects>
-                <viewController storyboardIdentifier="Main" id="xri-IS-lgI" customClass="SearchViewController" customModule="TheSpaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Main" id="xri-IS-lgI" customClass="MapViewController" customModule="TheSpaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c6a-cz-aWE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -113,6 +113,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drY-in-u45" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="444" y="119"/>
+        </scene>
+        <!--Search History View Controller-->
+        <scene sceneID="vYd-cw-J1M">
+            <objects>
+                <viewController id="cve-m4-eeW" customClass="SearchHistoryViewController" customModule="TheSpaces" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="77n-Cd-GY4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20s-YT-NPF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="20s-YT-NPF" firstAttribute="top" secondItem="77n-Cd-GY4" secondAttribute="top" id="1jI-IY-r4R"/>
+                            <constraint firstItem="20s-YT-NPF" firstAttribute="leading" secondItem="KAO-TA-cF5" secondAttribute="leading" id="PAU-e1-hy7"/>
+                            <constraint firstAttribute="bottom" secondItem="20s-YT-NPF" secondAttribute="bottom" id="fqd-tf-e6U"/>
+                            <constraint firstItem="KAO-TA-cF5" firstAttribute="trailing" secondItem="20s-YT-NPF" secondAttribute="trailing" id="tvM-Ln-SNq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="KAO-TA-cF5"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="20s-YT-NPF" id="buE-Rf-d1p"/>
+                        <outlet property="tableViewBottomConstr" destination="fqd-tf-e6U" id="rZy-sn-KwU"/>
+                        <outlet property="tableViewTopConstr" destination="1jI-IY-r4R" id="wlr-yx-zns"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R2j-Sb-I3j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1086" y="119"/>
         </scene>
     </scenes>
     <resources>

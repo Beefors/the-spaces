@@ -55,4 +55,8 @@ target 'TheSpaces' do
   # https://github.com/onevcat/Kingfisher
   pod 'Kingfisher'
   
+  # Simplified work with core data
+  # https://github.com/magicalpanda/MagicalRecord/blob/master/Docs/Installing-MagicalRecord.md
+  pod 'MagicalRecord'
+  
 end

@@ -15,7 +15,7 @@ import RxCocoa
 class YaMapService: NSObject, MapServiceType {
     
     //MARK: Owner
-    unowned(unsafe) private(set) var controller: SearchViewController
+    unowned(unsafe) private(set) var controller: MapViewController
 
     //MARK: - Variables
     weak var delegate: MapServiceDelegate?
@@ -28,7 +28,7 @@ class YaMapService: NSObject, MapServiceType {
     private var markersAdapters = Set<MarkerAdapter>()
     
     //MARK: - Initialization
-    init(_ controller: SearchViewController) {
+    init(_ controller: MapViewController) {
         self.controller = controller
         mapView = YMKMapView()
         map = mapView.mapWindow.map
