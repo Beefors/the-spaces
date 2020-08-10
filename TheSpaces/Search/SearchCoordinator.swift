@@ -12,6 +12,7 @@ import UIKit.UIViewController
 enum SearchCoordinator {
     case main
     case placesList(searchPanelView: SearchPanelView, placesDataViewModel: MapViewModel)
+    case searchHistory
 }
 
 extension SearchCoordinator: StoryboardCoordinator {
@@ -21,6 +22,7 @@ extension SearchCoordinator: StoryboardCoordinator {
         switch self {
         case .main: return "Main"
         case .placesList: return "PlacesList"
+        case .searchHistory: return "SearchHistory"
         }
     }
     
@@ -32,6 +34,9 @@ extension SearchCoordinator: StoryboardCoordinator {
             placesListVC.searchPanelView = searchPanelView
             placesListVC.builderUI = PlacesListUIBuilder(owner: placesListVC, tableViewTopInset: searchPanelView.frame.maxY)
             placesListVC.behaviorService = PlacesListBehaviorService(owner: placesListVC, placesDataProvider: placesDataViewModel)
+            
+        case .searchHistory:
+            break
             
         default: break
         }

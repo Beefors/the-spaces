@@ -8,6 +8,7 @@
 
 import UIKit
 import YandexMapKit
+import MagicalRecord
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.applicationIconBadgeNumber = 0
         YMKMapKit.setApiKey("f0648490-ed8b-4f8a-a7fb-d741fbc016b4")
+        
+        MagicalRecord.setupAutoMigratingCoreDataStack()
         
         RouterManager.shared.setup(forAppDelegate: self)
         

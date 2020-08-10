@@ -10,14 +10,25 @@ import Foundation
 
 class SearchHistoryBehaviorService {
     
+    //MARK: Owner
     unowned(unsafe) let owner: SearchHistoryViewController
     
+    //MARK: - Services
+    lazy var tableViewService = SearchHistoryTableViewService(owner: owner)
+    lazy var builderUI = SearchHistoryUIBuilder(owner: owner)
+    
+    //MARK: - View model
+    let viewModel = SearchHistoryViewModel()
+    
+    //MARK: - Initialization
     init(owner: SearchHistoryViewController) {
         self.owner = owner
     }
     
+    //MARK: - Setup
     func setup() {
-        
+        builderUI.buildUI()
+        tableViewService.setup()
     }
     
 }

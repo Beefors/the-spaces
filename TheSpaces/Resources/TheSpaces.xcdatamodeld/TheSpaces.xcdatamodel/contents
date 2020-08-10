@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="SearchHistoryItem" representedClassName="SearchHistoryItem" syncable="YES" codeGenerationType="class">
+        <attribute name="searchedDate" attributeType="Date" defaultDateTimeInterval="-978321600" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+    </entity>
+    <elements>
+        <element name="SearchHistoryItem" positionX="-63" positionY="-18" width="128" height="73"/>
+    </elements>
+</model>

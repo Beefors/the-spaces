@@ -18,10 +18,15 @@ class SearchHistoryViewController: UIViewController {
     //MARK: - Services
     lazy var behaviorService = SearchHistoryBehaviorService(owner: self)
     
+    //MARK: - Lyfecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         behaviorService.setup()
     }
 
+    //MARK: - Helpers
+    func setup(byParent parent: MapViewController) {
+        behaviorService.builderUI.setupTopInset(searchPanel: parent.searchPanelView)
+    }
+    
 }

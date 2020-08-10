@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import RxOptional
 import RxAppState
+import RxKeyboard
 
 class MapVCBehaviorService: NSObject {
     unowned(unsafe) let owner: MapViewController
@@ -105,6 +106,27 @@ class MapVCBehaviorService: NSObject {
             })
             .subscribe()
             .disposed(by: searchViewModel)
+        
+        // Show search history screen
+        Observable.just(self)
+            .flatMap { (behaviorService) in
+                return behaviorService.owner.searchPanelView.textField.rx.controlEvent(.editingDidBegin).map({behaviorService})
+            }
+            .flatMap { (behaviorService) -> Observable<MapVCBehaviorService> in
+                let searchHistoryCoordinator = SearchCoordinator.searchHistory
+                let searchHistoryVC = searchHistoryCoordinator.viewController as! SearchHistoryViewController
+                searchHistoryVC.setup(byParent: behaviorService.owner)
+                
+                behaviorService.presentationService.present(viewController: searchHistoryVC)
+                
+                return RxKeyboard.instance.isHidden.filter({$0}).asObservable().skip(1).take(1).map({ _ in return behaviorService})
+            }
+            .do(onNext: { (behaviorService) in
+                behaviorService.presentationService.dismissPresented()
+            })
+            .subscribe()
+            .disposed(by: searchViewModel)
+        
     }
     
 }

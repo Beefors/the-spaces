@@ -28,22 +28,22 @@ class PlacesListBehaviorService: NSObject {
         
         tableViewService.setup()
         
-        Observable.just(self)
-            .flatMap { (behaviorService) in
-                return behaviorService.owner.dismissButton.rx.tap.map({ behaviorService })
-            }
-            .bind { (behaviorService) in
-                guard let searchViewController = behaviorService.owner.parent as? MapViewController else { return }
-                
-                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {[unowned behaviorService, unowned searchViewController] in
-                    behaviorService.owner.view.frame.origin = CGPoint(x: .zero, y: searchViewController.view.bounds.height)
-                }, completion: {[unowned behaviorService] _ in
-                    behaviorService.owner.view.removeFromSuperview()
-                    behaviorService.owner.removeFromParent()
-                })
-                
-            }
-            .disposed(by: dataViewModel)
+//        Observable.just(self)
+//            .flatMap { (behaviorService) in
+//                return behaviorService.owner.dismissButton.rx.tap.map({ behaviorService })
+//            }
+//            .bind { (behaviorService) in
+//                guard let searchViewController = behaviorService.owner.parent as? MapViewController else { return }
+//                
+//                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {[unowned behaviorService, unowned searchViewController] in
+//                    behaviorService.owner.view.frame.origin = CGPoint(x: .zero, y: searchViewController.view.bounds.height)
+//                }, completion: {[unowned behaviorService] _ in
+//                    behaviorService.owner.view.removeFromSuperview()
+//                    behaviorService.owner.removeFromParent()
+//                })
+//                
+//            }
+//            .disposed(by: dataViewModel)
         
     }
     

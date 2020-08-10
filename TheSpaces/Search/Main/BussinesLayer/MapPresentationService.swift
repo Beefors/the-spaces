@@ -12,7 +12,7 @@ import UIKit
 protocol MapPresentationServiceType {
     func present(viewController: UIViewController)
     func present(coordinator: Coordinator)
-    var presentedController: UIViewController? { get }
+    var presentedControllers: [UIViewController] { get }
     func dismissPresented()
 }
 
@@ -24,9 +24,11 @@ class MapPresentationService: MapPresentationServiceType {
         owner = mapViewController
     }
     
-    private(set) weak var presentedController: UIViewController?
+    private(set) var presentedControllers = [UIViewController]()
     
     func present(viewController: UIViewController) {
+        
+        presentedControllers.append(viewController)
         
         owner.addChild(viewController)
         owner.view.insertSubview(viewController.view, belowSubview: owner.searchPanelView)
@@ -46,7 +48,8 @@ class MapPresentationService: MapPresentationServiceType {
     
     func dismissPresented() {
         
-        guard let presentedController = presentedController else { return }
+        guard presentedControllers.count > 0 else { return }
+        let presentedController = presentedControllers.removeLast()
         
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn, animations: {[unowned self, unowned presentedController] in
             presentedController.view.frame.origin = CGPoint(x: .zero, y: self.owner.view.bounds.height)

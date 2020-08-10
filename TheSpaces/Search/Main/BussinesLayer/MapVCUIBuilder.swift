@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class MapVCUIBuilder: UIBuilderType {
-    unowned(unsafe) private(set) var controller: MapViewController
+    unowned(unsafe) let controller: MapViewController
     
     init(_ controller: MapViewController) {
         self.controller = controller
