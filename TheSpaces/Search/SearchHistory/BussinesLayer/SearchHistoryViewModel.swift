@@ -21,6 +21,8 @@ class SearchHistoryViewModel: ViewModelType {
     let historyData = BehaviorRelay<Array<SearchHistoryItem>>(value: [])
     
     let addHistoryItemTrigger = PublishRelay<String>()
+    let clearHistoryListTrigger = PublishRelay<Void>()
+    let removeHistoryItemTrigger = PublishRelay<SearchHistoryItem>()
     let errorResponse = PublishRelay<Error>()
     
     init() {
@@ -43,6 +45,27 @@ class SearchHistoryViewModel: ViewModelType {
             .bind(to: historyDataTrigger)
             .disposed(by: bag)
 
+        clearHistoryListTrigger
+            .do(onNext: { _ in
+                MagicalRecord.save(blockAndWait: { context in
+                    SearchHistoryItem.mr_truncateAll(in: context)
+                })
+            })
+            .bind(to: historyDataTrigger)
+            .disposed(by: bag)
+        
+        removeHistoryItemTrigger
+            .do(onNext: { (item) in
+                MagicalRecord.save(blockAndWait: { context in
+                    item.mr_deleteEntity(in: context)
+                })
+            })
+            .map({ _ in return })
+            .bind(to: historyDataTrigger)
+            .disposed(by: bag)
+        
+        historyDataTrigger.accept(())
+        
         // Search by name logic
         setupSearchDataObservable()
     }

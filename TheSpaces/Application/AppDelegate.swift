@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
         YMKMapKit.setApiKey("f0648490-ed8b-4f8a-a7fb-d741fbc016b4")
         
+        // Setup magical record
         MagicalRecord.setupAutoMigratingCoreDataStack()
         
         RouterManager.shared.setup(forAppDelegate: self)

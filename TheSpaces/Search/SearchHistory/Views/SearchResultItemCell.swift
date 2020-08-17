@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 class SearchResultItemCell: UITableViewCell {
-    static var reuseIdentifier = String(describing: self)
+    static var reuseIdentifier: String {
+        String(describing: self)
+    }
     
     let label = UILabel()
     private(set) var labelLeadingConstr: NSLayoutConstraint!

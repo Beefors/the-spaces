@@ -14,6 +14,9 @@ class SearchHistoryHeaderView: UIView {
     let label = UILabel()
     let button = UIButton()
     
+    private var labelLeadingConstr: NSLayoutConstraint!
+    private var buttonTrailingConstr: NSLayoutConstraint!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -25,21 +28,26 @@ class SearchHistoryHeaderView: UIView {
     }
     
     private func commonInit() {
-        translatesAutoresizingMaskIntoConstraints = false
         
+        label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
+        
+        labelLeadingConstr = label.leadingAnchor.constraint(equalTo: leadingAnchor)
         
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: topAnchor),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor),
+            labelLeadingConstr,
             label.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
+        button.translatesAutoresizingMaskIntoConstraints = false
         addSubview(button)
+        
+        buttonTrailingConstr = trailingAnchor.constraint(equalTo: button.trailingAnchor)
         
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: topAnchor),
-            button.trailingAnchor.constraint(equalTo: trailingAnchor),
+            buttonTrailingConstr,
             button.bottomAnchor.constraint(equalTo: bottomAnchor),
             button.leadingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: 8)
         ])
@@ -54,6 +62,14 @@ class SearchHistoryHeaderView: UIView {
         
         button.setTitle("Очистить", for: .normal)
         
+    }
+    
+    func setupLabelLeadingOffset(_ value: CGFloat) {
+        labelLeadingConstr.constant = value
+    }
+    
+    func setButtonTrailingOffset(_ value: CGFloat) {
+        buttonTrailingConstr.constant = value
     }
     
 }

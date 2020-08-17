@@ -41,6 +41,7 @@ class SearchHistoryViewFactory {
     
     static func registerCells(tableView: UITableView) {
         tableView.register(SearchResultItemCell.self, forCellReuseIdentifier: SearchResultItemCell.reuseIdentifier)
+        tableView.register(SearchHistoryItemCell.self, forCellReuseIdentifier: SearchHistoryItemCell.reuseIdentifier)
     }
     
     static func dequeueSearchResultCell(tableView: UITableView) -> SearchResultItemCell {
@@ -50,16 +51,7 @@ class SearchHistoryViewFactory {
     }
     
     static func dequeueSearchHistoryItemCell(tableView: UITableView) -> SearchHistoryItemCell {
-        
-        let cell: SearchHistoryItemCell
-        
-        let reuseIdentifier = SearchHistoryItemCell.reuseIdentifier
-        if let temp = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as? SearchHistoryItemCell {
-            cell = temp
-        } else {
-            cell = SearchHistoryItemCell(style: .default, reuseIdentifier: reuseIdentifier)
-        }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchHistoryItemCell.reuseIdentifier) as! SearchHistoryItemCell
         return cell
     }
     
