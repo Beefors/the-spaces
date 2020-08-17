@@ -16,6 +16,7 @@
 		55236E1924B9E33200619510 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236E1824B9E33200619510 /* NetworkService.swift */; };
 		55236E1C24B9E3BE00619510 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236E1B24B9E3BE00619510 /* ApiProvider.swift */; };
 		55236E1F24B9FF6900619510 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236E1E24B9FF6900619510 /* PlaceModel.swift */; };
+		55243A4B24E52EF5006B08D1 /* PlacesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55243A4A24E52EF5006B08D1 /* PlacesFilter.swift */; };
 		554140E324BDD6C700FF9A38 /* PlacePreviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 554140E224BDD6C700FF9A38 /* PlacePreviewView.xib */; };
 		554140E524BDDDC600FF9A38 /* PlacePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554140E424BDDDC600FF9A38 /* PlacePreviewView.swift */; };
 		554140E824BDF77100FF9A38 /* PlacesListTableViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554140E724BDF77100FF9A38 /* PlacesListTableViewService.swift */; };
@@ -23,6 +24,7 @@
 		554809A424BED75E008BF41E /* PlacesListTableViewServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554809A324BED75E008BF41E /* PlacesListTableViewServiceViewModel.swift */; };
 		5562FBBC24BEE6AE0030F43D /* RxSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5562FBBB24BEE6AE0030F43D /* RxSectionModel.swift */; };
 		5562FBBF24BEEA320030F43D /* PlacesListViewsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5562FBBE24BEEA320030F43D /* PlacesListViewsFactory.swift */; };
+		556EC73824E6A1190017D3AC /* SearchResultItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556EC73724E6A1190017D3AC /* SearchResultItemCell.swift */; };
 		5572CBED24E13AD800D0175C /* SearchHistoryUIBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5572CBEC24E13AD800D0175C /* SearchHistoryUIBuilder.swift */; };
 		5572CBF024E146F700D0175C /* TheSpaces.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5572CBEE24E146F700D0175C /* TheSpaces.xcdatamodeld */; };
 		557B1CE024B458C60050289D /* TabBarSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CDF24B458C60050289D /* TabBarSource.swift */; };
@@ -89,6 +91,7 @@
 		55236E1824B9E33200619510 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		55236E1B24B9E3BE00619510 /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		55236E1E24B9FF6900619510 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		55243A4A24E52EF5006B08D1 /* PlacesFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesFilter.swift; sourceTree = "<group>"; };
 		55272D7524C4DD7400727E30 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		554140E224BDD6C700FF9A38 /* PlacePreviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlacePreviewView.xib; sourceTree = "<group>"; };
 		554140E424BDDDC600FF9A38 /* PlacePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePreviewView.swift; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 		554809A324BED75E008BF41E /* PlacesListTableViewServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListTableViewServiceViewModel.swift; sourceTree = "<group>"; };
 		5562FBBB24BEE6AE0030F43D /* RxSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSectionModel.swift; sourceTree = "<group>"; };
 		5562FBBE24BEEA320030F43D /* PlacesListViewsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewsFactory.swift; sourceTree = "<group>"; };
+		556EC73724E6A1190017D3AC /* SearchResultItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemCell.swift; sourceTree = "<group>"; };
 		5572CBEC24E13AD800D0175C /* SearchHistoryUIBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryUIBuilder.swift; sourceTree = "<group>"; };
 		5572CBEF24E146F700D0175C /* TheSpaces.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheSpaces.xcdatamodel; sourceTree = "<group>"; };
 		557B1CDF24B458C60050289D /* TabBarSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSource.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				55236E1E24B9FF6900619510 /* PlaceModel.swift */,
 				55EFB67824BB34F100C26495 /* CityModel.swift */,
 				55EFB67E24BB54CF00C26495 /* Errors.swift */,
+				55243A4A24E52EF5006B08D1 /* PlacesFilter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				55C46B1724D83EFE002B8677 /* SearchHistoryHeaderView.swift */,
+				556EC73724E6A1190017D3AC /* SearchResultItemCell.swift */,
 				55E4AF7524E16715007B7D68 /* SearchHistoryItemCell.swift */,
 			);
 			path = Views;
@@ -681,6 +687,7 @@
 				558575F424B5A19200FDAEAE /* OtherCoordinator.swift in Sources */,
 				55236E1C24B9E3BE00619510 /* ApiProvider.swift in Sources */,
 				55C3F90C24C42A06000778F5 /* PlacePreviewViewBehaviorService.swift in Sources */,
+				55243A4B24E52EF5006B08D1 /* PlacesFilter.swift in Sources */,
 				55E620FE24C5CACE00E4A389 /* MapServiceViewsFactory.swift in Sources */,
 				55EFB67724BB326000C26495 /* MapViewModel.swift in Sources */,
 				55EFB67F24BB54CF00C26495 /* Errors.swift in Sources */,
@@ -724,6 +731,7 @@
 				558575EE24B5A15E00FDAEAE /* ProfileCoordinator.swift in Sources */,
 				557B1CE024B458C60050289D /* TabBarSource.swift in Sources */,
 				55C46B1A24D84380002B8677 /* SearchHistoryTableViewService.swift in Sources */,
+				556EC73824E6A1190017D3AC /* SearchResultItemCell.swift in Sources */,
 				55C46B1524D83E6D002B8677 /* SearchHistoryViewFactory.swift in Sources */,
 				55C46B1324D83BFC002B8677 /* SearchHistoryBehaviorService.swift in Sources */,
 				55EF8C5224BDC16300E822E8 /* PlaceListCell.swift in Sources */,

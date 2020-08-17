@@ -11,12 +11,42 @@ import UIKit
 
 class SearchHistoryViewFactory {
     
-    static func createHeaderView() -> SearchHistoryHeaderView {
+    static func createHistorySectionHeaderView() -> SearchHistoryHeaderView {
         return SearchHistoryHeaderView()
     }
     
+    static func createSearchSectionHeaderView(leadingOffset: CGFloat) -> UIView {
+        
+        let view = UIView()
+        let label = UILabel()
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: view.topAnchor),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingOffset),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            label.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        view.backgroundColor = .white
+        label.textColor = .black
+        label.font = .tabbarTitles
+        
+        label.text = "Результаты"
+        
+        return view
+    }
+    
     static func registerCells(tableView: UITableView) {
-        tableView.register(SearchHistoryItemCell.self, forCellReuseIdentifier: SearchHistoryItemCell.reuseIdentifier)
+        tableView.register(SearchResultItemCell.self, forCellReuseIdentifier: SearchResultItemCell.reuseIdentifier)
+    }
+    
+    static func dequeueSearchResultCell(tableView: UITableView) -> SearchResultItemCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultItemCell.reuseIdentifier) as! SearchResultItemCell
+        cell.accessoryType = .disclosureIndicator
+        return cell
     }
     
     static func dequeueSearchHistoryItemCell(tableView: UITableView) -> SearchHistoryItemCell {

@@ -14,7 +14,7 @@ class NetworkService: NSObject {
     
     static let shared = NetworkService()
     
-    private let requestProvider = MoyaProvider<ApiProvider>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: [.formatRequestAscURL, .successResponseBody]))])
+    private let requestProvider = MoyaProvider<ApiProvider>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: [.formatRequestAscURL, .successResponseBody])), MoyaCacheablePlugin()])
     
     func citiesList() -> Observable<Array<CityModel>> {
         return requestProvider.rx
@@ -23,11 +23,22 @@ class NetworkService: NSObject {
             .asObservable()
     }
     
-    func placesList(cityId: Int) -> Observable<Array<PlaceModel>> {
+    func placesList(cityId: Int, filters: [PlacesFilter]? = nil) -> Observable<Array<PlaceModel>> {
         return requestProvider.rx
-            .request(.placesList(byCity: cityId))
+            .request(.placesList(byCity: cityId, filters: filters))
             .modelMap(Array<PlaceModel>.self)
             .asObservable()
     }
     
+}
+
+final class MoyaCacheablePlugin: PluginType {
+  func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
+    if let moyaCachableProtocol = target as? MoyaCacheable {
+      var cachableRequest = request
+      cachableRequest.cachePolicy = moyaCachableProtocol.cachePolicy
+      return cachableRequest
+    }
+    return request
+  }
 }

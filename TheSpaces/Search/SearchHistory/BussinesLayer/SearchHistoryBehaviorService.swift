@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class SearchHistoryBehaviorService {
     
@@ -29,6 +31,38 @@ class SearchHistoryBehaviorService {
     func setup() {
         builderUI.buildUI()
         tableViewService.setup()
+        
+        setupObservables()
+    }
+    
+    private func setupObservables() {
+        
+        let skipCount = (builderUI.searchPanel.textField.text?.count ?? 0) > 0 ? 0 : 1
+        
+        builderUI.searchPanel
+            .textField.rx
+            .text
+            .skip(skipCount)
+            .filterNil()
+            .filterEmpty()
+            .bind(to: viewModel.searchTrigger)
+            .disposed(by: viewModel)
+        
+        builderUI.searchPanel
+            .textField.rx
+            .text
+            .skip(skipCount)
+            .filterNil()
+            .filter({$0.isEmpty}) // If string is empty, 
+            .map({_ in return Array<PlaceModel>()})
+            .bind(to: viewModel.searchData)
+            .disposed(by: viewModel)
+        
+        viewModel
+            .searchData
+            .subscribe()
+            .disposed(by: viewModel)
+        
     }
     
 }

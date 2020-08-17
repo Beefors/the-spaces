@@ -30,7 +30,7 @@ class SearchPanelView: UIView {
         backgroundColor = .clear
         
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 64)
+            self.heightAnchor.constraint(equalToConstant: 36)
         ])
         
         optionsButton.backgroundColor = .white
@@ -44,7 +44,7 @@ class SearchPanelView: UIView {
         NSLayoutConstraint.activate([
             optionsButton.heightAnchor.constraint(equalToConstant: 36),
             optionsButton.widthAnchor.constraint(equalToConstant: 36),
-            optionsButton.topAnchor.constraint(equalTo: topAnchor, constant: 7),
+            optionsButton.topAnchor.constraint(equalTo: topAnchor),
             trailingAnchor.constraint(equalTo: optionsButton.trailingAnchor, constant: 16.5)
         ])
         
@@ -60,7 +60,7 @@ class SearchPanelView: UIView {
         
         NSLayoutConstraint.activate([
             textField.heightAnchor.constraint(equalToConstant: 36),
-            textField.topAnchor.constraint(equalTo: topAnchor, constant: 7),
+            textField.topAnchor.constraint(equalTo: topAnchor),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.5),
             optionsButton.leadingAnchor.constraint(equalTo: textField.trailingAnchor, constant: 9)
         ])

@@ -34,7 +34,7 @@
                                 <state key="normal" title="Button"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXF-He-frh" customClass="SearchPanelView" customModule="TheSpaces" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="4" width="375" height="64"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" placeholder="YES" id="9ZP-Tm-DZq"/>
@@ -47,7 +47,7 @@
                             <constraint firstItem="VXF-He-frh" firstAttribute="leading" secondItem="oHM-6C-Omt" secondAttribute="leading" id="CJX-5n-Cvr"/>
                             <constraint firstItem="oHM-6C-Omt" firstAttribute="bottom" secondItem="JQK-CN-aai" secondAttribute="bottom" constant="14" id="T7r-gU-zai"/>
                             <constraint firstItem="oHM-6C-Omt" firstAttribute="trailing" secondItem="VXF-He-frh" secondAttribute="trailing" id="To3-jn-ctz"/>
-                            <constraint firstItem="VXF-He-frh" firstAttribute="top" secondItem="oHM-6C-Omt" secondAttribute="top" id="bFQ-4i-2jM"/>
+                            <constraint firstItem="VXF-He-frh" firstAttribute="top" secondItem="oHM-6C-Omt" secondAttribute="top" constant="4" id="bFQ-4i-2jM"/>
                             <constraint firstItem="oHM-6C-Omt" firstAttribute="trailing" secondItem="TT6-rU-1hM" secondAttribute="trailing" constant="16.5" id="fIQ-Nq-hZ0"/>
                             <constraint firstItem="JQK-CN-aai" firstAttribute="centerX" secondItem="c6a-cz-aWE" secondAttribute="centerX" id="z6P-Gh-5tX"/>
                         </constraints>
@@ -122,9 +122,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20s-YT-NPF">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20s-YT-NPF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -139,7 +140,9 @@
                     <connections>
                         <outlet property="tableView" destination="20s-YT-NPF" id="buE-Rf-d1p"/>
                         <outlet property="tableViewBottomConstr" destination="fqd-tf-e6U" id="rZy-sn-KwU"/>
+                        <outlet property="tableViewLeadingConstr" destination="PAU-e1-hy7" id="17K-dx-10L"/>
                         <outlet property="tableViewTopConstr" destination="1jI-IY-r4R" id="wlr-yx-zns"/>
+                        <outlet property="tableViewTrailingConstr" destination="tvM-Ln-SNq" id="x4V-ub-NQa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R2j-Sb-I3j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

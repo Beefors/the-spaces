@@ -25,8 +25,11 @@ class SearchHistoryUIBuilder: UIBuilderType {
     
     //MARK: - Helpers
     func buildUI() {
-        SearchHistoryViewFactory.registerCells(tableView: owner.tableView)
         owner.tableView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
+        owner.tableView.separatorInset = .zero
+        
+        owner.tableViewLeadingConstr.constant = 17
+        owner.tableViewTrailingConstr.constant = owner.view.bounds.width - (searchPanel.frame.minX + searchPanel.textField.frame.maxX)
         
         searchPanel.textField.returnKeyType = .done
         owner.tableView.keyboardDismissMode = .interactive
@@ -34,7 +37,7 @@ class SearchHistoryUIBuilder: UIBuilderType {
     
     func setupTopInset(searchPanel: SearchPanelView) {
         self.searchPanel = searchPanel
-        topInset = searchPanel.frame.maxY        
+        topInset = searchPanel.frame.maxY + 10
     }
     
 }

@@ -11,7 +11,7 @@ import Foundation
 
 enum ApiProvider {
     case avalibleCities
-    case placesList(byCity: Int)
+    case placesList(byCity: Int, filters: [PlacesFilter]?)
     case getPlace(id: Int)
     case placeImage(placeId: Int, imageNumber: Int)
 }
@@ -40,7 +40,18 @@ extension ApiProvider: TargetType {
     var parameters: [String: Any]? {
         switch self {
         case .avalibleCities: return nil
-        case .placesList(let cityId): return ["cityId": cityId]
+        case .placesList(let cityId, let filters):
+            
+            var params: Dictionary<String, Any> = ["cityId": cityId]
+            
+            if let filters = filters {
+                for filter in filters {
+                    params[filter.key] = filter.value
+                }
+            }
+            
+            return params
+            
         case .getPlace: return nil
         case .placeImage: return nil
         }
@@ -57,4 +68,18 @@ extension ApiProvider: TargetType {
         return nil
     }
     
+}
+
+extension ApiProvider: MoyaCacheable {
+    var cachePolicy: MoyaCacheablePolicy {
+        switch self {
+        case .placesList: return .useProtocolCachePolicy
+        default: return .reloadIgnoringLocalAndRemoteCacheData
+        }
+    }
+}
+
+protocol MoyaCacheable {
+  typealias MoyaCacheablePolicy = URLRequest.CachePolicy
+  var cachePolicy: MoyaCacheablePolicy { get }
 }

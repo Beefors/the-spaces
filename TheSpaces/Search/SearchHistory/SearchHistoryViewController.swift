@@ -10,10 +10,13 @@ import UIKit
 
 class SearchHistoryViewController: UIViewController {
 
+    //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var tableViewTopConstr: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstr: NSLayoutConstraint!
+    @IBOutlet weak var tableViewLeadingConstr: NSLayoutConstraint!
+    @IBOutlet weak var tableViewTrailingConstr: NSLayoutConstraint!
     
     //MARK: - Services
     lazy var behaviorService = SearchHistoryBehaviorService(owner: self)
