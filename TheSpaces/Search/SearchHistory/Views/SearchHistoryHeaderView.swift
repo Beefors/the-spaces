@@ -29,6 +29,8 @@ class SearchHistoryHeaderView: UIView {
     
     private func commonInit() {
         
+        backgroundColor = .white
+        
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         
