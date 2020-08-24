@@ -21,6 +21,7 @@ class SearchHistoryTableViewService: NSObject {
     
     //MARK: - Views
     let historyHeaderView = SearchHistoryViewFactory.createHistorySectionHeaderView()
+    let refreshControl = SearchHistoryViewFactory.createLoadActivityView()
     
     //MARK: - Initialization
     init(owner: SearchHistoryViewController) {
@@ -28,11 +29,20 @@ class SearchHistoryTableViewService: NSObject {
         tableView = owner.tableView
     }
     
+    //MARK: - Observables
+    private let removeHistoryItemCellTrigger = PublishRelay<IndexPath>()
+    
     //MARK: - Setup
     func setup() {
-        
+        setupTableView()
+        setupObservables()
+    }
+    
+    private func setupTableView() {
         historyHeaderView.setupLabelLeadingOffset(7.5)
         historyHeaderView.setButtonTrailingOffset(15)
+        
+        tableView.refreshControl = refreshControl
         
         tableView.separatorStyle = .none
         SearchHistoryViewFactory.registerCells(tableView: tableView)
@@ -44,7 +54,11 @@ class SearchHistoryTableViewService: NSObject {
         tableView.rx
             .setDelegate(self)
             .disposed(by: owner.behaviorService.viewModel)
+    }
+    
+    private func setupObservables() {
         
+        // Table view logic observables
         let searchDataUpdatedObservable = owner.behaviorService.viewModel
             .searchData
             .distinctUntilChanged()
@@ -59,9 +73,17 @@ class SearchHistoryTableViewService: NSObject {
             })
             .disposed(by: owner.behaviorService.viewModel)
         
+        // Other observables
         historyHeaderView.button.rx
             .tap
             .bind(to: owner.behaviorService.viewModel.clearHistoryListTrigger)
+            .disposed(by: owner.behaviorService.viewModel)
+        
+        removeHistoryItemCellTrigger
+            .map {[unowned self] (indexPath) -> SearchHistoryItem in
+                return self.owner.behaviorService.viewModel.historyData.value[indexPath.row]
+            }
+            .bind(to: owner.behaviorService.viewModel.removeHistoryItemTrigger)
             .disposed(by: owner.behaviorService.viewModel)
         
     }
@@ -99,6 +121,8 @@ extension SearchHistoryTableViewService: UITableViewDataSource, UITableViewDeleg
             let item = owner.behaviorService.viewModel.historyData.value[indexPath.row]
             cell.label.text = item.title
             cell.setupLabelLeadingOffset(7.5)
+            
+            cell.delegate = self
             
             return cell
         default: abort()
@@ -154,11 +178,26 @@ extension SearchHistoryTableViewService: UITableViewDataSource, UITableViewDeleg
         case 0:
             
             let searchItem = owner.behaviorService.viewModel.searchData.value[indexPath.row]
-            owner.behaviorService.viewModel.addHistoryItemTrigger.accept(searchItem.name)
+            owner.behaviorService.viewModel.selectSerchResultItemObservable.accept(searchItem)
+            
+        case 1:
+            
+            let historyItem = owner.behaviorService.viewModel.historyData.value[indexPath.row]
+            let title = historyItem.title!
+            
+            owner.behaviorService.builderUI.searchPanel.textField.text = title
+            owner.behaviorService.viewModel.searchTrigger.accept(title)
             
         default: break
         }
         
     }
     
+}
+
+extension SearchHistoryTableViewService: SearchHistoryItemCellDelegate {
+    func removeActionCell(_ cell: SearchHistoryItemCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        removeHistoryItemCellTrigger.accept(indexPath)
+    }
 }

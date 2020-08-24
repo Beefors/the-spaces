@@ -20,20 +20,25 @@ class SearchHistoryViewModel: ViewModelType {
     let historyDataTrigger = PublishRelay<Void>()
     let historyData = BehaviorRelay<Array<SearchHistoryItem>>(value: [])
     
-    let addHistoryItemTrigger = PublishRelay<String>()
+    let selectSerchResultItemObservable = PublishRelay<PlaceModel>()
+    let selectHistoryItemObservable = PublishRelay<String>()
+    
     let clearHistoryListTrigger = PublishRelay<Void>()
     let removeHistoryItemTrigger = PublishRelay<SearchHistoryItem>()
+    
     let errorResponse = PublishRelay<Error>()
     
     init() {
         
         historyDataTrigger
-            .map({ SearchHistoryItem.mr_findAllSorted(by: "searchedDate", ascending: true) as? [SearchHistoryItem] })
+            .map({ SearchHistoryItem.mr_findAllSorted(by: "searchedDate", ascending: false) as? [SearchHistoryItem] })
             .filterNil()
             .bind(to: historyData)
             .disposed(by: bag)
 
-        addHistoryItemTrigger
+        // Add item title to history
+        selectSerchResultItemObservable
+            .map({$0.name})
             .do(onNext: { (title) in
                 MagicalRecord.save(blockAndWait: { (context) in
                     let item = SearchHistoryItem.mr_createEntity(in: context)

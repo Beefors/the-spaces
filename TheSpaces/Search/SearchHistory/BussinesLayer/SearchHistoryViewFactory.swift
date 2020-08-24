@@ -39,6 +39,10 @@ class SearchHistoryViewFactory {
         return view
     }
     
+    static func createLoadActivityView() -> UIRefreshControl {
+        return UIRefreshControl()
+    }
+    
     static func registerCells(tableView: UITableView) {
         tableView.register(SearchResultItemCell.self, forCellReuseIdentifier: SearchResultItemCell.reuseIdentifier)
         tableView.register(SearchHistoryItemCell.self, forCellReuseIdentifier: SearchHistoryItemCell.reuseIdentifier)

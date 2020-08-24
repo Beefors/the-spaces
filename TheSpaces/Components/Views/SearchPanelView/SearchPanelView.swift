@@ -14,6 +14,8 @@ class SearchPanelView: UIView {
     let textField = UITextField()
     let optionsButton = UIButton()
     
+    private let textFieldLeftAccesoryView = UIView()
+    
     /// Size is ignoring
     override init(frame: CGRect) {
         super.init(frame: CGRect(origin: frame.origin, size: .zero))
@@ -65,26 +67,25 @@ class SearchPanelView: UIView {
             optionsButton.leadingAnchor.constraint(equalTo: textField.trailingAnchor, constant: 9)
         ])
         
-        let imageContainer = UIView()
-        imageContainer.backgroundColor = .clear
-        imageContainer.translatesAutoresizingMaskIntoConstraints = false
+        textFieldLeftAccesoryView.backgroundColor = .clear
+        textFieldLeftAccesoryView.translatesAutoresizingMaskIntoConstraints = false
         
-        textField.leftView = imageContainer
+        textField.leftView = textFieldLeftAccesoryView
         textField.leftViewMode = .always
         
         NSLayoutConstraint.activate([
-            imageContainer.widthAnchor.constraint(equalToConstant: 40),
-            imageContainer.heightAnchor.constraint(equalToConstant: 36)
+            textFieldLeftAccesoryView.widthAnchor.constraint(equalToConstant: 40),
+            textFieldLeftAccesoryView.heightAnchor.constraint(equalToConstant: 36)
         ])
         
         let imageView = UIImageView(image: #imageLiteral(resourceName: "magnifierIcon"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        imageContainer.addSubview(imageView)
+        textFieldLeftAccesoryView.addSubview(imageView)
         
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor, constant: 3),
-            imageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor)
+            imageView.centerXAnchor.constraint(equalTo: textFieldLeftAccesoryView.centerXAnchor, constant: 3),
+            imageView.centerYAnchor.constraint(equalTo: textFieldLeftAccesoryView.centerYAnchor)
         ])
         
     }

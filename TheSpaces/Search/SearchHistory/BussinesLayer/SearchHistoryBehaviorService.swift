@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RxKeyboard
 
 class SearchHistoryBehaviorService {
     
@@ -61,6 +62,12 @@ class SearchHistoryBehaviorService {
         viewModel
             .searchData
             .subscribe()
+            .disposed(by: viewModel)
+        
+        RxKeyboard.instance
+            .visibleHeight
+            .map({$0 - TabBarSource.shared.tabBarController.tabBar.bounds.height})
+            .drive(owner.tableViewBottomConstr.rx.constant)
             .disposed(by: viewModel)
         
     }

@@ -8,13 +8,20 @@
 
 import UIKit
 
+protocol SearchHistoryItemCellDelegate: class {
+    func removeActionCell(_ cell: SearchHistoryItemCell)
+}
+
 class SearchHistoryItemCell: UITableViewCell {
     static var reuseIdentifier: String {
         String(describing: self)
     }
     
+    weak var delegate: SearchHistoryItemCellDelegate?
+    
     let button = UIButton(type: .custom)
     let label = UILabel()
+    
     private(set) var labelLeadingConstr: NSLayoutConstraint!
     
     required init?(coder: NSCoder) {
@@ -43,7 +50,9 @@ class SearchHistoryItemCell: UITableViewCell {
         label.font = UIFont.subtitles.withSize(12)
         
         button.setImage(UIImage(named: "removeHistoryItemIcon"), for: .normal)
-        button.frame.size = CGSize(width: 10, height: 10)
+        button.frame.size = CGSize(width: 20, height: 34)
+        button.contentHorizontalAlignment = .right
+        button.addTarget(self, action: #selector(removeButtonAction), for: .touchUpInside)
         
         accessoryView = button
     }
@@ -52,4 +61,9 @@ class SearchHistoryItemCell: UITableViewCell {
         labelLeadingConstr.constant = value
     }
 
+    @objc
+    func removeButtonAction() {
+        delegate?.removeActionCell(self)
+    }
+    
 }
