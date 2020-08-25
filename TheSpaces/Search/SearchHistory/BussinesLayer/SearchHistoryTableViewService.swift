@@ -21,7 +21,7 @@ class SearchHistoryTableViewService: NSObject {
     
     //MARK: - Views
     let historyHeaderView = SearchHistoryViewFactory.createHistorySectionHeaderView()
-    let refreshControl = SearchHistoryViewFactory.createLoadActivityView()
+    let refreshControl = SearchHistoryViewFactory.createRefreshControl()
     
     //MARK: - Initialization
     init(owner: SearchHistoryViewController) {
@@ -34,11 +34,20 @@ class SearchHistoryTableViewService: NSObject {
     
     //MARK: - Setup
     func setup() {
+        
         setupTableView()
-        setupObservables()
+        setupRefreshControl()
+        
+        // Setup historyHeaderView behavior
+        historyHeaderView.button.rx
+            .tap
+            .bind(to: owner.behaviorService.viewModel.clearHistoryListTrigger)
+            .disposed(by: owner.behaviorService.viewModel)
+        
     }
     
     private func setupTableView() {
+        
         historyHeaderView.setupLabelLeadingOffset(7.5)
         historyHeaderView.setButtonTrailingOffset(15)
         
@@ -54,9 +63,6 @@ class SearchHistoryTableViewService: NSObject {
         tableView.rx
             .setDelegate(self)
             .disposed(by: owner.behaviorService.viewModel)
-    }
-    
-    private func setupObservables() {
         
         // Table view logic observables
         let searchDataUpdatedObservable = owner.behaviorService.viewModel
@@ -73,10 +79,47 @@ class SearchHistoryTableViewService: NSObject {
             })
             .disposed(by: owner.behaviorService.viewModel)
         
-        // Other observables
-        historyHeaderView.button.rx
-            .tap
-            .bind(to: owner.behaviorService.viewModel.clearHistoryListTrigger)
+    }
+    
+    private func setupRefreshControl() {
+        
+        let searchTextField = owner.behaviorService.builderUI.searchPanel.textField
+        let textObservable = searchTextField.rx.text.filterNil()
+        
+        textObservable
+            .map({$0.isNotEmpty})
+            .distinctUntilChanged()
+            .map {[unowned self] (isNotEmpty) in
+                return isNotEmpty ? self.refreshControl : nil
+            }
+            .subscribe(onNext: {[unowned self] (refreshControl) in
+                self.tableView.refreshControl = refreshControl
+            })
+            .disposed(by: owner.behaviorService.viewModel)
+        
+        textObservable
+            .filter({$0.isNotEmpty})
+            .filter {[unowned self] _ -> Bool in
+                return !self.refreshControl.isRefreshing
+            }
+            .map({ _ in return true })
+            .delay(.milliseconds(100), scheduler: MainScheduler.asyncInstance)
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: owner.behaviorService.viewModel)
+        
+        owner.behaviorService.viewModel
+            .searchData
+            .map({ _ in return false })
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: owner.behaviorService.viewModel)
+        
+        refreshControl.rx
+            .controlEvent(.valueChanged)
+            .map {[unowned self] _ in
+                return self.owner.behaviorService.builderUI.searchPanel.textField.text
+            }
+            .filterNil()
+            .bind(to: owner.behaviorService.viewModel.searchTrigger)
             .disposed(by: owner.behaviorService.viewModel)
         
         removeHistoryItemCellTrigger
@@ -137,7 +180,7 @@ extension SearchHistoryTableViewService: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         switch section {
-        case 0: return owner.behaviorService.viewModel.searchData.value.count == 0 ? 0 : 24
+        case 0: return owner.behaviorService.viewModel.searchData.value.count == 0 && (owner.behaviorService.builderUI.searchPanel.textField.text?.isEmpty ?? true) ? 0 : 24
         case 1: return owner.behaviorService.viewModel.historyData.value.count == 0 ? 0 : 40
         default: return 0
         }

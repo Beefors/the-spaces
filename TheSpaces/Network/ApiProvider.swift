@@ -16,8 +16,32 @@ enum ApiProvider {
     case placeImage(placeId: Int, imageNumber: Int)
 }
 
+protocol ApiEnvironmentProvider {
+    var environmentURL: URL {get}
+}
+ 
+enum ApiEnvironment {
+    case development
+    case production
+}
+
+extension ApiEnvironment: ApiEnvironmentProvider {
+    var environmentURL: URL {
+        switch self {
+        case .development: return URL(string: "https://thespacesstage.azurewebsites.net/api/")!
+        case .production: abort()
+        }
+    }
+}
+
+extension ApiProvider: ApiEnvironmentProvider {
+    var environmentURL: URL {
+        return ApiEnvironment.development.environmentURL
+    }
+}
+
 extension ApiProvider: TargetType {
-    var baseURL: URL { return URL(string: "https://thespacesstage.azurewebsites.net/api/")! }
+    var baseURL: URL { return environmentURL }
     
     var path: String {
         switch self {

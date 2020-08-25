@@ -119,7 +119,19 @@ class MapVCBehaviorService: NSObject {
                 
                 behaviorService.presentationService.present(viewController: searchHistoryVC)
                 
-                return RxKeyboard.instance.isHidden.filter({$0}).asObservable().skip(1).take(1).map({ _ in return behaviorService})
+                let backButton = UIButton(type: .system)
+                backButton.setImage(UIImage(named: "backArrow")!, for: .normal)
+                backButton.tintColor = UIColor(red: 0.56, green: 0.56, blue: 0.58, alpha: 1)
+                
+                behaviorService.owner.searchPanelView.setupCustomAccesoryView(backButton, animation: true)
+                
+                let keyboardDismissTrigger = RxKeyboard.instance.isHidden.filter({$0}).asObservable().skip(1).take(1).map({ _ in return })
+                let backButtonDismissTrigger = backButton.rx.tap.take(1).do(onNext: {[unowned self] in
+                    self.owner.searchPanelView.textField.resignFirstResponder()
+                    self.owner.searchPanelView.setupDefaultAccesoryView(animation: true)
+                })
+                
+                return Observable<Void>.merge(keyboardDismissTrigger, backButtonDismissTrigger).map({ _ in return behaviorService})
             }
             .do(onNext: { (behaviorService) in
                 behaviorService.presentationService.dismissPresented()

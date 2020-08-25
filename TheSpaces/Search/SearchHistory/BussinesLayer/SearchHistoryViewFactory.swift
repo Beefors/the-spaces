@@ -39,7 +39,7 @@ class SearchHistoryViewFactory {
         return view
     }
     
-    static func createLoadActivityView() -> UIRefreshControl {
+    static func createRefreshControl() -> UIRefreshControl {
         return UIRefreshControl()
     }
     

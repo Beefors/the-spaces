@@ -78,16 +78,50 @@ class SearchPanelView: UIView {
             textFieldLeftAccesoryView.heightAnchor.constraint(equalToConstant: 36)
         ])
         
+        setupDefaultAccesoryView(animation: false)
+    }
+    
+    private func makeImageView() -> UIImageView {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "magnifierIcon"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        textFieldLeftAccesoryView.addSubview(imageView)
+        return imageView
+    }
+    
+    private func setupCustomAccesoryView(_ view: UIView){
+        view.translatesAutoresizingMaskIntoConstraints = false
+        textFieldLeftAccesoryView.addSubview(view)
         
         NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: textFieldLeftAccesoryView.centerXAnchor, constant: 3),
-            imageView.centerYAnchor.constraint(equalTo: textFieldLeftAccesoryView.centerYAnchor)
+            view.centerXAnchor.constraint(equalTo: textFieldLeftAccesoryView.centerXAnchor, constant: 3),
+            view.centerYAnchor.constraint(equalTo: textFieldLeftAccesoryView.centerYAnchor)
         ])
+    }
+    
+    func setupCustomAccesoryView(_ view: UIView, animation: Bool) {
+        let subviews = textFieldLeftAccesoryView.subviews
+        view.alpha = 0
+        let timeAnimation = animation ? 0.3 : 0
         
+        setupCustomAccesoryView(view)
+        
+        UIView.animate(withDuration: timeAnimation, animations: {
+            view.alpha = 1
+            
+            for subview in subviews {
+                subview.alpha = 0
+            }
+            
+        }) { (complate) in
+            for subview in subviews {
+                subview.removeFromSuperview()
+            }
+        }
+        
+    }
+    
+    func setupDefaultAccesoryView(animation: Bool) {
+        let view = makeImageView()
+        setupCustomAccesoryView(view, animation: animation)
     }
     
     override func layoutSubviews() {

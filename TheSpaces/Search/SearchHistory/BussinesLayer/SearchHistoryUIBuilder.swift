@@ -26,10 +26,7 @@ class SearchHistoryUIBuilder: UIBuilderType {
     //MARK: - Helpers
     func buildUI() {
         
-        let inset = UIEdgeInsets(top: topInset, left: 0, bottom: 0, right: 0)
-        
-        owner.tableView.contentInset = inset
-        owner.tableView.scrollIndicatorInsets = inset
+        owner.tableViewTopConstr.constant = topInset
         owner.tableView.separatorInset = .zero
         
         owner.tableViewLeadingConstr.constant = 17
