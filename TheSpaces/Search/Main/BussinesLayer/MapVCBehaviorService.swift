@@ -128,10 +128,13 @@ class MapVCBehaviorService: NSObject {
                 let keyboardDismissTrigger = RxKeyboard.instance.isHidden.filter({$0}).asObservable().skip(1).take(1).map({ _ in return })
                 let backButtonDismissTrigger = backButton.rx.tap.take(1).do(onNext: {[unowned self] in
                     self.owner.searchPanelView.textField.resignFirstResponder()
-                    self.owner.searchPanelView.setupDefaultAccesoryView(animation: true)
                 })
                 
-                return Observable<Void>.merge(keyboardDismissTrigger, backButtonDismissTrigger).map({ _ in return behaviorService})
+                return Observable<Void>.merge(keyboardDismissTrigger, backButtonDismissTrigger)
+                    .do(onNext: {[unowned self] in
+                        self.owner.searchPanelView.setupDefaultAccesoryView(animation: true)
+                    })
+                    .map({ _ in return behaviorService})
             }
             .do(onNext: { (behaviorService) in
                 behaviorService.presentationService.dismissPresented()
@@ -139,6 +142,28 @@ class MapVCBehaviorService: NSObject {
             .subscribe()
             .disposed(by: searchViewModel)
         
+        // Show filters screen
+        owner.searchPanelView.optionsButton.rx
+            .tap
+            .map { _ -> Coordinator in
+                SearchCoordinator.filters
+            }
+            .map { (coordinator) -> UIViewController? in
+                RouterManager.shared.present(coordinator, presentationType: .present(animated: true, completion: nil))
+            }
+            .filterNil()
+            .do(onNext: {[unowned self] (_) in
+                self.owner.searchPanelView.optionsButton.isUserInteractionEnabled = false
+            })
+            .flatMap { (viewController) -> Observable<Void> in
+                viewController.rx.viewDidDisappear.map({_ in return })
+            }
+            .do(onNext: {[unowned self] (_) in
+                self.owner.searchPanelView.optionsButton.isUserInteractionEnabled = true
+            })
+            .subscribe()
+            .disposed(by: searchViewModel)
+            
     }
     
 }

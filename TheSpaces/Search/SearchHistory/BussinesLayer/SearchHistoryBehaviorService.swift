@@ -28,7 +28,7 @@ class SearchHistoryBehaviorService {
         self.owner = owner
     }
     
-    //MARK: - Setup
+    //MARK: - Setups
     func setup() {
         builderUI.buildUI()
         tableViewService.setup()

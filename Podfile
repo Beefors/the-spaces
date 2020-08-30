@@ -45,6 +45,14 @@ target 'TheSpaces' do
   # https://github.com/shima11/FlexiblePageControl
   pod "FlexiblePageControl"
   
+  # DoubleSlider is a version of UISlider that has two draggable points —useful for choosing two points in a range.
+  # https://github.com/yhkaplan/doubleslider
+  pod 'DoubleSlider'
+  
+  # Simple and highly customizable iOS tag list view, in Swift.
+  # https://github.com/ElaWorkshop/TagListView
+  pod 'TagListView'
+  
   ##################
   ### Other Pods ###
   ##################

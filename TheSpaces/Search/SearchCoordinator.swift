@@ -13,6 +13,7 @@ enum SearchCoordinator {
     case main
     case placesList(searchPanelView: SearchPanelView, placesDataViewModel: MapViewModel)
     case searchHistory
+    case filters
 }
 
 extension SearchCoordinator: StoryboardCoordinator {
@@ -23,6 +24,7 @@ extension SearchCoordinator: StoryboardCoordinator {
         case .main: return "Main"
         case .placesList: return "PlacesList"
         case .searchHistory: return "SearchHistory"
+        case .filters: return "Filters"
         }
     }
     

@@ -35,4 +35,9 @@ extension UIFont {
         return UIFont.systemFont(ofSize: 10, weight: .regular)
     }
     
+    /// SFCompactDisplay-Medium size: 14
+    class var filterParam: UIFont {
+        return UIFont.systemFont(ofSize: 14, weight: .medium)
+    }
+    
 }
