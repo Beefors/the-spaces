@@ -73,7 +73,7 @@ class FiltersTableViewService: NSObject, ServiceType {
     
     //MARK: - Setups
     func setup() {
-        tableView.contentInset.bottom = 24
+//        tableView.contentInset.bottom = 24
         setupObservables()
     }
     
@@ -143,7 +143,8 @@ class FiltersTableViewService: NSObject, ServiceType {
             .contentSizeUpdatedObservable
             .subscribe(onNext: {[unowned self] (cell) in
                 guard let indexPath = self.tableView.indexPath(for: cell) else { return }
-                self.tableView.rectForRow(at: indexPath)
+//                self.tableView.reloadSections(IndexSet([indexPath.section]), with: .none)
+//                self.tableView.reloadRows(at: [indexPath], with: .none)
             })
             .disposed(by: owner.behaviorService.viewModel)
         
@@ -152,6 +153,44 @@ class FiltersTableViewService: NSObject, ServiceType {
 }
 
 extension FiltersTableViewService: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let section = FiltersDataSource().sections[section]
+
+        switch section {
+        case .equipment,
+             .facilities,
+             .services,
+             .transport:
+
+            let label = UILabel()
+
+            label.font = .filterParam
+            label.textColor = .STBlue
+            label.text = "qwe"
+
+            return label
+
+        default: return nil
+        }
+
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let section = FiltersDataSource().sections[section]
+
+        switch section {
+        case .equipment,
+             .facilities,
+             .services,
+             .transport:
+
+            return 19
+
+        default: return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = .STGray

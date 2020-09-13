@@ -35,6 +35,10 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, FilterCe
         cell.collectionView.dataSource = self
         cell.collectionView.delegate = self
         
+        DispatchQueue.main.async {
+            cell.collectionView.reloadData()
+        }
+        
         contentHeightDisposable?.dispose()
         contentHeightDisposable = cell.collectionView.rx
             .observe(CGSize.self, #keyPath(UICollectionView.contentSize))
