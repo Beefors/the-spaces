@@ -15,10 +15,10 @@ import RxDataSources
 class PlacesListBehaviorService: NSObject {
     
     unowned(unsafe) let owner: PlacesListViewController
-    unowned(unsafe) let dataViewModel: MapViewModel
+    unowned(unsafe) let dataViewModel: PlacesViewModel
     let tableViewService: PlacesListTableViewService
     
-    init(owner: PlacesListViewController, placesDataProvider: MapViewModel) {
+    init(owner: PlacesListViewController, placesDataProvider: PlacesViewModel) {
         self.owner = owner
         dataViewModel = placesDataProvider
         tableViewService = .init(owner: owner, viewModel: dataViewModel)

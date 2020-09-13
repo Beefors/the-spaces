@@ -15,6 +15,10 @@ class FilterSubtitleCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        label.font = .filterParam
+        label.textColor = .STText
+        
+        subtitleLabel.font = .choiceGray
+        subtitleLabel.textColor = UIColor(red: 0.56, green: 0.56, blue: 0.58, alpha: 1)
     }
 }

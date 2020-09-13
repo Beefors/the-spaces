@@ -40,4 +40,19 @@ extension UIFont {
         return UIFont.systemFont(ofSize: 14, weight: .medium)
     }
     
+    /// SFCompactDisplay-Regular size: 14
+    class var choiceGray: UIFont {
+        return UIFont.systemFont(ofSize: 14, weight: .regular)
+    }
+    
+    /// SFCompactDisplay-Regular size: 16
+    class var registerButton: UIFont {
+        return UIFont.systemFont(ofSize: 16, weight: .regular)
+    }
+    
+    /// SFCompactDisplay-Regular size: 12
+    class var historyNotWeight: UIFont {
+        return UIFont.systemFont(ofSize: 12, weight: .regular)
+    }
+    
 }

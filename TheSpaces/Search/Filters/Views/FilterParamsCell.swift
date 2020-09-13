@@ -7,21 +7,16 @@
 //
 
 import UIKit
-import TagListView
 
 class FilterParamsCell: UITableViewCell {
-
-    @IBOutlet weak var tagList: TagListView!
+    static let identifier = "FilterParamsCell"
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewHeightConstr: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
 }

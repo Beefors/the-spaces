@@ -11,6 +11,16 @@ import UIKit
 
 class FiltersViewsFactory {
     
-    static func dequePriceCell(for tableView: UITableView) -> 
+    static func dequeuPriceCell(for tableView: UITableView) -> FilterRangeSliderCell {
+        let identifier = "SliderCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! FilterRangeSliderCell
+        return cell
+    }
+    
+    static func dequeuSpecificationCell(for tableView: UITableView) -> FilterSubtitleCell {
+        let identifier = "SubtitleCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! FilterSubtitleCell
+        return cell
+    }
     
 }

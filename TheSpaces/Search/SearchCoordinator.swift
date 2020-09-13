@@ -11,7 +11,7 @@ import UIKit.UIViewController
 
 enum SearchCoordinator {
     case main
-    case placesList(searchPanelView: SearchPanelView, placesDataViewModel: MapViewModel)
+    case placesList(searchPanelView: SearchPanelView, placesDataViewModel: PlacesViewModel)
     case searchHistory
     case filters
 }
@@ -39,6 +39,9 @@ extension SearchCoordinator: StoryboardCoordinator {
             
         case .searchHistory:
             break
+            
+        case .filters:
+            viewController.modalPresentationStyle = .fullScreen
             
         default: break
         }

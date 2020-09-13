@@ -41,10 +41,20 @@ struct PlaceModel: Decodable {
     
 }
 
+enum SeatModelMap: String {
+    case day = "В день"
+    case week = "За неделю"
+    case month = "В месяц"
+}
+
 struct SeatType: Decodable {
     let seatTypeName: String
     let paymentTypeName: String
     let price: Float
+    
+    var modelMap: SeatModelMap? {
+        return SeatModelMap(rawValue: paymentTypeName)
+    }
 }
 
 extension PlaceModel {
@@ -53,6 +63,11 @@ extension PlaceModel {
             return seatType.price
         }.min() ?? 0
     }
+    
+    func seatType(by modelMap: SeatModelMap) -> SeatType? {
+        return seatTypes.first(where: { $0.modelMap == modelMap })
+    }
+    
 }
 
 extension PlaceModel: Equatable {

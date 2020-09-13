@@ -12,6 +12,8 @@ class FiltersViewController: UIViewController {
 
     //MARK: Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var resetFiltersButton: UIButton!
+    @IBOutlet weak var applyFiltersButton: UIButton!
     
     //MARK: - Services
     lazy var behaviorService = FilterBehaviorService(owner: self)

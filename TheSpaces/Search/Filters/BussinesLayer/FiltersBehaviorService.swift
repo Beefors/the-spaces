@@ -43,6 +43,16 @@ class FilterBehaviorService: ServiceType {
             })
             .disposed(by: viewModel)
         
+        guard let mapViewModel = viewModel.mapViewModel else { return }
+        
+        mapViewModel
+            .placesObservable
+            .map({$0.count})
+            .subscribe(onNext: {[unowned self] (count) in
+                self.builderUI.setupPlacesCount(count)
+            })
+            .disposed(by: viewModel)
+        
     }
     
 }

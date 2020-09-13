@@ -31,18 +31,18 @@ struct FiltersDataSource {
         
         // Specifications case
         enum SpecificationsTypes: CaseIterable {
-            case metro
-            case roominess
+//            case metro
             case working
+            case roominess
         }
         
         case specifications(types: [SpecificationsTypes])
         
         // Services case
         enum ServicesTypes: CaseIterable {
-            case Reception
-            case cityNumber
+            case reception
             case guests
+            case cityNumber
             case legalAddress
         }
         
@@ -93,6 +93,123 @@ extension FiltersDataSource.Sections {
         case .equipment(let types): return types.count
         case .facilities(let types): return types.count
         case .transport(let types): return types.count
+        }
+    }
+}
+
+protocol TitlePresentable {
+    var title: String { get }
+}
+
+extension FiltersDataSource.Sections.PricesTypes: TitlePresentable {
+    var title: String {
+        switch self {
+        case .day: return "Цена за день"
+        case .month: return "Цена за месяц"
+        }
+    }
+}
+
+extension FiltersDataSource.Sections.SpecificationsTypes: TitlePresentable {
+    var title: String {
+        switch self {
+        case .working: return "Режим работы"
+        case .roominess: return "Вместимость\nопенспейса"
+        }
+    }
+}
+
+protocol FilterCheckmarkType: TitlePresentable, Hashable {
+    var filterKey: String {get}
+    init(filterKey: String)
+}
+
+extension FilterCheckmarkType where Self: CaseIterable {
+    init(filterKey: String) {
+        self = Self.allCases.first(where: {$0.filterKey == filterKey})!
+    }
+}
+
+extension FiltersDataSource.Sections.ServicesTypes: FilterCheckmarkType {
+    var filterKey: String {
+        switch self {
+        case .reception: return "hasFrontDesk"
+        case .cityNumber: return "hasLandline"
+        case .guests: return "hasGuests"
+        case .legalAddress: return "canProvideLegalAddress"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .reception: return "Ресепшн"
+        case .cityNumber: return "Прием ваших звонков на городской номер"
+        case .guests: return "Доступ для гостей"
+        case .legalAddress: return "Предоставление юридического адреса"
+            
+        }
+    }
+}
+extension FiltersDataSource.Sections.EquipmentTypes: FilterCheckmarkType {
+    var filterKey: String {
+        switch self {
+        case .wifi: return "hasWiFi"
+        case .printer: return "hasBWPrinter"
+        case .scanner: return "hasScanner"
+        case .colorPrinter: return "hasColorPrinter"
+        case .meetingRooms: return "hasMeetingRooms"
+        case .phoneBooth: return "hasPhone"
+        case .conferenceHall: return "hasConferenceHall"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .wifi: return "Wi-Fi интернет"
+        case .printer: return "Ч/б принтер"
+        case .scanner: return "Сканер"
+        case .colorPrinter: return "Цветная печать"
+        case .meetingRooms: return "Переговорные комнаты"
+        case .phoneBooth: return "Телефонная будка"
+        case .conferenceHall: return "Конференц-зал"
+        }
+    }
+}
+extension FiltersDataSource.Sections.FacilitiesTypes: FilterCheckmarkType {
+    var filterKey: String {
+        switch self {
+        case .loungeArea: return "hasLounge"
+        case .kitchen: return "hasKitchen"
+        case .yogaStudio: return "hasYoga"
+        case .shower: return "hasBath"
+        case .boxForThings: return "hasThingsBox"
+        case .freeDrinks: return "hasFreeDrinks"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .loungeArea: return "Лаунж-зона"
+        case .kitchen: return "Кухня"
+        case .yogaStudio: return "Йога-студия"
+        case .shower: return "Душ"
+        case .boxForThings: return "Ящик для вещей"
+        case .freeDrinks: return "Бесплатные кофе/ чай"
+        }
+    }
+}
+extension FiltersDataSource.Sections.TransportTypes: FilterCheckmarkType {
+    var filterKey: String {
+        switch self {
+        case .freeParking: return "hasFreeParking"
+        case .bicycleParking: return "hasBikeParking"
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .freeParking: return "Бесплатная парковка"
+        case .bicycleParking: return "Велопарковка"
         }
     }
 }

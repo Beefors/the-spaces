@@ -21,7 +21,7 @@ class MapVCBehaviorService: NSObject {
     lazy var mapService: MapServiceType = YaMapService(owner)
     lazy var locationService = LocationService(parent: owner)
     lazy var placePreviewService = MapPlacePreviewService(owner: owner)
-    lazy var searchViewModel = MapViewModel()
+    lazy var placesViewModel = PlacesViewModel()
     lazy var presentationService: MapPresentationServiceType = MapPresentationService(parent: owner)
     
     //MARK: - Initialization
@@ -42,7 +42,7 @@ class MapVCBehaviorService: NSObject {
         placePreviewService.delegate = self
         
         // Load places
-        searchViewModel.getPlacesTrigger.accept(())
+        placesViewModel.getPlacesTrigger.accept(())
         
         // Enabling/disabling user location button
         locationService.viewModel
@@ -82,11 +82,11 @@ class MapVCBehaviorService: NSObject {
             .disposed(by: locationService.viewModel)
         
         // Show places on map
-        searchViewModel.placesObservable
+        placesViewModel.placesObservable
             .subscribe(onNext: {[unowned self] (places) in
                 self.mapService.presentPlaces(places)
             })
-            .disposed(by: searchViewModel)
+            .disposed(by: placesViewModel)
         
         // Show places list screen
         Observable.just(self)
@@ -94,7 +94,7 @@ class MapVCBehaviorService: NSObject {
                 return behaviorService.owner.showListButton.rx.tap.map({behaviorService})
             }
             .flatMap({ (behaviorService) -> Observable<MapVCBehaviorService> in
-                let placesListCoordinator = SearchCoordinator.placesList(searchPanelView: behaviorService.owner.searchPanelView, placesDataViewModel: behaviorService.searchViewModel)
+                let placesListCoordinator = SearchCoordinator.placesList(searchPanelView: behaviorService.owner.searchPanelView, placesDataViewModel: behaviorService.placesViewModel)
                 let placesListVC = placesListCoordinator.viewController as! PlacesListViewController
                 
                 behaviorService.presentationService.present(viewController: placesListVC)
@@ -105,7 +105,7 @@ class MapVCBehaviorService: NSObject {
                 behaviorService.presentationService.dismissPresented()
             })
             .subscribe()
-            .disposed(by: searchViewModel)
+            .disposed(by: placesViewModel)
         
         // Show search history screen
         Observable.just(self)
@@ -140,7 +140,7 @@ class MapVCBehaviorService: NSObject {
                 behaviorService.presentationService.dismissPresented()
             })
             .subscribe()
-            .disposed(by: searchViewModel)
+            .disposed(by: placesViewModel)
         
         // Show filters screen
         owner.searchPanelView.optionsButton.rx
@@ -152,8 +152,12 @@ class MapVCBehaviorService: NSObject {
                 RouterManager.shared.present(coordinator, presentationType: .present(animated: true, completion: nil))
             }
             .filterNil()
-            .do(onNext: {[unowned self] (_) in
+            .do(onNext: {[unowned self] (viewController) in
                 self.owner.searchPanelView.optionsButton.isUserInteractionEnabled = false
+                
+                guard let filterNavVC = viewController as? UINavigationController else { return }
+                guard let filterVC = filterNavVC.viewControllers[0] as? FiltersViewController else { return }
+                filterVC.behaviorService.viewModel.setPlacesViewModel(self.placesViewModel)
             })
             .flatMap { (viewController) -> Observable<Void> in
                 viewController.rx.viewDidDisappear.map({_ in return })
@@ -162,7 +166,7 @@ class MapVCBehaviorService: NSObject {
                 self.owner.searchPanelView.optionsButton.isUserInteractionEnabled = true
             })
             .subscribe()
-            .disposed(by: searchViewModel)
+            .disposed(by: placesViewModel)
             
     }
     

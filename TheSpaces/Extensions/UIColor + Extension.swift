@@ -84,4 +84,9 @@ extension UIColor {
         UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
     }
     
+    /// Cерый выбор #8F8E94
+    @nonobjc class var STChoiceGray: UIColor {
+        UIColor(red: 0.56, green: 0.56, blue: 0.58, alpha: 1)
+    }
+    
 }

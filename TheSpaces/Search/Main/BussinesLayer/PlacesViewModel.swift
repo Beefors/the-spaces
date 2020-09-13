@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class MapViewModel: ViewModelType {
+class PlacesViewModel: ViewModelType {
     let bag = DisposeBag()
     
     let getPlacesTrigger = PublishRelay<Void>()
