@@ -19,6 +19,23 @@ class FiltersViewModel: ViewModelType {
     let dayPriceObservable = BehaviorRelay<PriceRangeType>(value: (0, 0))
     let monthPriceObservable = BehaviorRelay<PriceRangeType>(value: (0, 0))
     
+    let selectedDayPriceObservable = BehaviorRelay<PriceRangeType>(value: (0, 0))
+    let selectedMonthPriceObservable = BehaviorRelay<PriceRangeType>(value: (0, 0))
+    
+    let selectedFiltersObservable = BehaviorRelay<Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter>>(value: [:])
+    
+    init() {
+        
+        selectedFiltersObservable
+            .distinctUntilChanged({ (dict1, dict2) -> Bool in
+                return dict1.keys == dict2.keys
+            })
+            .debug()
+            .subscribe()
+            .disposed(by: bag)
+        
+    }
+    
     func setPlacesViewModel(_ mapViewModel: PlacesViewModel) {
         self.mapViewModel = mapViewModel
         
@@ -90,6 +107,87 @@ class FiltersViewModel: ViewModelType {
             .bind(to: monthPriceObservable)
             .disposed(by: bag)
         
+        dayPriceObservable
+            .filter({[unowned self] in
+                let selectdValue = self.selectedDayPriceObservable.value
+                return $0.min > selectdValue.min || $0.max < selectdValue.max
+            })
+            .map({[unowned self] in
+                let selectdValue = self.selectedDayPriceObservable.value
+                let minVal = max($0.min, selectdValue.min)
+                let maxVal = min($0.max, selectdValue.max)
+                return PriceRangeType(minVal, maxVal)
+            })
+            .bind(to: selectedDayPriceObservable)
+            .disposed(by: bag)
+        
+        monthPriceObservable
+            .filter({[unowned self] in
+                let selectdValue = self.selectedMonthPriceObservable.value
+                return $0.min > selectdValue.min || $0.max < selectdValue.max
+            })
+            .map({[unowned self] in
+                let selectdValue = self.selectedMonthPriceObservable.value
+                let minVal = max($0.min, selectdValue.min)
+                let maxVal = min($0.max, selectdValue.max)
+                return PriceRangeType(minVal, maxVal)
+            })
+            .bind(to: selectedMonthPriceObservable)
+            .disposed(by: bag)
+        
+        selectedDayPriceObservable
+            .subscribe(onNext: {[unowned self] (value) in
+                let dayFilterType = FiltersDataSource.Sections.PricesTypes.day
+                let dayWrapper = dayFilterType.wrapper
+                let priceRange = self.dayPriceObservable.value
+                
+                let selectedIsNotEqualNormalRange = value.min == priceRange.min && value.max == priceRange.max
+                
+                var dict = self.selectedFiltersObservable.value
+                
+                if selectedIsNotEqualNormalRange {
+                    dict[dayWrapper] = dayFilterType.filter(minValue: Int(value.min), maxValue: Int(value.max))
+                } else {
+                    dict.removeValue(forKey: dayWrapper)
+                }
+            })
+            .disposed(by: bag)
+        
+        selectedMonthPriceObservable
+            .subscribe(onNext: {[unowned self] (value) in
+                let monthFilterType = FiltersDataSource.Sections.PricesTypes.month
+                let monthWrapper = monthFilterType.wrapper
+                let priceRange = self.monthPriceObservable.value
+                
+                let selectedIsEqualNormalRange = value.min == priceRange.min && value.max == priceRange.max
+                
+                var dict = self.selectedFiltersObservable.value
+                
+                if !selectedIsEqualNormalRange {
+                    dict[monthWrapper] = monthFilterType.filter(minValue: Int(value.min), maxValue: Int(value.max))
+                } else {
+                    dict.removeValue(forKey: monthWrapper)
+                }
+                
+                self.selectedFiltersObservable.accept(dict)
+            })
+            .disposed(by: bag)
+        
+    }
+    
+}
+
+struct FilterCheckmarkTypeWrapper: Hashable {
+    let filterKey: String
+}
+
+extension FilterCheckmarkType {
+    var wrapper: FilterCheckmarkTypeWrapper {
+        return FilterCheckmarkTypeWrapper(filterKey: filterKey)
+    }
+    
+    init(wrapper: FilterCheckmarkTypeWrapper) {
+        self.init(filterKey: wrapper.filterKey)
     }
     
 }

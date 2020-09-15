@@ -17,13 +17,13 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, FilterCe
     var contentHeightDisposable: Disposable?
     
     var filters = [Filter]()
-    var selectedFilters = Set<Filter>()
+    let selectedFiltersObservable = BehaviorRelay<Set<Filter>>(value: [])
     
     let contentSizeUpdatedObservable = PublishRelay<FilterParamsCell>()
     
     init(flags: [Filter], selectedFlags: [Filter]) {
         filters = flags
-        selectedFilters = Set(selectedFlags)
+        selectedFiltersObservable.accept(Set(selectedFlags))
     }
     
     func dequeuCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
@@ -32,11 +32,16 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, FilterCe
     
     func setupCell(_ cell: UITableViewCell) {
         let cell = cell as! FilterParamsCell
+        
         cell.collectionView.dataSource = self
         cell.collectionView.delegate = self
         
-        DispatchQueue.main.async {
-            cell.collectionView.reloadData()
+        if #available(iOS 13.0, *) {
+            return
+        } else {
+            DispatchQueue.main.async {
+                cell.collectionView.reloadData()
+            }
         }
         
         contentHeightDisposable?.dispose()
@@ -45,10 +50,17 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, FilterCe
             .filterNil()
             .map({[weak cell] _ in return cell })
             .filterNil()
+            .filter({ (cell) -> Bool in
+                cell.collectionViewHeightConstr.constant != cell.collectionView.contentSize.height
+            })
             .do(onNext: { (cell) in
                 cell.collectionViewHeightConstr.constant = cell.collectionView.contentSize.height
             })
             .bind(to: contentSizeUpdatedObservable)
+        
+    }
+    
+    func cellWillApear(_ cell: UITableViewCell) {
         
     }
     
@@ -60,6 +72,7 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, FilterCe
         
         let filter = filters[indexPath.row]
         cell.checkButton.label.text = filter.title
+        let selectedFilters = selectedFiltersObservable.value
         cell.checkButton.isSelected = selectedFilters.contains(filter)
         
         if !cell.checkButton.constraints.contains(where: {$0.firstAttribute == .width}) {
@@ -72,6 +85,7 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, FilterCe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let filter = filters[indexPath.row]
         let cell = collectionView.cellForItem(at: indexPath) as! CheckmarkCell
+        var selectedFilters = selectedFiltersObservable.value
         
         if selectedFilters.contains(filter) {
             selectedFilters.remove(filter)
@@ -81,5 +95,6 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, FilterCe
             cell.checkButton.isSelected = true
         }
         
+        selectedFiltersObservable.accept(selectedFilters)
     }
 }

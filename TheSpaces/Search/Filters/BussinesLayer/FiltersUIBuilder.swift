@@ -31,6 +31,8 @@ class FiltersUIBuilder: ServiceType {
         owner.navigationItem.leftBarButtonItem = closeItem
         closeItem.tintColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 1)
         
+        owner.tableView.scrollIndicatorInsets.right = -20
+        
         owner.resetFiltersButton.setTitle("Сбросить фильтры", for: .normal)
         owner.resetFiltersButton.titleLabel?.font = .choiceGray
         owner.resetFiltersButton.setTitleColor(.STChoiceGray, for: .normal)

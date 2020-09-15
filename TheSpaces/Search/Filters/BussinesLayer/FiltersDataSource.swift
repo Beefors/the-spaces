@@ -95,18 +95,44 @@ extension FiltersDataSource.Sections {
         case .transport(let types): return types.count
         }
     }
+    
+    var title: String? {
+        switch self {
+        case .services: return "Услуги"
+        case .equipment: return "Оборудование"
+        case .facilities: return "Удобства"
+        case .transport: return "Транспорт"
+        default: return nil
+        }
+    }
 }
 
 protocol TitlePresentable {
     var title: String { get }
 }
 
-extension FiltersDataSource.Sections.PricesTypes: TitlePresentable {
+protocol FilterCheckmarkType: TitlePresentable, Hashable {
+    var filterKey: String {get}
+    init(filterKey: String)
+}
+
+extension FiltersDataSource.Sections.PricesTypes: FilterCheckmarkType {
     var title: String {
         switch self {
         case .day: return "Цена за день"
         case .month: return "Цена за месяц"
         }
+    }
+    
+    var filterKey: String {
+        switch self {
+        case .day: return "pricePerDay"
+        case .month: return "pricePerMonth"
+        }
+    }
+    
+    func filter(minValue: Int, maxValue: Int) -> PlacesFilter {
+        return PlacesFilter.priceFilter(priceType: self, minValue: minValue, maxValue: maxValue)
     }
 }
 
@@ -117,11 +143,6 @@ extension FiltersDataSource.Sections.SpecificationsTypes: TitlePresentable {
         case .roominess: return "Вместимость\nопенспейса"
         }
     }
-}
-
-protocol FilterCheckmarkType: TitlePresentable, Hashable {
-    var filterKey: String {get}
-    init(filterKey: String)
 }
 
 extension FilterCheckmarkType where Self: CaseIterable {

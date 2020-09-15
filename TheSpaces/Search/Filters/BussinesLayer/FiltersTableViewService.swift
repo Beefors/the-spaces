@@ -103,6 +103,7 @@ class FiltersTableViewService: NSObject, ServiceType {
         
         let cellModel = FilterCellPriceModel(priceType: priceType)
         let observable: Observable<FiltersViewModel.PriceRangeType>
+        let selectedObser: BehaviorRelay<FiltersViewModel.PriceRangeType>
         
         switch priceType {
         case .day:
@@ -113,6 +114,11 @@ class FiltersTableViewService: NSObject, ServiceType {
                 .dayPriceObservable
                 .asObservable()
             
+            selectedObser = self.owner
+                .behaviorService
+                .viewModel
+                .selectedDayPriceObservable
+            
         case .month:
             
             observable = self.owner
@@ -121,10 +127,20 @@ class FiltersTableViewService: NSObject, ServiceType {
                 .monthPriceObservable
                 .asObservable()
             
+            selectedObser = self.owner
+                .behaviorService
+                .viewModel
+                .selectedMonthPriceObservable
+            
         }
         
         observable
             .bind(to: cellModel.rangeValueObservable)
+            .disposed(by: owner.behaviorService.viewModel)
+        
+        cellModel
+            .selectedRangeObservable
+            .bind(to: selectedObser)
             .disposed(by: owner.behaviorService.viewModel)
         
         return cellModel
@@ -136,17 +152,38 @@ class FiltersTableViewService: NSObject, ServiceType {
     }
     
     private func createCheckmarkCellModel<Filter: FilterCheckmarkType>(types: [Filter]) -> FilterCellCheckmarksModel<Filter> {
-        
         let model = FilterCellCheckmarksModel<Filter>(flags: types, selectedFlags: [])
         
-        model
-            .contentSizeUpdatedObservable
-            .subscribe(onNext: {[unowned self] (cell) in
-                guard let indexPath = self.tableView.indexPath(for: cell) else { return }
-//                self.tableView.reloadSections(IndexSet([indexPath.section]), with: .none)
-//                self.tableView.reloadRows(at: [indexPath], with: .none)
-            })
+        let appendObservable = PublishRelay<Array<Filter>>()
+        let removeObservable = PublishRelay<Array<Filter>>()
+        
+        appendObservable
+            .map {[unowned self] filters -> Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter> in
+                var filtersDict = self.owner.behaviorService.viewModel.selectedFiltersObservable.value
+                
+                for filter in filters {
+                    let wrapper = filter.wrapper
+                    let value = PlacesFilter(key: filter.filterKey, value: true)
+                    filtersDict[wrapper] = value
+                }
+                
+                return filtersDict
+            }
+            .bind(to: owner.behaviorService.viewModel.selectedFiltersObservable)
             .disposed(by: owner.behaviorService.viewModel)
+        
+        model.selectedFiltersObservable
+            .skip(1)
+            .take(1)
+            .map({Array($0)})
+            .bind(to: appendObservable)
+            .disposed(by: owner.behaviorService.viewModel)
+        
+//            .map({[unowned self] in
+//                var filtersDict = self.owner.behaviorService.viewModel.selectedFiltersObservable.value
+//
+//            })
+//            .disposed(by: owner.behaviorService.viewModel)
         
         return model
     }
@@ -157,38 +194,36 @@ extension FiltersTableViewService: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let section = FiltersDataSource().sections[section]
 
-        switch section {
-        case .equipment,
-             .facilities,
-             .services,
-             .transport:
-
+        if let title = section.title {
+            
+            let view = UIView()
+            
             let label = UILabel()
-
+            label.translatesAutoresizingMaskIntoConstraints = false
+            
+            view.addSubview(label)
+            
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: view.topAnchor, constant: 13),
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                label.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+            
             label.font = .filterParam
             label.textColor = .STBlue
-            label.text = "qwe"
-
-            return label
-
-        default: return nil
+            label.text = title
+            
+            return view
+        } else {
+            return nil
         }
 
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let section = FiltersDataSource().sections[section]
-
-        switch section {
-        case .equipment,
-             .facilities,
-             .services,
-             .transport:
-
-            return 19
-
-        default: return 0
-        }
+        return section.title != nil ? 33 : 0
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -211,7 +246,7 @@ extension FiltersTableViewService: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
-        let sectionModel = dataSource[indexPath.section]
+        let sectionModel = self.dataSource[indexPath.section]
         let rowModel = sectionModel.items[indexPath.row]
         
         rowModel.cellWillApear(cell)

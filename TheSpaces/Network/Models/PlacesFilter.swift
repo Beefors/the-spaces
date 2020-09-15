@@ -22,4 +22,10 @@ extension PlacesFilter {
     static func nameFilter(name: String) -> PlacesFilter {
         return PlacesFilter(key: "name", value: name)
     }
+    
+    static func priceFilter(priceType: FiltersDataSource.Sections.PricesTypes, minValue: Int, maxValue: Int) -> PlacesFilter {
+        let value = ["min": minValue, "max": maxValue]
+        return PlacesFilter(key: priceType.filterKey, value: value)
+    }
+    
 }
