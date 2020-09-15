@@ -12,6 +12,10 @@ target 'TheSpaces' do
   pod 'RxSwift'
   pod 'RxCocoa'
   
+  # This repository's purpose is to provide additional convenience operators and Reactive Extensions.
+  # https://github.com/RxSwiftCommunity/RxSwiftExt#pairwise
+  pod 'RxSwiftExt'
+  
   # RxSwift extensions for Swift optionals and "Occupiable" types.
   # https://github.com/RxSwiftCommunity/RxOptional
   pod 'RxOptional'

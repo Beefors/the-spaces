@@ -43,6 +43,13 @@ class FilterBehaviorService: ServiceType {
             })
             .disposed(by: viewModel)
         
+        // Setup clear filters observable
+        owner.resetFiltersButton.rx
+            .tap
+            .map({Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter>()})
+            .bind(to: viewModel.selectedFiltersObservable)
+            .disposed(by: viewModel)
+        
         guard let mapViewModel = viewModel.mapViewModel else { return }
         
         mapViewModel

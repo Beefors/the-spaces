@@ -11,6 +11,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RxSwiftExt
 
 class FiltersTableViewService: NSObject, ServiceType {
     typealias Owner = FiltersViewController
@@ -154,36 +155,27 @@ class FiltersTableViewService: NSObject, ServiceType {
     private func createCheckmarkCellModel<Filter: FilterCheckmarkType>(types: [Filter]) -> FilterCellCheckmarksModel<Filter> {
         let model = FilterCellCheckmarksModel<Filter>(flags: types, selectedFlags: [])
         
-        let appendObservable = PublishRelay<Array<Filter>>()
-        let removeObservable = PublishRelay<Array<Filter>>()
-        
-        appendObservable
-            .map {[unowned self] filters -> Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter> in
+         model.selectedFiltersObservable
+            .pairwise()
+            .map({[unowned self] (prevVal, nextVal) -> Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter> in
                 var filtersDict = self.owner.behaviorService.viewModel.selectedFiltersObservable.value
                 
-                for filter in filters {
-                    let wrapper = filter.wrapper
+                let removedFilters = prevVal.subtracting(nextVal)
+                let apendFilters = nextVal.subtracting(prevVal)
+                
+                for filter in removedFilters {
+                    filtersDict[filter.wrapper] = nil
+                }
+                
+                for filter in apendFilters {
                     let value = PlacesFilter(key: filter.filterKey, value: true)
-                    filtersDict[wrapper] = value
+                    filtersDict[filter.wrapper] = value
                 }
                 
                 return filtersDict
-            }
+            })
             .bind(to: owner.behaviorService.viewModel.selectedFiltersObservable)
             .disposed(by: owner.behaviorService.viewModel)
-        
-        model.selectedFiltersObservable
-            .skip(1)
-            .take(1)
-            .map({Array($0)})
-            .bind(to: appendObservable)
-            .disposed(by: owner.behaviorService.viewModel)
-        
-//            .map({[unowned self] in
-//                var filtersDict = self.owner.behaviorService.viewModel.selectedFiltersObservable.value
-//
-//            })
-//            .disposed(by: owner.behaviorService.viewModel)
         
         return model
     }
