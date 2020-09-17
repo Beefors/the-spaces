@@ -12,7 +12,7 @@ struct FiltersDataSource {
     
     var sections: [Sections] {
         return [.prices(types: Sections.PricesTypes.allCases),
-                .specifications(types: Sections.SpecificationsTypes.allCases),
+                .specifications(types: [Sections.SpecificationsTypes.working(types: Sections.SpecificationsTypes.WorkingTypes.allCases), Sections.SpecificationsTypes.roominess(types: Sections.SpecificationsTypes.RoominessTypes.allCases)]),
                 .services(types: Sections.ServicesTypes.allCases),
                 .equipment(types: Sections.EquipmentTypes.allCases),
                 .facilities(types: Sections.FacilitiesTypes.allCases),
@@ -30,10 +30,24 @@ struct FiltersDataSource {
         case prices(types: [PricesTypes])
         
         // Specifications case
-        enum SpecificationsTypes: CaseIterable {
+        enum SpecificationsTypes {
+            
 //            case metro
-            case working
-            case roominess
+            
+            enum WorkingTypes: Int, CaseIterable {
+                case hours24
+                case weekendWork
+            }
+            
+            case working(types: [WorkingTypes])
+            
+            enum RoominessTypes: Int, CaseIterable {
+                case from1to20
+                case from21to50
+                case from50
+            }
+            
+            case roominess(types: [RoominessTypes])
         }
         
         case specifications(types: [SpecificationsTypes])
@@ -113,7 +127,7 @@ protocol TitlePresentable {
 
 protocol FilterCheckmarkType: TitlePresentable, Hashable {
     var filterKey: String {get}
-    init(filterKey: String)
+    init?(filterKey: String)
 }
 
 extension FiltersDataSource.Sections.PricesTypes: FilterCheckmarkType {
@@ -136,18 +150,71 @@ extension FiltersDataSource.Sections.PricesTypes: FilterCheckmarkType {
     }
 }
 
-extension FiltersDataSource.Sections.SpecificationsTypes: TitlePresentable {
+extension FiltersDataSource.Sections.SpecificationsTypes: FilterCheckmarkType {
     var title: String {
         switch self {
         case .working: return "Режим работы"
         case .roominess: return "Вместимость\nопенспейса"
         }
     }
+    
+    var filterKey: String {
+        switch self {
+        case .working: return "workingMode"
+        case .roominess: return "openspaceSize"
+        }
+    }
+    
+    init?(filterKey: String) {
+        
+        for section in FiltersDataSource().sections {
+            switch section {
+            case .specifications(let types):
+                
+                for type in types {
+                    
+                    switch type {
+                    case .working:
+                        guard filterKey == type.filterKey else { continue }
+                        self = type
+                        
+                    case .roominess:
+                        guard filterKey == type.filterKey else { continue }
+                        self = type
+                    }
+                }
+                
+            default: continue
+            }
+        }
+        
+        return nil
+    }
+}
+
+extension FiltersDataSource.Sections.SpecificationsTypes.WorkingTypes: TitlePresentable {
+    var title: String {
+        switch self {
+        case .hours24: return "Круглосуточный режим"
+        case .weekendWork: return "Работа в выходные дни"
+        }
+    }
+}
+
+extension FiltersDataSource.Sections.SpecificationsTypes.RoominessTypes: TitlePresentable {
+    var title: String {
+        switch self {
+        case .from1to20: return "от 1 до 20"
+        case .from21to50: return "от 21 до 50"
+        case .from50: return "от 50 и выше"
+        }
+    }
 }
 
 extension FilterCheckmarkType where Self: CaseIterable {
-    init(filterKey: String) {
-        self = Self.allCases.first(where: {$0.filterKey == filterKey})!
+    init?(filterKey: String) {
+        guard let filter = Self.allCases.first(where: {$0.filterKey == filterKey}) else { return nil }
+        self = filter
     }
 }
 

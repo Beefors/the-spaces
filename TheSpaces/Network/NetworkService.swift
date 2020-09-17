@@ -30,6 +30,13 @@ class NetworkService: NSObject {
             .asObservable()
     }
     
+    func filterPlacesCount(cityId: Int, filters: [PlacesFilter]) -> Observable<Int> {
+        return requestProvider.rx
+            .request(.filtersPlacesCount(byCity: cityId, filters: filters))
+            .modelMap(Int.self, atKeyPath: "count")
+            .asObservable()
+    }
+    
 }
 
 final class MoyaCacheablePlugin: PluginType {

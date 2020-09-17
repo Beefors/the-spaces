@@ -15,8 +15,8 @@ import RxSwiftExt
 
 class FiltersTableViewService: NSObject, ServiceType {
     typealias Owner = FiltersViewController
-    typealias Row = FilterCellModelType
-    typealias Section = RxSectionModel<FilterCellModelType>
+    typealias Row = TableCellModelType
+    typealias Section = RxSectionModel<TableCellModelType>
     
     //MARK: Owner
     unowned(unsafe) let owner: FiltersViewController
@@ -84,7 +84,7 @@ class FiltersTableViewService: NSObject, ServiceType {
             .setDelegate(self)
             .disposed(by: owner.behaviorService.viewModel)
         
-        let rxDataSource = RxTableViewSectionedReloadDataSource<RxSectionModel<FilterCellModelType>>(configureCell: { (dataSource, tableView, indexPath, cellModel) -> UITableViewCell in
+        let rxDataSource = RxTableViewSectionedReloadDataSource<RxSectionModel<TableCellModelType>>(configureCell: { (dataSource, tableView, indexPath, cellModel) -> UITableViewCell in
             let cell = cellModel.dequeuCell(tableView: tableView, indexPath: indexPath)
             cellModel.setupCell(cell)
             return cell
@@ -149,6 +149,73 @@ class FiltersTableViewService: NSObject, ServiceType {
     
     private func createSpecificationCellModel(specificationType: FiltersDataSource.Sections.SpecificationsTypes) -> FilterCellSpecificationModel {
         let cellModel = FilterCellSpecificationModel(specificationType: specificationType)
+        
+        cellModel.rowDidSelectObservable
+            .map { (spetifications) -> (String, [TitlePresentable]) in
+                
+                let items: [TitlePresentable]
+                
+                switch spetifications {
+                case .roominess(let types): items = types
+                case .working(let types): items = types
+                }
+                
+                return (spetifications.title, items)
+            }
+            .map({(title, items) -> FiltersRadioButtonViewController in
+                return SearchCoordinator.filtersRadioButtons(title: title, items: items).viewController as! FiltersRadioButtonViewController
+            })
+            .do(onNext: {[unowned self, unowned cellModel] (vc) in
+                vc.beheviorService.viewModel.appliedFilterObservable.accept(cellModel.selectedFilterObservable.value)
+                self.owner.navigationController?.pushViewController(vc, animated: true)
+            })
+            .flatMap({ (vc) in
+                return vc.beheviorService.viewModel.appliedFilterObservable.skip(1)
+            })
+            .bind(to: cellModel.selectedFilterObservable)
+            .disposed(by: owner.behaviorService.viewModel)
+        
+        cellModel
+            .selectedFilterObservable
+            .map { (presentable) -> (FilterCheckmarkTypeWrapper, Any?) in
+                
+                let wrapper = specificationType.wrapper
+                var value: Any?
+                
+                if let presentable = presentable {
+                    
+                    switch specificationType {
+                        
+                    case .working(types: let types):
+                        
+                        for type in types {
+                            guard type.title == presentable.title else { continue }
+                            value = type.rawValue
+                        }
+                        
+                    case .roominess(types: let types):
+                        
+                        for type in types {
+                            guard type.title == presentable.title else { continue }
+                            value = type.rawValue
+                        }
+                        
+                    }
+                    
+                } else  {
+                    value = nil
+                }
+                
+                return (wrapper, value)
+            }
+            .map {[unowned self] (wrapper, value) -> Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter> in
+                var dict = self.owner.behaviorService.viewModel.selectedFiltersObservable.value
+                dict[wrapper] = value != nil ? PlacesFilter(key: wrapper.filterKey, value: value!) : nil
+                return dict
+            }
+            .bind(to: owner.behaviorService.viewModel.selectedFiltersObservable)
+            .disposed(by: owner.behaviorService.viewModel)
+        
         return cellModel
     }
     

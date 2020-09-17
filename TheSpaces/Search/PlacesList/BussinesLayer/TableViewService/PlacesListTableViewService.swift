@@ -45,7 +45,7 @@ class PlacesListTableViewService: NSObject {
         })
         
         viewModel.searchViewMode
-            .placesObservable
+            .actualPlacesList
             .map({ [RxSectionModel(items: $0)] })
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: viewModel)

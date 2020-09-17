@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         RouterManager.shared.setup(forAppDelegate: self)
         
+        UIBarButtonItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
+        
         return true
     }
 

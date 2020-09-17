@@ -14,6 +14,9 @@ enum ApiProvider {
     case placesList(byCity: Int, filters: [PlacesFilter]?)
     case getPlace(id: Int)
     case placeImage(placeId: Int, imageNumber: Int)
+    
+    case filtersPlacesCount(byCity: Int, filters: [PlacesFilter])
+    
 }
 
 protocol ApiEnvironmentProvider {
@@ -49,12 +52,13 @@ extension ApiProvider: TargetType {
         case .placesList: return "Entities"
         case .getPlace(let id): return "entities/\(id)"
         case .placeImage(let id, let imageNumber): return "entities/\(id)/image/\(imageNumber)"
+        case .filtersPlacesCount: return "Entities/filterCount"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .placesList: return .post
+        case .placesList, .filtersPlacesCount: return .post
         default: return .get
         }
     }
@@ -78,6 +82,16 @@ extension ApiProvider: TargetType {
             
         case .getPlace: return nil
         case .placeImage: return nil
+            
+        case .filtersPlacesCount(let cityId, let filters):
+            
+            var params: Dictionary<String, Any> = ["cityId": cityId]
+            
+            for filter in filters {
+                params[filter.key] = filter.value
+            }
+            
+            return params
         }
     }
     

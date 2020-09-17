@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, FilterCellModelType, UICollectionViewDataSource, UICollectionViewDelegate {
+class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, TableCellModelType, UICollectionViewDataSource, UICollectionViewDelegate {
     
     let bag = DisposeBag()
     

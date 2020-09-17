@@ -20,6 +20,7 @@ class FilterBehaviorService: ServiceType {
     lazy var builderUI = FiltersUIBuilder(owner: owner)
     lazy var tableViewService = FiltersTableViewService(owner: owner)
     let viewModel = FiltersViewModel()
+//    let showRadioButtonsScreenTrigger = PublishRelay<(title: String, items: [TitlePresentable])>()
     
     //MARK: - Initialization
     required init(owner: FiltersViewController) {
@@ -52,12 +53,35 @@ class FilterBehaviorService: ServiceType {
         
         guard let mapViewModel = viewModel.mapViewModel else { return }
         
-        mapViewModel
-            .placesObservable
-            .map({$0.count})
+        let countObservable = PublishRelay<Int>()
+        
+        countObservable
             .subscribe(onNext: {[unowned self] (count) in
                 self.builderUI.setupPlacesCount(count)
             })
+            .disposed(by: viewModel)
+        
+        mapViewModel
+            .placesObservable
+            .map({$0.count})
+            .bind(to: countObservable)
+            .disposed(by: viewModel)
+        
+        viewModel
+            .placesCountByFiltersObservable
+            .bind(to: countObservable)
+            .disposed(by: viewModel)
+        
+        owner.applyFiltersButton.rx
+            .tap
+            .do(onNext: {[unowned self] in
+                self.owner.dismiss(animated: true, completion: nil)
+            })
+            .flatMap {[unowned self] in
+                return self.viewModel.selectedFiltersObservable
+            }
+            .map({ Array($0.values) })
+            .bind(to: mapViewModel.filtersPlacesTrigger)
             .disposed(by: viewModel)
         
     }

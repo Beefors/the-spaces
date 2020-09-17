@@ -9,7 +9,7 @@
 import Foundation
 import UIKit.UITableViewCell
 
-protocol FilterCellModelType: ViewModelType {
+protocol TableCellModelType: ViewModelType {
     
     func dequeuCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
     func setupCell(_ cell: UITableViewCell)
@@ -22,7 +22,7 @@ protocol FilterCellModelType: ViewModelType {
     
 }
 
-extension FilterCellModelType {
+extension TableCellModelType {
     func cellWillApear(_ cell: UITableViewCell) {}
     func cellDidApear(_ cell: UITableViewCell) {}
     

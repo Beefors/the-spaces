@@ -14,6 +14,7 @@ enum SearchCoordinator {
     case placesList(searchPanelView: SearchPanelView, placesDataViewModel: PlacesViewModel)
     case searchHistory
     case filters
+    case filtersRadioButtons(title: String, items: [TitlePresentable])
 }
 
 extension SearchCoordinator: StoryboardCoordinator {
@@ -25,6 +26,7 @@ extension SearchCoordinator: StoryboardCoordinator {
         case .placesList: return "PlacesList"
         case .searchHistory: return "SearchHistory"
         case .filters: return "Filters"
+        case .filtersRadioButtons: return "RadioButtons"
         }
     }
     
@@ -42,6 +44,12 @@ extension SearchCoordinator: StoryboardCoordinator {
             
         case .filters:
             viewController.modalPresentationStyle = .fullScreen
+            (viewController as! UINavigationController).navigationBar.tintColor = UIColor(red: 0.77, green: 0.77, blue: 0.77, alpha: 1)
+            
+        case .filtersRadioButtons(let title, let items):
+            let radioButtonsVC = viewController as! FiltersRadioButtonViewController
+            radioButtonsVC.beheviorService.viewModel.title = title
+            radioButtonsVC.beheviorService.viewModel.items = items
             
         default: break
         }

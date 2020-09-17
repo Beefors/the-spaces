@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FilterCellPriceModel: FilterCellModelType {
+class FilterCellPriceModel: TableCellModelType {
     let bag = DisposeBag()
     let priceType: FiltersDataSource.Sections.PricesTypes
     

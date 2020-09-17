@@ -10,9 +10,12 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FilterCellSpecificationModel: FilterCellModelType {
+class FilterCellSpecificationModel: TableCellModelType {
     let bag = DisposeBag()
     let specificationType: FiltersDataSource.Sections.SpecificationsTypes
+    
+    let rowDidSelectObservable = PublishRelay<FiltersDataSource.Sections.SpecificationsTypes>()
+    let selectedFilterObservable = BehaviorRelay<TitlePresentable?>(value: nil)
     
     init(specificationType: FiltersDataSource.Sections.SpecificationsTypes) {
         self.specificationType = specificationType
@@ -22,10 +25,21 @@ class FilterCellSpecificationModel: FilterCellModelType {
         return FiltersViewsFactory.dequeuSpecificationCell(for: tableView)
     }
     
+    var disposable: Disposable?
+    
     func setupCell(_ cell: UITableViewCell) {
         guard let cell = cell as? FilterSubtitleCell else { return }
         cell.label.text = specificationType.title
-        cell.subtitleLabel.text = "Выбрать"
+        
+        disposable?.dispose()
+        disposable = selectedFilterObservable
+            .map({ $0?.title ?? "Выбрать" })
+            .bind(to: cell.subtitleLabel.rx.text)
+        
+    }
+    
+    func cellDidSelect(_ cell: UITableViewCell) {
+        rowDidSelectObservable.accept(specificationType)
     }
     
 }

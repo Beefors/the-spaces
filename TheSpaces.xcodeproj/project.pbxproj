@@ -24,6 +24,7 @@
 		55236E1F24B9FF6900619510 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55236E1E24B9FF6900619510 /* PlaceModel.swift */; };
 		55243A4B24E52EF5006B08D1 /* PlacesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55243A4A24E52EF5006B08D1 /* PlacesFilter.swift */; };
 		552B839E250A907900DE0B07 /* FilterCellCheckmarksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552B839D250A907900DE0B07 /* FilterCellCheckmarksModel.swift */; };
+		5535D7792512445D0079F6E7 /* FiltersRadioButtonViewsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5535D7782512445D0079F6E7 /* FiltersRadioButtonViewsFactory.swift */; };
 		553AB0DD24FB788800114EF9 /* FilterRangeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AB0DC24FB788800114EF9 /* FilterRangeSliderCell.swift */; };
 		553AB0DF24FB7B4C00114EF9 /* FilterSubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AB0DE24FB7B4C00114EF9 /* FilterSubtitleCell.swift */; };
 		553AB0E124FB7D5100114EF9 /* FilterParamsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AB0E024FB7D5100114EF9 /* FilterParamsCell.swift */; };
@@ -34,7 +35,7 @@
 		554140E824BDF77100FF9A38 /* PlacesListTableViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554140E724BDF77100FF9A38 /* PlacesListTableViewService.swift */; };
 		55440AE024B74794004319D3 /* YMKPoint + TS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55440ADF24B74794004319D3 /* YMKPoint + TS.swift */; };
 		554809A424BED75E008BF41E /* PlacesListTableViewServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554809A324BED75E008BF41E /* PlacesListTableViewServiceViewModel.swift */; };
-		55523BC224FD871600D4EA85 /* FilterCellModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55523BC124FD871600D4EA85 /* FilterCellModelType.swift */; };
+		55523BC224FD871600D4EA85 /* TableCellModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55523BC124FD871600D4EA85 /* TableCellModelType.swift */; };
 		55523BC524FD886B00D4EA85 /* FilterPriceCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55523BC424FD886B00D4EA85 /* FilterPriceCellModel.swift */; };
 		5562FBBC24BEE6AE0030F43D /* RxSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5562FBBB24BEE6AE0030F43D /* RxSectionModel.swift */; };
 		5562FBBF24BEEA320030F43D /* PlacesListViewsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5562FBBE24BEEA320030F43D /* PlacesListViewsFactory.swift */; };
@@ -72,6 +73,12 @@
 		55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */; };
 		55C899ED24B611D70048FF59 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899EC24B611D70048FF59 /* LocationService.swift */; };
 		55C899F024B614B30048FF59 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899EF24B614B30048FF59 /* ViewModelType.swift */; };
+		55DC8F1C2511ECFF00BC0BCC /* FiltersRadioButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F1B2511ECFF00BC0BCC /* FiltersRadioButtonViewController.swift */; };
+		55DC8F202511EDD400BC0BCC /* RadioButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F1F2511EDD400BC0BCC /* RadioButtonCell.swift */; };
+		55DC8F222511EE6200BC0BCC /* FiltersRadioButtonBehaviorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F212511EE6200BC0BCC /* FiltersRadioButtonBehaviorService.swift */; };
+		55DC8F242511F06B00BC0BCC /* FiltersRadioButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F232511F06B00BC0BCC /* FiltersRadioButtonViewModel.swift */; };
+		55DC8F262511F3DA00BC0BCC /* FiltersRadioButtonUIBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F252511F3DA00BC0BCC /* FiltersRadioButtonUIBuilder.swift */; };
+		55DC8F282512071A00BC0BCC /* FiltersRadioButtonTableViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F272512071A00BC0BCC /* FiltersRadioButtonTableViewService.swift */; };
 		55E193E124B6F3C100BF8313 /* UIBuilderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E193E024B6F3C100BF8313 /* UIBuilderType.swift */; };
 		55E193E424B6F47600BF8313 /* MapVCUIBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E193E324B6F47600BF8313 /* MapVCUIBuilder.swift */; };
 		55E193E724B6F7A700BF8313 /* MapServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E193E624B6F7A700BF8313 /* MapServiceType.swift */; };
@@ -118,6 +125,7 @@
 		55243A4A24E52EF5006B08D1 /* PlacesFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesFilter.swift; sourceTree = "<group>"; };
 		55272D7524C4DD7400727E30 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		552B839D250A907900DE0B07 /* FilterCellCheckmarksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCellCheckmarksModel.swift; sourceTree = "<group>"; };
+		5535D7782512445D0079F6E7 /* FiltersRadioButtonViewsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRadioButtonViewsFactory.swift; sourceTree = "<group>"; };
 		553AB0DC24FB788800114EF9 /* FilterRangeSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRangeSliderCell.swift; sourceTree = "<group>"; };
 		553AB0DE24FB7B4C00114EF9 /* FilterSubtitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSubtitleCell.swift; sourceTree = "<group>"; };
 		553AB0E024FB7D5100114EF9 /* FilterParamsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParamsCell.swift; sourceTree = "<group>"; };
@@ -128,7 +136,7 @@
 		554140E724BDF77100FF9A38 /* PlacesListTableViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListTableViewService.swift; sourceTree = "<group>"; };
 		55440ADF24B74794004319D3 /* YMKPoint + TS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YMKPoint + TS.swift"; sourceTree = "<group>"; };
 		554809A324BED75E008BF41E /* PlacesListTableViewServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListTableViewServiceViewModel.swift; sourceTree = "<group>"; };
-		55523BC124FD871600D4EA85 /* FilterCellModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCellModelType.swift; sourceTree = "<group>"; };
+		55523BC124FD871600D4EA85 /* TableCellModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellModelType.swift; sourceTree = "<group>"; };
 		55523BC424FD886B00D4EA85 /* FilterPriceCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPriceCellModel.swift; sourceTree = "<group>"; };
 		5562FBBB24BEE6AE0030F43D /* RxSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSectionModel.swift; sourceTree = "<group>"; };
 		5562FBBE24BEEA320030F43D /* PlacesListViewsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesListViewsFactory.swift; sourceTree = "<group>"; };
@@ -166,6 +174,12 @@
 		55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceViewModel.swift; sourceTree = "<group>"; };
 		55C899EC24B611D70048FF59 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		55C899EF24B614B30048FF59 /* ViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		55DC8F1B2511ECFF00BC0BCC /* FiltersRadioButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRadioButtonViewController.swift; sourceTree = "<group>"; };
+		55DC8F1F2511EDD400BC0BCC /* RadioButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonCell.swift; sourceTree = "<group>"; };
+		55DC8F212511EE6200BC0BCC /* FiltersRadioButtonBehaviorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRadioButtonBehaviorService.swift; sourceTree = "<group>"; };
+		55DC8F232511F06B00BC0BCC /* FiltersRadioButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRadioButtonViewModel.swift; sourceTree = "<group>"; };
+		55DC8F252511F3DA00BC0BCC /* FiltersRadioButtonUIBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRadioButtonUIBuilder.swift; sourceTree = "<group>"; };
+		55DC8F272512071A00BC0BCC /* FiltersRadioButtonTableViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRadioButtonTableViewService.swift; sourceTree = "<group>"; };
 		55E193E024B6F3C100BF8313 /* UIBuilderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBuilderType.swift; sourceTree = "<group>"; };
 		55E193E324B6F47600BF8313 /* MapVCUIBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVCUIBuilder.swift; sourceTree = "<group>"; };
 		55E193E624B6F7A700BF8313 /* MapServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapServiceType.swift; sourceTree = "<group>"; };
@@ -334,7 +348,7 @@
 		55523BC324FD884800D4EA85 /* FilterCellModels */ = {
 			isa = PBXGroup;
 			children = (
-				55523BC124FD871600D4EA85 /* FilterCellModelType.swift */,
+				55523BC124FD871600D4EA85 /* TableCellModelType.swift */,
 				55523BC424FD886B00D4EA85 /* FilterPriceCellModel.swift */,
 				55BD4F4B25055C71001C99A4 /* FilterCellSpecificationModel.swift */,
 				552B839D250A907900DE0B07 /* FilterCellCheckmarksModel.swift */,
@@ -398,6 +412,7 @@
 				55EF8C4424BDAAF300E822E8 /* PlacesList */,
 				55C46B0C24D836A8002B8677 /* SearchHistory */,
 				551A105824F64FC7004DEFA9 /* Filters */,
+				55DC8F1A2511ECC400BC0BCC /* RadioButtonFilters */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -559,6 +574,36 @@
 				5562FBBA24BEE66E0030F43D /* Models */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		55DC8F1A2511ECC400BC0BCC /* RadioButtonFilters */ = {
+			isa = PBXGroup;
+			children = (
+				55DC8F1E2511EDA500BC0BCC /* Views */,
+				55DC8F1D2511ED0200BC0BCC /* BussinaesLayer */,
+				55DC8F1B2511ECFF00BC0BCC /* FiltersRadioButtonViewController.swift */,
+			);
+			path = RadioButtonFilters;
+			sourceTree = "<group>";
+		};
+		55DC8F1D2511ED0200BC0BCC /* BussinaesLayer */ = {
+			isa = PBXGroup;
+			children = (
+				55DC8F232511F06B00BC0BCC /* FiltersRadioButtonViewModel.swift */,
+				55DC8F212511EE6200BC0BCC /* FiltersRadioButtonBehaviorService.swift */,
+				55DC8F252511F3DA00BC0BCC /* FiltersRadioButtonUIBuilder.swift */,
+				55DC8F272512071A00BC0BCC /* FiltersRadioButtonTableViewService.swift */,
+				5535D7782512445D0079F6E7 /* FiltersRadioButtonViewsFactory.swift */,
+			);
+			path = BussinaesLayer;
+			sourceTree = "<group>";
+		};
+		55DC8F1E2511EDA500BC0BCC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				55DC8F1F2511EDD400BC0BCC /* RadioButtonCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		55E193E524B6F73500BF8313 /* MapService */ = {
@@ -778,6 +823,7 @@
 				55C899E524B5E92B0048FF59 /* UIFont + Extension.swift in Sources */,
 				55C899ED24B611D70048FF59 /* LocationService.swift in Sources */,
 				557B1CF024B46EC10050289D /* UIColor + Extension.swift in Sources */,
+				55DC8F262511F3DA00BC0BCC /* FiltersRadioButtonUIBuilder.swift in Sources */,
 				55F6B944250A5A1C0030C83B /* CheckmarkCell.swift in Sources */,
 				55EF8C4B24BDADB800E822E8 /* PlacesListViewController.swift in Sources */,
 				558575F424B5A19200FDAEAE /* OtherCoordinator.swift in Sources */,
@@ -796,10 +842,13 @@
 				55EF8C4D24BDBC1000E822E8 /* PlacesListBehaviorService.swift in Sources */,
 				55440AE024B74794004319D3 /* YMKPoint + TS.swift in Sources */,
 				55E193E124B6F3C100BF8313 /* UIBuilderType.swift in Sources */,
+				55DC8F1C2511ECFF00BC0BCC /* FiltersRadioButtonViewController.swift in Sources */,
 				55236E1F24B9FF6900619510 /* PlaceModel.swift in Sources */,
 				554140E524BDDDC600FF9A38 /* PlacePreviewView.swift in Sources */,
 				55523BC524FD886B00D4EA85 /* FilterPriceCellModel.swift in Sources */,
 				551CEA6E24B1CF8A00465B69 /* Coordinator.swift in Sources */,
+				55DC8F282512071A00BC0BCC /* FiltersRadioButtonTableViewService.swift in Sources */,
+				5535D7792512445D0079F6E7 /* FiltersRadioButtonViewsFactory.swift in Sources */,
 				551A106324F6667B004DEFA9 /* FiltersViewModel.swift in Sources */,
 				55EFB67D24BB519F00C26495 /* Reactive + ST.swift in Sources */,
 				55E193EC24B7137500BF8313 /* MapVCBehaviorService.swift in Sources */,
@@ -813,9 +862,11 @@
 				55C46B0E24D836D4002B8677 /* SearchHistoryViewController.swift in Sources */,
 				557B1CE924B46BB70050289D /* SearchCoordinator.swift in Sources */,
 				554140E824BDF77100FF9A38 /* PlacesListTableViewService.swift in Sources */,
+				55DC8F202511EDD400BC0BCC /* RadioButtonCell.swift in Sources */,
 				55E4AF7624E16715007B7D68 /* SearchHistoryItemCell.swift in Sources */,
-				55523BC224FD871600D4EA85 /* FilterCellModelType.swift in Sources */,
+				55523BC224FD871600D4EA85 /* TableCellModelType.swift in Sources */,
 				55C46B1124D83BAC002B8677 /* SearchHistoryViewModel.swift in Sources */,
+				55DC8F222511EE6200BC0BCC /* FiltersRadioButtonBehaviorService.swift in Sources */,
 				5572CBED24E13AD800D0175C /* SearchHistoryUIBuilder.swift in Sources */,
 				551A105A24F64FE2004DEFA9 /* FiltersViewController.swift in Sources */,
 				55236E1924B9E33200619510 /* NetworkService.swift in Sources */,
@@ -838,6 +889,7 @@
 				551CEA5524B1C8C300465B69 /* AppDelegate.swift in Sources */,
 				558575F824B5A38300FDAEAE /* ProfileViewController.swift in Sources */,
 				558575EE24B5A15E00FDAEAE /* ProfileCoordinator.swift in Sources */,
+				55DC8F242511F06B00BC0BCC /* FiltersRadioButtonViewModel.swift in Sources */,
 				553AB0E124FB7D5100114EF9 /* FilterParamsCell.swift in Sources */,
 				557B1CE024B458C60050289D /* TabBarSource.swift in Sources */,
 				55C46B1A24D84380002B8677 /* SearchHistoryTableViewService.swift in Sources */,

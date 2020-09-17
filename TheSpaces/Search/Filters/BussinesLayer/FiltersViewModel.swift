@@ -23,17 +23,26 @@ class FiltersViewModel: ViewModelType {
     let selectedMonthPriceObservable = BehaviorRelay<PriceRangeType>(value: (0, 0))
     
     let selectedFiltersObservable = BehaviorRelay<Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter>>(value: [:])
+    let placesCountByFiltersObservable = BehaviorRelay<Int>(value: 0)
     
     init() {
+        setupObservables()
+    }
+    
+    private func setupObservables() {
         
         selectedFiltersObservable
-            .distinctUntilChanged({ (dict1, dict2) -> Bool in
-                return dict1.keys == dict2.keys
+            .skip(1)
+            .distinctUntilChanged()
+            .flatMap({ (dict) in
+                return NetworkService.shared.filterPlacesCount(cityId: 1, filters: Array(dict.values))
             })
-            .debug()
-            .subscribe()
+            .subscribe(onNext: {[weak self] (count) in
+                self?.placesCountByFiltersObservable.accept(count)
+            }, onError: {[weak self] (error) in
+                self?.setupObservables()
+            })
             .disposed(by: bag)
-        
     }
     
     func setPlacesViewModel(_ mapViewModel: PlacesViewModel) {
@@ -187,7 +196,7 @@ extension FilterCheckmarkType {
     }
     
     init(wrapper: FilterCheckmarkTypeWrapper) {
-        self.init(filterKey: wrapper.filterKey)
+        self.init(filterKey: wrapper.filterKey)!
     }
     
 }

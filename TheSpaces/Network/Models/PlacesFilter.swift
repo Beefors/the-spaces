@@ -8,12 +8,24 @@
 
 import Foundation
 
-protocol PlacesFilterType {
+protocol PlacesFilterType: Equatable {
     var key: String {get}
     var value: Any {get}
 }
 
 struct PlacesFilter: PlacesFilterType {
+    static func == (lhs: PlacesFilter, rhs: PlacesFilter) -> Bool {
+        guard lhs.key == rhs.key else { return false }
+        
+        if let lhsValueDict = lhs.value as? Dictionary<String, Int>, let rhsValueDict = rhs.value as? Dictionary<String, Int> {
+            return lhsValueDict == rhsValueDict
+        } else if let lhsValue = lhs.value as? Int, let rhsValue = rhs.value as? Int {
+            return lhsValue == rhsValue
+        }
+        
+        return true
+    }
+    
     let key: String
     let value: Any
 }
