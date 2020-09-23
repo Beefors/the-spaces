@@ -14,9 +14,4 @@ class FilterParamsCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstr: NSLayoutConstraint!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
 }

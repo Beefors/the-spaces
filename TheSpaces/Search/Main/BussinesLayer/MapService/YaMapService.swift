@@ -73,6 +73,7 @@ class YaMapService: NSObject, MapServiceType {
     func presentPlaces(_ places: Array<PlaceModel>) {
         
         clusterizedCollection.clear()
+        markersAdapters.removeAll()
         
         for place in places {
             

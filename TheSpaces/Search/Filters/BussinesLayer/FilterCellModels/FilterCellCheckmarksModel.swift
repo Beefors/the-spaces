@@ -14,7 +14,7 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, TableCel
     
     let bag = DisposeBag()
     
-    var filters = [Filter]()
+    var filters: [Filter]
     let selectedFiltersObservable = BehaviorRelay<Set<Filter>>(value: [])
     
     let contentSizeUpdatedObservable = PublishRelay<FilterParamsCell>()
@@ -37,9 +37,7 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, TableCel
         cell.collectionView.dataSource = self
         cell.collectionView.delegate = self
         
-        if #available(iOS 13.0, *) {
-            return
-        } else {
+        if #available(iOS 13.0, *) {} else {
             DispatchQueue.main.async {
                 cell.collectionView.reloadData()
             }
@@ -64,7 +62,12 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, TableCel
         resetTrigger
             .subscribe {[unowned self, unowned cell] _ in
                 self.selectedFiltersObservable.accept([])
-                cell.collectionView.reloadData()
+                
+                for index in 0 ..< filters.count {
+                    guard let checkmarkCell = cell.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? CheckmarkCell else { continue }
+                    checkmarkCell.checkButton.isSelected = false
+                }
+                
             }
             .disposed(by: setupBag)
         

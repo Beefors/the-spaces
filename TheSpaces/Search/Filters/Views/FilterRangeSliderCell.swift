@@ -36,25 +36,9 @@ class FilterRangeSliderCell: UITableViewCell {
     }
     
     func set(lowerValue: CGFloat, upperValue: CGFloat) {
-
-        func value(_ value: CGFloat, inRangeMinValue minValue: CGFloat, maxValue: CGFloat) -> Bool {
-            return value >= minValue && value <= maxValue
-        }
-        
         rangeSlider.minValue = lowerValue
-        
-        if !value(rangeSlider.selectedMinValue, inRangeMinValue: lowerValue, maxValue: upperValue) {
-            rangeSlider.selectedMinValue = lowerValue
-        }
-        
         rangeSlider.maxValue = upperValue
-        
-        if !value(rangeSlider.selectedMaxValue, inRangeMinValue: lowerValue, maxValue: upperValue) {
-            rangeSlider.selectedMaxValue = upperValue
-        }
-        
         rangeSlider.layoutSubviews()
-        selectedRangeObservable.accept((rangeSlider.selectedMinValue, rangeSlider.selectedMaxValue))
     }
     
 }

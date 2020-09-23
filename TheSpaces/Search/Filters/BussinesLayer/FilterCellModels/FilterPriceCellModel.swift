@@ -49,17 +49,29 @@ class FilterCellPriceModel: TableCellModelType {
             })
             .disposed(by: setupBag)
         
-        rangeValueObservable
-            .subscribe(onNext: {[weak cell, unowned self] (min, max) in
-                cell?.set(lowerValue: min, upperValue: max)
-                cell?.rangeSlider.selectedMinValue = self.selectedRangeObservable.value.min
-                cell?.rangeSlider.selectedMaxValue = self.selectedRangeObservable.value.max
+        Observable.combineLatest(rangeValueObservable.asObservable(), selectedRangeObservable.asObservable())
+            .subscribe {[weak cell] (rangeValue, selectedRangeValue) in
+                cell?.set(lowerValue: rangeValue.min, upperValue: rangeValue.max)
+                cell?.rangeSlider.selectedMinValue = max(rangeValue.min, selectedRangeValue.min)
+                
+                if selectedRangeValue.max < rangeValue.min {
+                    cell?.rangeSlider.selectedMaxValue = rangeValue.max
+                } else {
+                    cell?.rangeSlider.selectedMaxValue = min(rangeValue.max, max(rangeValue.min, selectedRangeValue.max))
+                }
+                
                 cell?.rangeSlider.layoutSubviews()
-            })
+            }
             .disposed(by: setupBag)
         
         cell.selectedRangeObservable
+            .skip(1)
             .bind(to: selectedRangeObservable)
+            .disposed(by: setupBag)
+        
+        selectedRangeObservable
+            .debug()
+            .subscribe()
             .disposed(by: setupBag)
         
     }

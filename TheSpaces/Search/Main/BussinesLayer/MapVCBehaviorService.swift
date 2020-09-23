@@ -82,7 +82,7 @@ class MapVCBehaviorService: NSObject {
             .disposed(by: locationService.viewModel)
         
         // Show places on map
-        placesViewModel.placesObservable
+        placesViewModel.actualPlacesList
             .subscribe(onNext: {[unowned self] (places) in
                 self.mapService.presentPlaces(places)
             })

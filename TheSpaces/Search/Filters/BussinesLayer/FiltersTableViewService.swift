@@ -44,7 +44,6 @@ class FiltersTableViewService: NSObject, ServiceType {
                     rows.append(cellModel)
                 }
                 
-                
             case .specifications(let types):
                 
                 for specification in types {
