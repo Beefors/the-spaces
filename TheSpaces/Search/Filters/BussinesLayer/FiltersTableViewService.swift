@@ -135,20 +135,53 @@ class FiltersTableViewService: NSObject, ServiceType {
             
         }
         
+        if let choosedFilter = owner.behaviorService.viewModel.selectedFiltersObservable.value[priceType.wrapper]?.value as? Dictionary<String, Int> {
+            
+            let minValue = CGFloat(choosedFilter["min"]!)
+            let maxValue = CGFloat(choosedFilter["max"]!)
+            
+            cellModel.selectedRangeObservable.accept((minValue, maxValue))
+        }
+        
         observable
             .bind(to: cellModel.rangeValueObservable)
-            .disposed(by: owner.behaviorService.viewModel)
+            .disposed(by: cellModel.bag)
         
         cellModel
             .selectedRangeObservable
             .bind(to: selectedObser)
-            .disposed(by: owner.behaviorService.viewModel)
+            .disposed(by: cellModel.bag)
+        
+        owner
+            .behaviorService
+            .resetTrigger
+            .bind(to: cellModel.resetTrigger)
+            .disposed(by: cellModel.bag)
         
         return cellModel
     }
     
     private func createSpecificationCellModel(specificationType: FiltersDataSource.Sections.SpecificationsTypes) -> FilterCellSpecificationModel {
         let cellModel = FilterCellSpecificationModel(specificationType: specificationType)
+        
+        owner
+            .behaviorService
+            .resetTrigger
+            .bind(to: cellModel.resetTrigger)
+            .disposed(by: cellModel.bag)
+        
+        if let filter = owner.behaviorService.viewModel.selectedFiltersObservable.value[specificationType.wrapper], let id = filter.value as? Int {
+            
+            switch specificationType {
+            case .working(let types):
+                let type = types.first(where: {$0.rawValue == id})!
+                cellModel.selectedFilterObservable.accept(type)
+            case .roominess(let types):
+                let type = types.first(where: {$0.rawValue == id})!
+                cellModel.selectedFilterObservable.accept(type)
+            }
+            
+        }
         
         cellModel.rowDidSelectObservable
             .map { (spetifications) -> (String, [TitlePresentable]) in
@@ -222,6 +255,14 @@ class FiltersTableViewService: NSObject, ServiceType {
     private func createCheckmarkCellModel<Filter: FilterCheckmarkType>(types: [Filter]) -> FilterCellCheckmarksModel<Filter> {
         let model = FilterCellCheckmarksModel<Filter>(flags: types, selectedFlags: [])
         
+        for type in types {
+            if owner.behaviorService.viewModel.selectedFiltersObservable.value[type.wrapper] != nil {
+                var set = model.selectedFiltersObservable.value
+                set.insert(type)
+                model.selectedFiltersObservable.accept(set)
+            }
+        }
+        
          model.selectedFiltersObservable
             .pairwise()
             .map({[unowned self] (prevVal, nextVal) -> Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter> in
@@ -243,6 +284,12 @@ class FiltersTableViewService: NSObject, ServiceType {
             })
             .bind(to: owner.behaviorService.viewModel.selectedFiltersObservable)
             .disposed(by: owner.behaviorService.viewModel)
+        
+        owner
+            .behaviorService
+            .resetTrigger
+            .bind(to: model.resetTrigger)
+            .disposed(by: model.bag)
         
         return model
     }

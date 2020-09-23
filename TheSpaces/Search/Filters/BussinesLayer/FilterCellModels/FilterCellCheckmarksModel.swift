@@ -14,12 +14,11 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, TableCel
     
     let bag = DisposeBag()
     
-    var contentHeightDisposable: Disposable?
-    
     var filters = [Filter]()
     let selectedFiltersObservable = BehaviorRelay<Set<Filter>>(value: [])
     
     let contentSizeUpdatedObservable = PublishRelay<FilterParamsCell>()
+    let resetTrigger = PublishRelay<Void>()
     
     init(flags: [Filter], selectedFlags: [Filter]) {
         filters = flags
@@ -29,6 +28,8 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, TableCel
     func dequeuCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: FilterParamsCell.identifier)!
     }
+    
+    private var setupBag = DisposeBag()
     
     func setupCell(_ cell: UITableViewCell) {
         let cell = cell as! FilterParamsCell
@@ -44,8 +45,9 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, TableCel
             }
         }
         
-        contentHeightDisposable?.dispose()
-        contentHeightDisposable = cell.collectionView.rx
+        setupBag = DisposeBag()
+        
+        cell.collectionView.rx
             .observe(CGSize.self, #keyPath(UICollectionView.contentSize))
             .filterNil()
             .map({[weak cell] _ in return cell })
@@ -57,6 +59,14 @@ class FilterCellCheckmarksModel<Filter: FilterCheckmarkType>: NSObject, TableCel
                 cell.collectionViewHeightConstr.constant = cell.collectionView.contentSize.height
             })
             .bind(to: contentSizeUpdatedObservable)
+            .disposed(by: setupBag)
+        
+        resetTrigger
+            .subscribe {[unowned self, unowned cell] _ in
+                self.selectedFiltersObservable.accept([])
+                cell.collectionView.reloadData()
+            }
+            .disposed(by: setupBag)
         
     }
     

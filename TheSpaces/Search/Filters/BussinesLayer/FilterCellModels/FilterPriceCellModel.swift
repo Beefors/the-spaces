@@ -16,6 +16,7 @@ class FilterCellPriceModel: TableCellModelType {
     
     let rangeValueObservable: BehaviorRelay<FiltersViewModel.PriceRangeType>
     let selectedRangeObservable: BehaviorRelay<FiltersViewModel.PriceRangeType>
+    let resetTrigger = PublishRelay<Void>()
     
     init(priceType: FiltersDataSource.Sections.PricesTypes, minValue: CGFloat = 0, maxValue: CGFloat = 0, selectedMinValue: CGFloat? = nil, selectedMaxValue: CGFloat? = nil) {
         self.priceType = priceType
@@ -27,21 +28,39 @@ class FilterCellPriceModel: TableCellModelType {
         return FiltersViewsFactory.dequeuPriceCell(for: tableView)
     }
     
-    private var rangeDisposable: Disposable?
-    private var selectedRangeDisposable: Disposable?
+    private var setupBag = DisposeBag()
     
     func setupCell(_ cell: UITableViewCell) {
         guard let cell = cell as? FilterRangeSliderCell else { return }
         cell.label.text = priceType.title
+        cell.selectedRangeObservable.accept(selectedRangeObservable.value)
         
-        rangeDisposable?.dispose()
-        rangeDisposable = rangeValueObservable
-            .subscribe(onNext: {[weak cell] (min, max) in
-                cell?.set(lowerValue: min, upperValue: max)
+        setupBag = DisposeBag()
+        
+        resetTrigger
+            .map {[unowned self] _ -> FiltersViewModel.PriceRangeType in
+                return self.rangeValueObservable.value
+            }
+            .subscribe(onNext: {[unowned cell] (value) in
+                cell.selectedRangeObservable.accept(value)
+                cell.rangeSlider.selectedMinValue = value.min
+                cell.rangeSlider.selectedMaxValue = value.max
+                cell.rangeSlider.layoutSubviews()
             })
+            .disposed(by: setupBag)
         
-        selectedRangeDisposable?.dispose()
-        selectedRangeDisposable = cell.selectedRangeObservable.bind(to: selectedRangeObservable)
+        rangeValueObservable
+            .subscribe(onNext: {[weak cell, unowned self] (min, max) in
+                cell?.set(lowerValue: min, upperValue: max)
+                cell?.rangeSlider.selectedMinValue = self.selectedRangeObservable.value.min
+                cell?.rangeSlider.selectedMaxValue = self.selectedRangeObservable.value.max
+                cell?.rangeSlider.layoutSubviews()
+            })
+            .disposed(by: setupBag)
+        
+        cell.selectedRangeObservable
+            .bind(to: selectedRangeObservable)
+            .disposed(by: setupBag)
         
     }
     

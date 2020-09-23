@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30E2BAD2251B4917006821E4 /* CountDescriptionFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2BAD1251B4917006821E4 /* CountDescriptionFormatter.swift */; };
 		551052CA24BC5BD600D71130 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551052C924BC5BD600D71130 /* UIView + Extension.swift */; };
 		551A105A24F64FE2004DEFA9 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A105924F64FE2004DEFA9 /* FiltersViewController.swift */; };
 		551A105D24F6564B004DEFA9 /* FiltersBehaviorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A105C24F6564B004DEFA9 /* FiltersBehaviorService.swift */; };
@@ -104,6 +105,7 @@
 
 /* Begin PBXFileReference section */
 		1061CFA4843D8F4E55B6B7BD /* Pods_TheSpaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheSpaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		30E2BAD1251B4917006821E4 /* CountDescriptionFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDescriptionFormatter.swift; sourceTree = "<group>"; };
 		3405A610496B9FA96D6D663A /* Pods-TheSpaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheSpaces.release.xcconfig"; path = "Target Support Files/Pods-TheSpaces/Pods-TheSpaces.release.xcconfig"; sourceTree = "<group>"; };
 		551052C924BC5BD600D71130 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
 		551A105924F64FE2004DEFA9 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				551A106024F65A69004DEFA9 /* FiltersUIBuilder.swift */,
 				553BE0C224F7CAC400D9593B /* FiltersTableViewService.swift */,
 				551A106424F66997004DEFA9 /* FiltersDataSource.swift */,
+				30E2BAD1251B4917006821E4 /* CountDescriptionFormatter.swift */,
 			);
 			path = BussinesLayer;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */,
 				55BD4F4C25055C71001C99A4 /* FilterCellSpecificationModel.swift in Sources */,
 				5562FBBC24BEE6AE0030F43D /* RxSectionModel.swift in Sources */,
+				30E2BAD2251B4917006821E4 /* CountDescriptionFormatter.swift in Sources */,
 				553AB0DD24FB788800114EF9 /* FilterRangeSliderCell.swift in Sources */,
 				55EF8C4D24BDBC1000E822E8 /* PlacesListBehaviorService.swift in Sources */,
 				55440AE024B74794004319D3 /* YMKPoint + TS.swift in Sources */,
@@ -1040,7 +1044,7 @@
 			baseConfigurationReference = 6575D05773BC03660780F254 /* Pods-TheSpaces.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9SXF3SW9RV;
@@ -1063,7 +1067,7 @@
 			baseConfigurationReference = 3405A610496B9FA96D6D663A /* Pods-TheSpaces.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9SXF3SW9RV;

@@ -19,6 +19,7 @@ class FiltersUIBuilder: ServiceType {
     
     //MARK: - Views
     let closeItem = UIBarButtonItem(image: UIImage(named: "closeButtonIcon")!, style: .plain, target: nil, action: nil)
+    let countForamatter = CountDescriptionFormatter(denomination: PlacesDenomination())
     
     //MARK: - Initialization
     required init(owner: FiltersViewController) {
@@ -44,7 +45,8 @@ class FiltersUIBuilder: ServiceType {
     }
     
     func setupPlacesCount(_ count: Int) {
-        owner.applyFiltersButton.setTitle("Показать \(count) мест", for: .normal)
+        countForamatter.count = count
+        owner.applyFiltersButton.setTitle("Показать \(countForamatter.toForm())", for: .normal)
     }
     
 }

@@ -34,6 +34,7 @@ class FiltersViewModel: ViewModelType {
         selectedFiltersObservable
             .skip(1)
             .distinctUntilChanged()
+            .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
             .flatMap({ (dict) in
                 return NetworkService.shared.filterPlacesCount(cityId: 1, filters: Array(dict.values))
             })
@@ -181,6 +182,72 @@ class FiltersViewModel: ViewModelType {
                 self.selectedFiltersObservable.accept(dict)
             })
             .disposed(by: bag)
+        
+        let filters = mapViewModel.filtersPlacesTrigger.value
+        
+        let sections = FiltersDataSource().sections
+        
+        var resultDict = Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter>()
+        
+        for filter in filters {
+            for section in sections {
+                switch section {
+                case .prices(let types):
+                    
+                    for type in types {
+                        if filter.key == type.filterKey {
+                            resultDict[type.wrapper] = filter
+                        }
+                    }
+                    
+                case .specifications(let types):
+                    
+                    for type in types {
+                        if filter.key == type.filterKey {
+                            resultDict[type.wrapper] = filter
+                        }
+                    }
+                    
+                case .services(let types):
+                    
+                    for type in types {
+                        if filter.key == type.filterKey {
+                            resultDict[type.wrapper] = filter
+                        }
+                    }
+                    
+                case .equipment(let types):
+                    
+                    for type in types {
+                        if filter.key == type.filterKey {
+                            resultDict[type.wrapper] = filter
+                        }
+                    }
+                    
+                case .facilities(let types):
+                    
+                    for type in types {
+                        if filter.key == type.filterKey {
+                            resultDict[type.wrapper] = filter
+                        }
+                    }
+                    
+                case .transport(let types):
+                    
+                    for type in types {
+                        if filter.key == type.filterKey {
+                            resultDict[type.wrapper] = filter
+                        }
+                    }
+                    
+                }
+            }
+            
+            
+            
+        }
+        
+        selectedFiltersObservable.accept(resultDict)
         
     }
     

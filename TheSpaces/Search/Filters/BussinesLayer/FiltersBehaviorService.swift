@@ -20,7 +20,9 @@ class FilterBehaviorService: ServiceType {
     lazy var builderUI = FiltersUIBuilder(owner: owner)
     lazy var tableViewService = FiltersTableViewService(owner: owner)
     let viewModel = FiltersViewModel()
-//    let showRadioButtonsScreenTrigger = PublishRelay<(title: String, items: [TitlePresentable])>()
+    
+    //MARK: - Properties
+    let resetTrigger = PublishRelay<Void>()
     
     //MARK: - Initialization
     required init(owner: FiltersViewController) {
@@ -47,8 +49,7 @@ class FilterBehaviorService: ServiceType {
         // Setup clear filters observable
         owner.resetFiltersButton.rx
             .tap
-            .map({Dictionary<FilterCheckmarkTypeWrapper, PlacesFilter>()})
-            .bind(to: viewModel.selectedFiltersObservable)
+            .bind(to: resetTrigger)
             .disposed(by: viewModel)
         
         guard let mapViewModel = viewModel.mapViewModel else { return }
@@ -62,7 +63,8 @@ class FilterBehaviorService: ServiceType {
             .disposed(by: viewModel)
         
         mapViewModel
-            .placesObservable
+            .actualPlacesList
+            .take(1)
             .map({$0.count})
             .bind(to: countObservable)
             .disposed(by: viewModel)
