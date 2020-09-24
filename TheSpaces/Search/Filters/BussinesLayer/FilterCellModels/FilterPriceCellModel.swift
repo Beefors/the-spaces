@@ -69,11 +69,6 @@ class FilterCellPriceModel: TableCellModelType {
             .bind(to: selectedRangeObservable)
             .disposed(by: setupBag)
         
-        selectedRangeObservable
-            .debug()
-            .subscribe()
-            .disposed(by: setupBag)
-        
     }
     
     func cellDidSelect(_ cell: UITableViewCell) {}

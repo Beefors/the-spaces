@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import RxSwiftExt
+import RxAppState
 
 class FiltersTableViewService: NSObject, ServiceType {
     typealias Owner = FiltersViewController
@@ -289,6 +290,14 @@ class FiltersTableViewService: NSObject, ServiceType {
             .resetTrigger
             .bind(to: model.resetTrigger)
             .disposed(by: model.bag)
+        
+        model
+            .contentSizeUpdatedObservable
+            .debounce(.milliseconds(10), scheduler: MainScheduler.instance)
+            .subscribe(onNext: {[unowned self] (_) in
+                self.tableView.reloadData()
+            })
+            .disposed(by: owner.behaviorService.viewModel)
         
         return model
     }
