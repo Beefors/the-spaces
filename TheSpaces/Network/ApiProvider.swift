@@ -10,12 +10,23 @@ import Moya
 import Foundation
 
 enum ApiProvider {
+    
+    // Cities
     case avalibleCities
+    
+    // Places
     case placesList(byCity: Int, filters: [PlacesFilter]?)
     case getPlace(id: Int)
     case placeImage(placeId: Int, imageNumber: Int)
     
+    // Filters
     case filtersPlacesCount(byCity: Int, filters: [PlacesFilter])
+    
+    // Registration / Authorization
+    case register(data: RegisterRequestModel)
+    case sendPhoneCode(email: String)
+    case confirmPhone(email: String, code: String)
+    case getToken(email: String, password: String)
     
 }
 
@@ -48,26 +59,40 @@ extension ApiProvider: TargetType {
     
     var path: String {
         switch self {
+        
+        // Cities
         case .avalibleCities: return "dictionaries/cities"
+            
+        // Places
         case .placesList: return "Entities"
         case .getPlace(let id): return "entities/\(id)"
         case .placeImage(let id, let imageNumber): return "entities/\(id)/image/\(imageNumber)"
+            
+        // Filters
         case .filtersPlacesCount: return "Entities/filterCount"
+            
+        // Registration / Authorization
+        case .register: return "Users/register"
+        case .sendPhoneCode: return "Users/sendPhoneCode"
+        case .confirmPhone: return "Users/confirmPhone"
+        case .getToken: return "Users/token"
+            
         }
     }
     
     var method: Moya.Method {
-        switch self {
-        case .placesList, .filtersPlacesCount: return .post
-        default: return .get
-        }
+        return parameters != nil || encodeData != nil ? .post : .get
     }
     
     var sampleData: Data { Data() }
     
     var parameters: [String: Any]? {
         switch self {
+        
+        // Cities
         case .avalibleCities: return nil
+            
+        // Places
         case .placesList(let cityId, let filters):
             
             var params: Dictionary<String, Any> = ["cityId": cityId]
@@ -83,6 +108,7 @@ extension ApiProvider: TargetType {
         case .getPlace: return nil
         case .placeImage: return nil
             
+        // Filters
         case .filtersPlacesCount(let cityId, let filters):
             
             var params: Dictionary<String, Any> = ["cityId": cityId]
@@ -92,13 +118,35 @@ extension ApiProvider: TargetType {
             }
             
             return params
+            
+        // Registration / Authorization
+        case .register: return nil
+        case .sendPhoneCode(let email): return nil
+        case .confirmPhone(let email, let code): return ["email": email,
+                                                         "code": code]
+        case .getToken(let email, let password): return ["email": email,
+                                                         "password": password]
+        }
+    }
+    
+    var encodeData: Encodable? {
+        switch self {
+        
+        // Registration / Authorization
+        case .register(let data): return data
+            
+        // Other
+        default: return nil
         }
     }
     
     var task: Task {
         if let requestParameters = parameters {
             return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+        } else if let encodedData = encodeData {
+            return .requestJSONEncodable(encodedData)
         }
+        
         return .requestPlain
     }
     

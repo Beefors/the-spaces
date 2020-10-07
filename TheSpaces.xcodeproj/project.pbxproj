@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		308577C52521C02C0038336F /* RegisterRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308577C42521C02C0038336F /* RegisterRequestModel.swift */; };
 		30E2BAD2251B4917006821E4 /* CountDescriptionFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2BAD1251B4917006821E4 /* CountDescriptionFormatter.swift */; };
 		551052CA24BC5BD600D71130 /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551052C924BC5BD600D71130 /* UIView + Extension.swift */; };
 		551A105A24F64FE2004DEFA9 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A105924F64FE2004DEFA9 /* FiltersViewController.swift */; };
@@ -105,6 +106,7 @@
 
 /* Begin PBXFileReference section */
 		1061CFA4843D8F4E55B6B7BD /* Pods_TheSpaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TheSpaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		308577C42521C02C0038336F /* RegisterRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequestModel.swift; sourceTree = "<group>"; };
 		30E2BAD1251B4917006821E4 /* CountDescriptionFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDescriptionFormatter.swift; sourceTree = "<group>"; };
 		3405A610496B9FA96D6D663A /* Pods-TheSpaces.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheSpaces.release.xcconfig"; path = "Target Support Files/Pods-TheSpaces/Pods-TheSpaces.release.xcconfig"; sourceTree = "<group>"; };
 		551052C924BC5BD600D71130 /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				55EFB67824BB34F100C26495 /* CityModel.swift */,
 				55EFB67E24BB54CF00C26495 /* Errors.swift */,
 				55243A4A24E52EF5006B08D1 /* PlacesFilter.swift */,
+				308577C42521C02C0038336F /* RegisterRequestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -858,6 +861,7 @@
 				55E193EC24B7137500BF8313 /* MapVCBehaviorService.swift in Sources */,
 				558575F624B5A21200FDAEAE /* PlacesViewController.swift in Sources */,
 				553BE0C524F7CCA900D9593B /* FiltersViewsFactory.swift in Sources */,
+				308577C52521C02C0038336F /* RegisterRequestModel.swift in Sources */,
 				55C46B0B24D7FAC7002B8677 /* MapPresentationService.swift in Sources */,
 				55C46B1824D83EFE002B8677 /* SearchHistoryHeaderView.swift in Sources */,
 				55E193E724B6F7A700BF8313 /* MapServiceType.swift in Sources */,
