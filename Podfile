@@ -53,11 +53,19 @@ target 'TheSpaces' do
   # https://github.com/WorldDownTown/RangeSeekSlider
   pod 'RangeSeekSlider'
   
+  # ProgressHUD is a lightweight and easy-to-use HUD for iOS.
+  # https://github.com/relatedcode/ProgressHUD.git
+  pod 'ProgressHUD'
+  
   ##################
   ### Other Pods ###
   ##################
   
   pod 'YandexMapKit', '3.5'
+  
+  # Text formatting framework
+  # https://github.com/luximetr/AnyFormatKit
+  pod 'AnyFormatKit'
   
   # Image management
   # https://github.com/onevcat/Kingfisher

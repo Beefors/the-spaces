@@ -9,6 +9,7 @@
 import UIKit
 import YandexMapKit
 import MagicalRecord
+import ProgressHUD
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,9 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Setup magical record
         MagicalRecord.setupAutoMigratingCoreDataStack()
         
+        // Setup routing
         RouterManager.shared.setup(forAppDelegate: self)
         
         UIBarButtonItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
+        
+        // Setup progress hud
+//        ProgressHUD
         
         return true
     }

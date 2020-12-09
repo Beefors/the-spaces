@@ -56,7 +56,7 @@ extension UIColor {
     
     /// Зеленый #51CB98
     @nonobjc class var STGreen: UIColor {
-        UIColor(red: 0.914, green: 0.329, blue: 0.337, alpha: 1)
+        UIColor(red: 0.32, green: 0.8, blue: 0.6, alpha: 1)
     }
     
     /// Графит #605E5E

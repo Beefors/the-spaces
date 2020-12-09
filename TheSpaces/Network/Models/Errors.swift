@@ -10,17 +10,23 @@ import Foundation
 
 enum Errors: Error {
     case objectMapping
+    case serverNotResponding
 }
 
 extension Errors: LocalizedError {
-    
     var errorDescription: String? {
-        
         switch self {
         case .objectMapping: return "Ошибка чтения данных"
+        case .serverNotResponding: return "Сервер не отвечает, попробуйте позже"
         default: return nil
         }
-        
     }
+}
+
+struct RawStringError: Error, LocalizedError {
+    let value: String
     
+    var errorDescription: String? {
+        return value
+    }
 }

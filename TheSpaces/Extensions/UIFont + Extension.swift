@@ -55,4 +55,9 @@ extension UIFont {
         return UIFont.systemFont(ofSize: 12, weight: .regular)
     }
     
+    /// SFCompactText-Regular size: 13
+    class var underline: UIFont {
+        return UIFont.systemFont(ofSize: 13, weight: .regular)
+    }
+    
 }

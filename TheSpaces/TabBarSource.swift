@@ -24,11 +24,6 @@ class TabBarSource: NSObject, UITabBarControllerDelegate {
         tabBarController.tabBar.isTranslucent = false
         tabBarController.delegate = TabBarSource.shared
         
-//        let testView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 50, height: 50)))
-//        testView.backgroundColor = .blue
-//        
-//        tabBarController.view.addSubview(testView)
-        
         setupControllers()
     }
     
@@ -49,8 +44,15 @@ class TabBarSource: NSObject, UITabBarControllerDelegate {
         
         let searchNavController = buildNavController(coordinator: SearchCoordinator.main, title: "Поиск", tabbarIcon: #imageLiteral(resourceName: "tabbarSearchIcon"))
         let placesNavController = buildNavController(coordinator: PlacesCoordinator.placesList, title: "Мои места", tabbarIcon: #imageLiteral(resourceName: "tabbarPlacesIcon"))
-        let profileNavController = buildNavController(coordinator: ProfileCoordinator.profile, title: "Профиль", tabbarIcon: #imageLiteral(resourceName: "tabbarProfiletIcon"))
+        let profileNavController = buildNavController(coordinator: ProfileCoordinator.authorization, title: "Профиль", tabbarIcon: #imageLiteral(resourceName: "tabbarProfiletIcon"))
         let otherNavController = buildNavController(coordinator: OtherCoordinator.other, title: "Прочее", tabbarIcon: #imageLiteral(resourceName: "tabbarOtherIcon"))
+        
+        profileNavController.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "authBackIndicator").withRenderingMode(.alwaysOriginal)
+        profileNavController.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "authBackIndicator").withRenderingMode(.alwaysOriginal)
+        profileNavController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        profileNavController.navigationBar.shadowImage = UIImage()
+        profileNavController.navigationBar.isTranslucent = true
+        profileNavController.view.backgroundColor = .clear
         
         tabBarController.setViewControllers([searchNavController, placesNavController, profileNavController, otherNavController], animated: false)
         

@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
-//import RxSwift
-//import RxCocoa
+import RxSwift
+import RxCocoa
 
 class RouterManager: NSObject {
     
@@ -141,6 +141,34 @@ extension RouterManager {
         }
         
         return vc
+    }
+    
+}
+
+extension RouterManager {
+    struct Route {
+        let coordinator: Coordinator
+        let presentation: PresentationType
+        
+        init(coordinator: Coordinator, presentation: PresentationType = .push(by: .onSelectedTab, animated: .standart)) {
+            self.coordinator = coordinator
+            self.presentation = presentation
+        }
+        
+    }
+}
+
+extension Reactive where Base: RouterManager {
+    typealias Route = Base.Route
+    
+    enum PresentationError: Error {
+        case cantPresent(route: Route)
+    }
+    
+    var present: Binder<Route> {
+        return Binder<Route>(base) { (router, route) in
+            router.present(route.coordinator, presentationType: route.presentation) 
+        }
     }
     
 }

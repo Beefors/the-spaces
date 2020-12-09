@@ -12,8 +12,8 @@ struct RegisterRequestModel: Encodable {
     let email: String
     let lastName: String
     let firstName: String
-    let birthDate: Date
-    let specialization: String
+    let birthDate: Date?
+    let specialization: String?
     let phoneNumber: String
     let password: String
 }

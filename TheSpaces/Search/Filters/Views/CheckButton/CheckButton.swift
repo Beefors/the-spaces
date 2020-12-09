@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class CheckButton: UIView {
     
@@ -28,7 +30,7 @@ class CheckButton: UIView {
             render()
         }
     }
-
+    
     //MARK: - Outlets
     @IBOutlet weak var topContentConstr: NSLayoutConstraint!
     @IBOutlet weak var leadingContentConstr: NSLayoutConstraint!
@@ -66,6 +68,7 @@ class CheckButton: UIView {
             bottomAnchor.constraint(equalTo: mainView.bottomAnchor)
         ])
         
+        checkView.tintColor = .STBlue
         checkView.layer.cornerRadius = checkView.bounds.height / 2
         checkView.layer.borderColor = UIColor.STGrayUnderline.cgColor
         label.font = .historyNotWeight
@@ -76,7 +79,7 @@ class CheckButton: UIView {
     }
     
     private func render() {
-        checkView.backgroundColor = isSelected ? .STBlue : .clear
+        checkView.backgroundColor = isSelected ? checkView.tintColor : .clear
         checkView.layer.borderWidth = !isSelected ? 1.4 : 0
     }
     
@@ -88,4 +91,12 @@ class CheckButton: UIView {
         itemInsetConstr.constant = itemsInset
     }
     
+}
+
+extension Reactive where Base: CheckButton {
+    var isSelected: Binder<Bool> {
+        return Binder<Bool>(base) { (target, value) in
+            target.isSelected = value
+        }
+    }
 }
