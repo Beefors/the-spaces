@@ -11,13 +11,17 @@ import UIKit
 class AuthorizationViewController: UIViewController {
     
     //MARK: Outlets
-    // Image views
     @IBOutlet weak var authStyleImageView: UIImageView!
+    
+    // Image views
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projImageView: UIImageView!
     
     // Text fields
     @IBOutlet weak var loginTextField: UITextField!
+    @IBOutlet weak var loginTFContainer: UIView!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var passwordTFContainer: UIView!
     
     // Buttons
     @IBOutlet weak var loginButton: UIButton!
@@ -37,7 +41,5 @@ class AuthorizationViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         behaviorService.setup()
     }
-
-    
     
 }

@@ -27,6 +27,7 @@ enum ApiProvider {
     case sendPhoneCode(email: String)
     case confirmPhone(email: String, code: String)
     case getToken(email: String, password: String)
+    case refreshToken(refreshToken: String)
     
 }
 
@@ -76,6 +77,7 @@ extension ApiProvider: TargetType {
         case .sendPhoneCode: return "Users/sendPhoneCode"
         case .confirmPhone: return "Users/confirmPhone"
         case .getToken: return "Users/token"
+        case .refreshToken: return "Users/refresh"
             
         }
     }
@@ -124,8 +126,9 @@ extension ApiProvider: TargetType {
         case .sendPhoneCode(let email): return nil
         case .confirmPhone(let email, let code): return ["email": email,
                                                          "code": code]
-        case .getToken(let email, let password): return ["email": email,
+        case .getToken(let email, let password): return ["userName": email,
                                                          "password": password]
+        case .refreshToken(let refreshToken): return ["token": refreshToken]
         }
     }
     

@@ -88,7 +88,7 @@ class RegisterBehaviorService: NSObject, ServiceType {
             .bind(to: viewModel.registerTrigger)
             .disposed(by: viewModel)
         
-        //MARK: Setup error obaserver
+        //MARK: Setup error observer
         viewModel.errorObservable
             .subscribe(onNext: {[unowned self] (error) in
                 
@@ -123,6 +123,14 @@ class RegisterBehaviorService: NSObject, ServiceType {
                 
                 self.builderUI.showAlert(title: error.localizedDescription, action: action)
             })
+            .disposed(by: viewModel)
+        
+        //MARK: Setup success observer
+        viewModel.successObservable
+            .map({[unowned self] in self.viewModel.userModelObservable.value})
+            .map({UserAuthModel(registerModel: $0)})
+            .map({RouterManager.Route(coordinator: ProfileCoordinator.confirmCode(authModel: $0))})
+            .bind(to: RouterManager.shared.rx.present)
             .disposed(by: viewModel)
         
     }

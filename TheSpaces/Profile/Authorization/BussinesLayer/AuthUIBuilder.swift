@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AuthuiBuilder: ServiceType, UIBuilderType {
+class AuthuiBuilder: ServiceType, UIBuilderType, TFContainerStyler {
     
     //MARK: Owner type
     typealias Owner = AuthBehaviorService.Owner
@@ -30,18 +30,14 @@ class AuthuiBuilder: ServiceType, UIBuilderType {
     func buildUI() {
         
         // Setup login text field
-        let loginTFContainer = owner.loginTextField.superview
-        
-        loginTFContainer?.layer.cornerRadius = (loginTFContainer?.bounds.height ?? 0) / 2
-        loginTFContainer?.layer.borderWidth = 1
-        loginTFContainer?.layer.borderColor = UIColor.STGrayUnderline.cgColor
+        owner.loginTFContainer.layer.cornerRadius = owner.loginTFContainer.bounds.height / 2
+        owner.loginTFContainer.layer.borderWidth = 1
+        borderFor(textFieldContainer: owner.loginTFContainer, style: .normal)
         
         // Setup password text field
-        let passwordTFContainer = owner.passwordTextField.superview
-        
-        passwordTFContainer?.layer.cornerRadius = (passwordTFContainer?.bounds.height ?? 0) / 2
-        passwordTFContainer?.layer.borderWidth = 1
-        passwordTFContainer?.layer.borderColor = UIColor.STGrayUnderline.cgColor
+        owner.passwordTFContainer.layer.cornerRadius = owner.passwordTFContainer.bounds.height / 2
+        owner.passwordTFContainer.layer.borderWidth = 1
+        borderFor(textFieldContainer: owner.passwordTFContainer, style: .normal)
         
         // Setup login button
         owner.loginButton.layer.cornerRadius = owner.loginButton.bounds.height / 2
@@ -64,13 +60,12 @@ class AuthuiBuilder: ServiceType, UIBuilderType {
         owner.refreshButton.titleLabel?.attributedText = attrString
 
         // Setup error label
-        owner.errorLabel.attributedText = NSAttributedString(string: owner.errorLabel.text ?? "", attributes: [.font: UIFont.underline, .foregroundColor: UIColor.STRed, .underlineStyle: NSUnderlineStyle.single.rawValue, .underlineColor: UIColor.STRed])
-        
         hideError()
         
     }
     
-    func showError() {
+    func showError(text: String) {
+        owner.errorLabel.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.underline, .foregroundColor: UIColor.STRed, .underlineStyle: NSUnderlineStyle.single.rawValue, .underlineColor: UIColor.STRed])
         owner.errorLabel.alpha = 1
     }
     

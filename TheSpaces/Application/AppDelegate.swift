@@ -29,9 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIBarButtonItem.appearance().setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
         
-        // Setup progress hud
-//        ProgressHUD
-        
         return true
     }
 

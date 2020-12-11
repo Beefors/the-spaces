@@ -9,8 +9,15 @@
 import Foundation
 
 enum Errors: Error {
+    
+    enum OAuthError {
+        case needRefreshToken
+        case needRelogin
+    }
+    
     case objectMapping
     case serverNotResponding
+    case oauth(type: OAuthError)
 }
 
 extension Errors: LocalizedError {

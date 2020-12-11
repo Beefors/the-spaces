@@ -45,24 +45,35 @@ class NetworkService: NSObject {
     func register(request: RegisterRequestModel) -> Observable<Void> {
         return requestProvider.rx
             .request(.register(data: request))
-            .debug()
-            .map({ (response) in
-                switch response.statusCode {
-                case 200: return
-                case 500: throw Errors.serverNotResponding
-                default:
-                    do {
-                        let string = try response.mapString()
-                        throw RawStringError(value: string)
-                    } catch let e as RawStringError {
-                        throw e
-                    } catch {
-                        throw Errors.objectMapping
-                    }
-                }
-
-            })
             .asObservable()
+            .validate()
+            .mapTo(Void())
+    }
+    
+    func confirmPhone(email: String, code: String) -> Observable<Void> {
+        return requestProvider.rx
+            .request(.confirmPhone(email: email, code: code))
+            .asObservable()
+            .validate()
+            .mapTo(Void())
+    }
+    
+    func authorizate(email: String, password: String) -> Observable<(userData: UserDataModel,userAuthorization: UserAuthorizationModel)> {
+        return requestProvider.rx
+            .request(.getToken(email: email, password: password))
+            .asObservable()
+            .debug()
+            .validate()
+            .map { (response) in
+                do {
+                    let data = try response.map(UserDataModel.self)
+                    let auth = try response.map(UserAuthorizationModel.self)
+                    return (data, auth)
+                } catch {
+                    throw Errors.objectMapping
+                }
+            }
+            .debug()
     }
     
 }

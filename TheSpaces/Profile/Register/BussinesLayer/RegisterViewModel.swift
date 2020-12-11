@@ -32,6 +32,8 @@ class RegisterViewModel: ViewModelType {
     let userModelObservable = BehaviorRelay<UserRegisterModel>(value: UserRegisterModel())
     
     let registerTrigger = PublishRelay<(Void)>()
+    
+    let successObservable = PublishRelay<Void>()
     let errorObservable = PublishRelay<Error>()
     
     //MARK: - Initialization
@@ -165,8 +167,9 @@ class RegisterViewModel: ViewModelType {
                 ProgressHUD.show(nil, interaction: false)
             })
             .flatMap({ NetworkService.shared.register(request: $0.registerRequest()) })
-            .subscribe { (user) in
+            .subscribe {[unowned self] (user) in
                 ProgressHUD.dismiss()
+                self.successObservable.accept(())
             } onError: {[unowned self] (error) in
                 ProgressHUD.dismiss()
                 self.errorObservable.accept(error)

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegisterUIBuilder: ServiceType, UIBuilderType {
+class RegisterUIBuilder: ServiceType, UIBuilderType, TFContainerStyler {
     
     //MARK: Owner type
     typealias Owner = RegisterBehaviorService.Owner
@@ -72,23 +72,6 @@ class RegisterUIBuilder: ServiceType, UIBuilderType {
             owner.emailTextField,
             owner.passwordTextField
         ]
-    }
-    
-    enum TFBorderStyle {
-        case normal
-        case red
-    }
-    
-    func borderFor(textFieldContainer: UIView, style: TFBorderStyle) {
-        
-        let borderColor: CGColor
-        
-        switch style {
-        case .normal: borderColor = UIColor.STGrayUnderline.cgColor
-        case .red: borderColor = UIColor.STRed.cgColor
-        }
-        
-        textFieldContainer.layer.borderColor = borderColor
     }
     
     func showAlert(title: String, action: (() -> ())?) {

@@ -14,6 +14,7 @@ class TabBarSource: NSObject, UITabBarControllerDelegate {
     static let shared = TabBarSource()
     
     var tabBarController: UITabBarController!
+    private(set) var profileNavController: ProfileNavigationController!
     
     func setupForTabBarController(_ tabBarController: TabbarController) {
         self.tabBarController = tabBarController
@@ -29,8 +30,9 @@ class TabBarSource: NSObject, UITabBarControllerDelegate {
     
     private func setupControllers() {
         
-        func buildNavController(coordinator: Coordinator, title: String, tabbarIcon: UIImage) -> UINavigationController {
-            let navController = UINavigationController(rootViewController: coordinator.viewController)
+        @discardableResult
+        func buildNavController(navControllerType: UINavigationController.Type = UINavigationController.self, coordinator: Coordinator, title: String, tabbarIcon: UIImage) -> UINavigationController {
+            let navController = navControllerType.init(rootViewController: coordinator.viewController)
             navController.tabBarItem = UITabBarItem(title: title,
                                                     image: tabbarIcon.withRenderingMode(.alwaysTemplate),
                                                     selectedImage: tabbarIcon.withRenderingMode(.alwaysOriginal))
@@ -44,9 +46,9 @@ class TabBarSource: NSObject, UITabBarControllerDelegate {
         
         let searchNavController = buildNavController(coordinator: SearchCoordinator.main, title: "Поиск", tabbarIcon: #imageLiteral(resourceName: "tabbarSearchIcon"))
         let placesNavController = buildNavController(coordinator: PlacesCoordinator.placesList, title: "Мои места", tabbarIcon: #imageLiteral(resourceName: "tabbarPlacesIcon"))
-        let profileNavController = buildNavController(coordinator: ProfileCoordinator.authorization, title: "Профиль", tabbarIcon: #imageLiteral(resourceName: "tabbarProfiletIcon"))
+        profileNavController = (buildNavController(navControllerType: ProfileNavigationController.self, coordinator: ProfileCoordinator.authorization, title: "Профиль", tabbarIcon: #imageLiteral(resourceName: "tabbarProfiletIcon")) as! ProfileNavigationController)
         let otherNavController = buildNavController(coordinator: OtherCoordinator.other, title: "Прочее", tabbarIcon: #imageLiteral(resourceName: "tabbarOtherIcon"))
-        
+
         profileNavController.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "authBackIndicator").withRenderingMode(.alwaysOriginal)
         profileNavController.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "authBackIndicator").withRenderingMode(.alwaysOriginal)
         profileNavController.navigationBar.setBackgroundImage(UIImage(), for: .default)
