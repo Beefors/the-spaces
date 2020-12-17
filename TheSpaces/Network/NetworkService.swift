@@ -14,6 +14,7 @@ import Moya
 class NetworkService: NSObject {
     
     static let shared = NetworkService()
+    private let tokenProvider = TokenProvider()
     
     private let requestProvider = MoyaProvider<ApiProvider>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: [.formatRequestAscURL, .successResponseBody])), MoyaCacheablePlugin()])
     
@@ -58,22 +59,26 @@ class NetworkService: NSObject {
             .mapTo(Void())
     }
     
-    func authorizate(email: String, password: String) -> Observable<(userData: UserDataModel,userAuthorization: UserAuthorizationModel)> {
+    func authorizate(email: String, password: String) -> Observable<UserDataModel> {
         return requestProvider.rx
             .request(.getToken(email: email, password: password))
             .asObservable()
-            .debug()
             .validate()
-            .map { (response) in
+            .map {[unowned self] (response) in
                 do {
                     let data = try response.map(UserDataModel.self)
                     let auth = try response.map(UserAuthorizationModel.self)
-                    return (data, auth)
+                    self.tokenProvider.authorization = auth
+                    return data
                 } catch {
                     throw Errors.objectMapping
                 }
             }
-            .debug()
+    }
+    
+    func logout() -> Observable<Void> {
+        tokenProvider.authorization = nil
+        return Observable<Void>.just(())
     }
     
 }
@@ -87,4 +92,37 @@ final class MoyaCacheablePlugin: PluginType {
     }
     return request
   }
+}
+
+//MARK: - TokenProvider
+import MagicalRecord
+
+private class TokenProvider {
+    var authorization: UserAuthorizationModel? {
+        didSet {
+            
+            MagicalRecord.save(blockAndWait: { contenxt in
+                UserAuthDBModel.mr_truncateAll(in: contenxt)
+            })
+             
+            guard authorization != nil else { return }
+            
+            MagicalRecord.save ({[unowned self] (context) in
+                let authDB = UserAuthDBModel.mr_createEntity(in: context)
+                authDB?.accessToken = self.authorization?.accessToken
+                authDB?.refreshToken = self.authorization?.refreshToken
+                authDB?.accessTokenExpiresAt = self.authorization?.accessTokenExpiresAt
+                authDB?.refreshTokenExpiresAt = self.authorization?.refreshTokenExpiresAt
+            })
+        }
+    }
+    
+    init() {
+        guard let authDB = UserAuthDBModel.mr_findFirst() else { return }
+        authorization = UserAuthorizationModel(accessToken: authDB.accessToken!,
+                                               refreshToken: authDB.refreshToken!,
+                                               accessTokenExpiresAt: authDB.accessTokenExpiresAt!,
+                                               refreshTokenExpiresAt: authDB.refreshTokenExpiresAt!)
+    }
+    
 }

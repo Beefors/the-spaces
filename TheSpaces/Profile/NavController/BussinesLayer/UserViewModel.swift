@@ -17,9 +17,10 @@ class UserViewModel: ViewModelType {
     
     //MARK: - Triggers
     let loginTrigger = PublishRelay<UserAuthModel>()
-    let refreshTrigger = PublishRelay<String>()
+    let logoutTrigger = PublishRelay<Void>()
     
     //MARK: - Observables
+    let userObservable = BehaviorRelay<UserDataModel?>(value: UserDataFactory.loadUserData())
     let errorObservables = PublishRelay<Error>()
     
     //MARK: - Initialization
@@ -29,13 +30,22 @@ class UserViewModel: ViewModelType {
     
     private func setupObservables() {
         setupLoginObservable()
+        
+        logoutTrigger
+            .flatMap({ NetworkService.shared.logout() })
+            .do(onNext: { UserDataFactory.removeUserData() })
+            .mapTo(nil)
+            .bind(to: userObservable)
+            .disposed(by: bag)
+
     }
     
     private func setupLoginObservable() {
         loginTrigger
             .flatMap({NetworkService.shared.authorizate(email: $0.email, password: $0.pass)})
-            .subscribe {[unowned self] (userData, auth) in
-                
+            .subscribe {[unowned self] (userData) in
+                UserDataFactory.saveUserData(userData)
+                self.userObservable.accept(userData)
             } onError: {[unowned self] (error) in
                 self.errorObservables.accept(error)
                 self.setupLoginObservable()

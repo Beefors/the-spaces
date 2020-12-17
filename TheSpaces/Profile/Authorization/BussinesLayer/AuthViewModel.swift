@@ -46,9 +46,14 @@ class AuthViewModel: ViewModelType {
                 UserAuthModel(email: self.loginObservable.value, pass: self.passObservable.value)
             }
             .validate()
-            .subscribe(onNext: {[unowned authViewModel] (auth) in
-                authViewModel.loginTrigger.accept(auth)
+            .do(onNext: { _ in ProgressHUD.show(nil, interaction: false)})
+            .do(onNext: { TabBarSource.shared.profileNavController.behaviorService.viewModel.loginTrigger.accept($0) })
+            .mapTo(())
+            .flatMap({[unowned authViewModel] in authViewModel.userObservable.filterNil().take(1) })
+            .subscribe(onNext: { _ in
+                ProgressHUD.dismiss()
             }, onError: {[unowned self, unowned authViewModel] (error) in
+                ProgressHUD.dismiss()
                 self.errorObservable.accept(error)
                 self.setupAuthTrigger(authViewModel: authViewModel)
             })

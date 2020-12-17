@@ -29,6 +29,15 @@ class ConfirmCodeViewModel: ViewModelType {
     //MARK: - Initialization
     init() {
         setupObservers()
+        
+        TabBarSource.shared
+            .profileNavController
+            .behaviorService
+            .viewModel
+            .errorObservables
+            .bind(to: errorObservable)
+            .disposed(by: bag)
+        
     }
     
     //MARK: - Helpers
@@ -41,9 +50,11 @@ class ConfirmCodeViewModel: ViewModelType {
             .validate()
             .do(onNext: {_ in ProgressHUD.show(nil, interaction: false)})
             .flatMap({[unowned self] in NetworkService.shared.confirmPhone(email: self.authModel.email, code: $0.code)})
-            .subscribe {[unowned self] in
+            .do(onNext: {[unowned self] in self.successObservable.accept(()) })
+            .do(onNext: {[unowned self] in TabBarSource.shared.profileNavController.behaviorService.viewModel.loginTrigger.accept(self.authModel) })
+            .flatMap({ TabBarSource.shared.profileNavController.behaviorService.viewModel.userObservable.filterNil().take(1) })
+            .subscribe { _ in
                 ProgressHUD.dismiss()
-                self.successObservable.accept(())
             } onError: {[unowned self] (error) in
                 ProgressHUD.dismiss()
                 self.errorObservable.accept(error)

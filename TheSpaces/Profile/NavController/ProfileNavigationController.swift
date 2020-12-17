@@ -14,7 +14,10 @@ class ProfileNavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        behaviorService.setup()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.behaviorService.setup()
+        }) 
     }
     
 }

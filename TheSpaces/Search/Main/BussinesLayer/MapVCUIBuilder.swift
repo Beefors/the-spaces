@@ -17,6 +17,9 @@ class MapVCUIBuilder: UIBuilderType {
     }
     
     func buildUI() {
+        
+        controller.searchPanelView.textField.tintColor = UIColor.STBlue
+        
         // Setup buttons
         controller.userLocationButton.clipsToBounds = false
         controller.userLocationButton.layer.masksToBounds = false

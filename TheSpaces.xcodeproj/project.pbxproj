@@ -47,6 +47,7 @@
 		556EC73824E6A1190017D3AC /* SearchResultItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556EC73724E6A1190017D3AC /* SearchResultItemCell.swift */; };
 		5572CBED24E13AD800D0175C /* SearchHistoryUIBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5572CBEC24E13AD800D0175C /* SearchHistoryUIBuilder.swift */; };
 		5572CBF024E146F700D0175C /* TheSpaces.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5572CBEE24E146F700D0175C /* TheSpaces.xcdatamodeld */; };
+		557428E3258B549E00AD43FD /* ProfileUIBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557428E2258B549E00AD43FD /* ProfileUIBuilder.swift */; };
 		557B1CE024B458C60050289D /* TabBarSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CDF24B458C60050289D /* TabBarSource.swift */; };
 		557B1CE724B46BA30050289D /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 557B1CE624B46BA30050289D /* Search.storyboard */; };
 		557B1CE924B46BB70050289D /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B1CE824B46BB70050289D /* SearchCoordinator.swift */; };
@@ -75,6 +76,9 @@
 		559B1DAC2580FCBB00ADFC22 /* ConfirmCodeBehaviorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559B1DAB2580FCBB00ADFC22 /* ConfirmCodeBehaviorService.swift */; };
 		559B1DB02580FEC600ADFC22 /* ConfirmCodeUIBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559B1DAF2580FEC600ADFC22 /* ConfirmCodeUIBuilder.swift */; };
 		559B1DB32581032E00ADFC22 /* ConfirmCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559B1DB22581032E00ADFC22 /* ConfirmCodeViewModel.swift */; };
+		55A45712258A15E1000457D9 /* UserDataFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A45711258A15E1000457D9 /* UserDataFactory.swift */; };
+		55A45716258A393B000457D9 /* ProfileBehaviorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A45715258A393B000457D9 /* ProfileBehaviorService.swift */; };
+		55A45719258A3C03000457D9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A45718258A3C03000457D9 /* ProfileViewModel.swift */; };
 		55B155FE254023C300BFC7D1 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B155FD254023C300BFC7D1 /* AuthorizationViewController.swift */; };
 		55B156032540300A00BFC7D1 /* AuthBehaviorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B156022540300A00BFC7D1 /* AuthBehaviorService.swift */; };
 		55B156072540312900BFC7D1 /* AuthUIBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B156062540312900BFC7D1 /* AuthUIBuilder.swift */; };
@@ -97,6 +101,7 @@
 		55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */; };
 		55C899ED24B611D70048FF59 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899EC24B611D70048FF59 /* LocationService.swift */; };
 		55C899F024B614B30048FF59 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C899EF24B614B30048FF59 /* ViewModelType.swift */; };
+		55C9C47F2588D7520018824F /* ResponsePasswordErrorChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C9C47E2588D7520018824F /* ResponsePasswordErrorChecker.swift */; };
 		55DC8F1C2511ECFF00BC0BCC /* FiltersRadioButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F1B2511ECFF00BC0BCC /* FiltersRadioButtonViewController.swift */; };
 		55DC8F202511EDD400BC0BCC /* RadioButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F1F2511EDD400BC0BCC /* RadioButtonCell.swift */; };
 		55DC8F222511EE6200BC0BCC /* FiltersRadioButtonBehaviorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DC8F212511EE6200BC0BCC /* FiltersRadioButtonBehaviorService.swift */; };
@@ -177,6 +182,7 @@
 		556EC73724E6A1190017D3AC /* SearchResultItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemCell.swift; sourceTree = "<group>"; };
 		5572CBEC24E13AD800D0175C /* SearchHistoryUIBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryUIBuilder.swift; sourceTree = "<group>"; };
 		5572CBEF24E146F700D0175C /* TheSpaces.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheSpaces.xcdatamodel; sourceTree = "<group>"; };
+		557428E2258B549E00AD43FD /* ProfileUIBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUIBuilder.swift; sourceTree = "<group>"; };
 		557B1CDF24B458C60050289D /* TabBarSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSource.swift; sourceTree = "<group>"; };
 		557B1CE624B46BA30050289D /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		557B1CE824B46BB70050289D /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
@@ -205,6 +211,9 @@
 		559B1DAB2580FCBB00ADFC22 /* ConfirmCodeBehaviorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCodeBehaviorService.swift; sourceTree = "<group>"; };
 		559B1DAF2580FEC600ADFC22 /* ConfirmCodeUIBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCodeUIBuilder.swift; sourceTree = "<group>"; };
 		559B1DB22581032E00ADFC22 /* ConfirmCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCodeViewModel.swift; sourceTree = "<group>"; };
+		55A45711258A15E1000457D9 /* UserDataFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataFactory.swift; sourceTree = "<group>"; };
+		55A45715258A393B000457D9 /* ProfileBehaviorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBehaviorService.swift; sourceTree = "<group>"; };
+		55A45718258A3C03000457D9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		55B155FD254023C300BFC7D1 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		55B156022540300A00BFC7D1 /* AuthBehaviorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBehaviorService.swift; sourceTree = "<group>"; };
 		55B156062540312900BFC7D1 /* AuthUIBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUIBuilder.swift; sourceTree = "<group>"; };
@@ -227,6 +236,7 @@
 		55C899E924B610A70048FF59 /* LocationServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceViewModel.swift; sourceTree = "<group>"; };
 		55C899EC24B611D70048FF59 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		55C899EF24B614B30048FF59 /* ViewModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		55C9C47E2588D7520018824F /* ResponsePasswordErrorChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePasswordErrorChecker.swift; sourceTree = "<group>"; };
 		55DC8F1B2511ECFF00BC0BCC /* FiltersRadioButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRadioButtonViewController.swift; sourceTree = "<group>"; };
 		55DC8F1F2511EDD400BC0BCC /* RadioButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonCell.swift; sourceTree = "<group>"; };
 		55DC8F212511EE6200BC0BCC /* FiltersRadioButtonBehaviorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRadioButtonBehaviorService.swift; sourceTree = "<group>"; };
@@ -356,12 +366,12 @@
 		55236E1D24B9FF5800619510 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				55C9C47D2588D6F30018824F /* ResponseValidation */,
 				55236E1E24B9FF6900619510 /* PlaceModel.swift */,
 				55EFB67824BB34F100C26495 /* CityModel.swift */,
 				55EFB67E24BB54CF00C26495 /* Errors.swift */,
 				55243A4A24E52EF5006B08D1 /* PlacesFilter.swift */,
 				308577C42521C02C0038336F /* RegisterRequestModel.swift */,
-				5584EB1725826D81001C0A6A /* ResponseStatusCodeValidator.swift */,
 				55FC8CEB25836D09005AA7E3 /* UserDataModel.swift */,
 				55FC8CEE25836D37005AA7E3 /* UserAuthorizationModel.swift */,
 			);
@@ -535,7 +545,6 @@
 		5584EB0725822AF2001C0A6A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5584EB0825822AFF001C0A6A /* UserViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -554,6 +563,8 @@
 			isa = PBXGroup;
 			children = (
 				5584EB1125823C8E001C0A6A /* ProfileNavControllerBehaviorService.swift */,
+				5584EB0825822AFF001C0A6A /* UserViewModel.swift */,
+				55A45711258A15E1000457D9 /* UserDataFactory.swift */,
 			);
 			path = BussinesLayer;
 			sourceTree = "<group>";
@@ -604,6 +615,7 @@
 		558575EF24B5A16200FDAEAE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				55A45714258A38FD000457D9 /* BussinesLayer */,
 				558575F724B5A38300FDAEAE /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -642,6 +654,16 @@
 				559B1DAB2580FCBB00ADFC22 /* ConfirmCodeBehaviorService.swift */,
 				559B1DAF2580FEC600ADFC22 /* ConfirmCodeUIBuilder.swift */,
 				559B1DB22581032E00ADFC22 /* ConfirmCodeViewModel.swift */,
+			);
+			path = BussinesLayer;
+			sourceTree = "<group>";
+		};
+		55A45714258A38FD000457D9 /* BussinesLayer */ = {
+			isa = PBXGroup;
+			children = (
+				55A45715258A393B000457D9 /* ProfileBehaviorService.swift */,
+				557428E2258B549E00AD43FD /* ProfileUIBuilder.swift */,
+				55A45718258A3C03000457D9 /* ProfileViewModel.swift */,
 			);
 			path = BussinesLayer;
 			sourceTree = "<group>";
@@ -757,6 +779,15 @@
 				5562FBBA24BEE66E0030F43D /* Models */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		55C9C47D2588D6F30018824F /* ResponseValidation */ = {
+			isa = PBXGroup;
+			children = (
+				5584EB1725826D81001C0A6A /* ResponseStatusCodeValidator.swift */,
+				55C9C47E2588D7520018824F /* ResponsePasswordErrorChecker.swift */,
+			);
+			path = ResponseValidation;
 			sourceTree = "<group>";
 		};
 		55DC8F1A2511ECC400BC0BCC /* RadioButtonFilters */ = {
@@ -1003,11 +1034,13 @@
 			files = (
 				557B1CEB24B46D230050289D /* MapViewController.swift in Sources */,
 				5572CBF024E146F700D0175C /* TheSpaces.xcdatamodeld in Sources */,
+				55A45719258A3C03000457D9 /* ProfileViewModel.swift in Sources */,
 				55C899E524B5E92B0048FF59 /* UIFont + Extension.swift in Sources */,
 				556DE0D52578EC7200A60307 /* UserRegisterModel.swift in Sources */,
 				55C899ED24B611D70048FF59 /* LocationService.swift in Sources */,
 				559B1DAC2580FCBB00ADFC22 /* ConfirmCodeBehaviorService.swift in Sources */,
 				557B1CF024B46EC10050289D /* UIColor + Extension.swift in Sources */,
+				55A45712258A15E1000457D9 /* UserDataFactory.swift in Sources */,
 				55DC8F262511F3DA00BC0BCC /* FiltersRadioButtonUIBuilder.swift in Sources */,
 				55F6B944250A5A1C0030C83B /* CheckmarkCell.swift in Sources */,
 				55EF8C4B24BDADB800E822E8 /* PlacesListViewController.swift in Sources */,
@@ -1025,6 +1058,7 @@
 				55C899EA24B610A70048FF59 /* LocationServiceViewModel.swift in Sources */,
 				55BD4F4C25055C71001C99A4 /* FilterCellSpecificationModel.swift in Sources */,
 				55B717F32573C9B0006D30B2 /* RegisterBehaviorService.swift in Sources */,
+				557428E3258B549E00AD43FD /* ProfileUIBuilder.swift in Sources */,
 				559B1DA82580FB0A00ADFC22 /* ConfirmCodeViewController.swift in Sources */,
 				5562FBBC24BEE6AE0030F43D /* RxSectionModel.swift in Sources */,
 				5584EB1825826D81001C0A6A /* ResponseStatusCodeValidator.swift in Sources */,
@@ -1077,6 +1111,7 @@
 				55C899E224B5D0C20048FF59 /* YMKCameraPosition + TS.swift in Sources */,
 				552B839E250A907900DE0B07 /* FilterCellCheckmarksModel.swift in Sources */,
 				558575E924B5A12800FDAEAE /* PlacesCoordinator.swift in Sources */,
+				55A45716258A393B000457D9 /* ProfileBehaviorService.swift in Sources */,
 				55E4AF7424E161D0007B7D68 /* ManagedObject + Rx.swift in Sources */,
 				551CEA6D24B1CF8A00465B69 /* RouterManager.swift in Sources */,
 				55EFB67924BB34F100C26495 /* CityModel.swift in Sources */,
@@ -1086,6 +1121,7 @@
 				5584EB1225823C8E001C0A6A /* ProfileNavControllerBehaviorService.swift in Sources */,
 				554809A424BED75E008BF41E /* PlacesListTableViewServiceViewModel.swift in Sources */,
 				558575FA24B5A3EF00FDAEAE /* OtherViewController.swift in Sources */,
+				55C9C47F2588D7520018824F /* ResponsePasswordErrorChecker.swift in Sources */,
 				55E193E424B6F47600BF8313 /* MapVCUIBuilder.swift in Sources */,
 				559B1DB02580FEC600ADFC22 /* ConfirmCodeUIBuilder.swift in Sources */,
 				551A106524F66997004DEFA9 /* FiltersDataSource.swift in Sources */,
@@ -1254,7 +1290,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 9SXF3SW9RV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TheSpaces/Application/Info.plist";
@@ -1278,7 +1314,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 9SXF3SW9RV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/TheSpaces/Application/Info.plist";

@@ -61,6 +61,11 @@ class TabBarSource: NSObject, UITabBarControllerDelegate {
         tabBarController.tabBar.bounds = CGRect(x: 0, y: 0, width: tabBarController.tabBar.bounds.width, height: 60)
     }
     
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard viewController == tabBarController.selectedViewController else { return true }
+        guard let profileNavigation = viewController as? ProfileNavigationController else { return true }
+        return !(profileNavigation.topViewController is ProfileViewController)
+    }
 }
 
 class TabbarController: UITabBarController {

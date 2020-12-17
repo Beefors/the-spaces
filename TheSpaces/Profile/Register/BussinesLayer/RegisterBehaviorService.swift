@@ -101,24 +101,36 @@ class RegisterBehaviorService: NSObject, ServiceType {
                     
                     switch registerDataError {
                     case .firstnameIsInvalid:
-                        tfContainer = owner.nameTextFieldContainer
-                        textField = owner.nameTextField
+                        tfContainer = self.owner.nameTextFieldContainer
+                        textField = self.owner.nameTextField
                     case .lastnameIsInvalid:
-                        tfContainer = owner.lastnameTextFieldContainer
-                        textField = owner.lastnameTextField
+                        tfContainer = self.owner.lastnameTextFieldContainer
+                        textField = self.owner.lastnameTextField
                     case .phoneIsInvalid:
-                        tfContainer = owner.phoneTextFieldContainer
-                        textField = owner.phoneTextField
+                        tfContainer = self.owner.phoneTextFieldContainer
+                        textField = self.owner.phoneTextField
                     case .emailIsInvalid:
-                        tfContainer = owner.emailTextFieldContainer
-                        textField = owner.emailTextField
+                        tfContainer = self.owner.emailTextFieldContainer
+                        textField = self.owner.emailTextField
                     case .passwordIsInvalid:
-                        tfContainer = owner.passwordTextFieldContainer
-                        textField = owner.passwordTextField
+                        tfContainer = self.owner.passwordTextFieldContainer
+                        textField = self.owner.passwordTextField
                     }
                     
                     action = { textField.becomeFirstResponder() }
                     self.builderUI.borderFor(textFieldContainer: tfContainer, style: .red)
+                }
+                
+                switch error {
+                case is ResponseEmailErrorChecker.EmailServerError:
+                    action = { self.owner.emailTextField.becomeFirstResponder() }
+                    self.builderUI.borderFor(textFieldContainer: self.owner.emailTextFieldContainer, style: .red)
+                    
+                case is ResponsePasswordErrorChecker.PasswordServerError:
+                    action = { self.owner.passwordTextField.becomeFirstResponder() }
+                    self.builderUI.borderFor(textFieldContainer: self.owner.passwordTextFieldContainer, style: .red)
+                    
+                default: break
                 }
                 
                 self.builderUI.showAlert(title: error.localizedDescription, action: action)
