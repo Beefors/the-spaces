@@ -59,10 +59,20 @@ struct PlaceModel: Decodable {
     
 }
 
-enum SeatModelMap: String {
-    case day = "В день"
-    case week = "За неделю"
-    case month = "В месяц"
+enum PaymentModelMap: Int {
+    case day = 1
+    case week = 2
+    case month = 3
+}
+
+extension PaymentModelMap {
+    var localizedDescription: String {
+        switch self {
+        case .day: return "В день"
+        case .week: return "За неделю"
+        case .month: return "В месяц"
+        }
+    }
 }
 
 struct SeatType: Decodable {
@@ -72,6 +82,9 @@ struct SeatType: Decodable {
     let capacity: Int
     let paymentTypes: [PaymentType]
     
+    var price: Float {
+        return paymentTypes.map({$0.price}).min() ?? 0
+    }
     
 }
 
@@ -81,8 +94,8 @@ struct PaymentType: Decodable {
     let paymentTypeName: String
     let price: Float
     
-    var modelMap: SeatModelMap? {
-        return SeatModelMap(rawValue: paymentTypeName)
+    var modelMap: PaymentModelMap? {
+        return PaymentModelMap(rawValue: paymentType)
     }
 }
 
@@ -93,8 +106,17 @@ extension PlaceModel {
         }.min() ?? 0
     }
     
-    func seatType(by modelMap: SeatModelMap) -> SeatType? {
-        return seatTypes.first(where: { $0.modelMap == modelMap })
+    func seatType(by modelMap: PaymentModelMap) -> SeatType? {
+        
+        var seatType: SeatType?
+        
+        for type in seatTypes {
+            guard type.paymentTypes.first(where: { $0.modelMap == modelMap }) != nil else { continue }
+            seatType = type
+            break
+        }
+        
+        return seatType
     }
     
 }
