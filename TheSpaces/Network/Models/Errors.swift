@@ -22,6 +22,7 @@ enum Errors: Error {
 
 extension Errors: LocalizedError {
     var errorDescription: String? {
+        
         switch self {
         case .objectMapping: return "Ошибка чтения данных"
         case .serverNotResponding: return "Сервер не отвечает, попробуйте позже"

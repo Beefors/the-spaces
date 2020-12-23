@@ -19,6 +19,8 @@ extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
             do {
                 return .just(try $0.map(type, atKeyPath: keyPath, using: decoder, failsOnEmptyData: failsOnEmptyData))
             } catch {
+                
+                
                 throw Errors.objectMapping
             }
             

@@ -16,7 +16,7 @@ class NetworkService: NSObject {
     static let shared = NetworkService()
     private let tokenProvider = TokenProvider()
     
-    private let requestProvider = MoyaProvider<ApiProvider>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: [.formatRequestAscURL, .successResponseBody])), MoyaCacheablePlugin()])
+    private let requestProvider = MoyaProvider<ApiProvider>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: [.verbose, .successResponseBody])), MoyaCacheablePlugin()])
     
     //MARK: - Cities
     func citiesList() -> Observable<Array<CityModel>> {

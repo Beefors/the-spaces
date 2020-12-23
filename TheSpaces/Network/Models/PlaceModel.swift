@@ -14,22 +14,40 @@ struct PlaceModel: Decodable {
     let address: String
     let phone: String
     let email: String?
+    let cityId: Int
     let cityName: String
+    let entityTypeId: Int
     let entityTypeName: String
     let metroStationName: String
+    let distanceFromMetroInMeters: Double?
     let workingHours: String?
+    let hasAlldayAccess: Bool?
+    let isWorksOnWeekend: Bool?
+    
     let hasFrontDesk: Bool?
     let hasKitchen: Bool?
-    let hasDrinks: Bool?
+    let hasFreeDrinks: Bool?
     let hasWiFi: Bool?
     let hasGuests: Bool?
     let hasMeetingRooms: Bool?
     let hasPhone: Bool?
+    let hasLandline: Bool?
+    let canProvideLegalAddress: Bool?
     let hasConferenceHall: Bool?
+    let hasBWPrinter: Bool?
+    let hasColorPrinter: Bool?
+    let hasScanner: Bool?
+    let hasLounge: Bool?
+    let hasYoga: Bool?
+    let hasBath: Bool?
+    let hasThingsBox: Bool?
+    let hasFreeParking: Bool?
+    let hasBikeParking: Bool?
     let latitude: Double
     let longtitude:Double
     let priceRange: String
     let imagesCount: Int
+    let isActive: Bool?
     let seatTypes: [SeatType]
     
     var imagesLinks: [URL] {
@@ -48,7 +66,18 @@ enum SeatModelMap: String {
 }
 
 struct SeatType: Decodable {
+    let id: Int
+    let seatTypeId: Int
     let seatTypeName: String
+    let capacity: Int
+    let paymentTypes: [PaymentType]
+    
+    
+}
+
+struct PaymentType: Decodable {
+    let entitySeatTypeId: Int
+    let paymentType: Int
     let paymentTypeName: String
     let price: Float
     

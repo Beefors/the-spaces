@@ -36,6 +36,8 @@ class PlacesViewModel: ViewModelType {
             .subscribe(onNext: {[unowned self] (places) in
                 self.placesObservable.accept(places)
             }, onError: {[unowned self] (error) in
+                
+                print(error.localizedDescription)
                 self.errorObservable.accept(error)
                 self.setupObservables()
             })

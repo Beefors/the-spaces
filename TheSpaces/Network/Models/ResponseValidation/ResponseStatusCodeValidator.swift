@@ -41,6 +41,7 @@ class ResponseStatusCodeValidator: Validator {
             } catch let e as RawStringError {
                 throw e
             } catch {
+                
                 throw Errors.objectMapping
             }
         }
